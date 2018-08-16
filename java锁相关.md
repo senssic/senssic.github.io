@@ -177,10 +177,6 @@ protected final boolean compareAndSetState(int expect, int update) {
 
   ![共享锁获取流程](java锁相关_9.png)
 
-
-
-
-
 [Java中的锁 (原理、锁优化、CAS、AQS)]: https://www.jianshu.com/p/e674ee68fd3f
 [Java中的锁分类]: https://www.cnblogs.com/qifengshi/p/6831055.html
 
