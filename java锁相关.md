@@ -49,7 +49,7 @@ synchronize是通过jvm执行Monitor的互斥执行和协作来实现锁的。
 4. 其他线程调用 notify() / notifyAll() 接口唤醒等待集合中的线程，这些等待的线程需要重新获取监视锁后才能执行 wait() 之后的代码。
 5. 同步方法执行完毕了，线程退出临界区，并释放监视锁。
 
-![monitor工作原理](/java锁相关_1.jpeg)
+![monitor工作原理](java锁相关_1.jpeg)
 
 
 
@@ -79,7 +79,7 @@ synchronize是通过jvm执行Monitor的互斥执行和协作来实现锁的。
 
 - 自旋状态-轻量级锁的具体实现原理,指尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁，这样的好处是减少线程上下文切换的消耗，缺点是循环会消耗CPU。
 
-![轻量级锁以及膨胀流程图](/java锁相关_2.jpeg)
+![轻量级锁以及膨胀流程图](java锁相关_2.jpeg)
 
 
 
@@ -140,15 +140,15 @@ protected final boolean compareAndSetState(int expect, int update) {
 
 - 同步器包含两个节点类型的应用，一个指向头节点，一个指向尾节点，未获取到锁的线程会创建节点线程安全（compareAndSetTail）的加入队列尾部。同步队列遵循FIFO，首节点是获取同步状态成功的节点。
 
-  ![双向队列](/java锁相关_3.jpeg)
+  ![双向队列](java锁相关_3.jpeg)
 
 - 未获取到锁的线程将创建一个节点，设置到尾节点
 
-  ![未获取到锁队列](/java锁相关_4.jpeg)
+  ![未获取到锁队列](java锁相关_4.jpeg)
 
 - 首节点的线程在释放锁时，将会唤醒后继节点。而后继节点将会在获取锁成功时将自己设置为首节点
 
-  ![双向队列锁释放](/java锁相关_5.jpeg)
+  ![双向队列锁释放](java锁相关_5.jpeg)
 
   #### 独占式和共享式获取锁
 
@@ -159,11 +159,11 @@ protected final boolean compareAndSetState(int expect, int update) {
 
   ​         每个节点自旋观察自己的前一节点是不是Header节点，如果是，就去尝试获取锁
 
-  ![独占式锁](/java锁相关_6.jpeg)
+  ![独占式锁](java锁相关_6.jpeg)
 
   ​        独占式锁获取流程
 
-  ![独占式锁获取流程](/java锁相关_7.jpeg)
+  ![独占式锁获取流程](java锁相关_7.jpeg)
 
   ​
 
@@ -171,11 +171,11 @@ protected final boolean compareAndSetState(int expect, int update) {
 
   ​       共享式与独占式的区别
 
-  ![共享与独占式的区别](/java锁相关_8.png)
+  ![共享与独占式的区别](java锁相关_8.png)
 
   ​       共享锁获取流程
 
-  ![共享锁获取流程](/java锁相关_9.png)
+  ![共享锁获取流程](java锁相关_9.png)
 
   ​
 
