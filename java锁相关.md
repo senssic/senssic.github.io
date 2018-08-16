@@ -1,8 +1,8 @@
 ---
 title: java锁相关
 date: 2018-08-16 21:14:45
-tags: 锁
-categories:java
+tags: [锁]
+categories: [java]
 ---
 
 
