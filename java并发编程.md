@@ -5,6 +5,10 @@ tags: [并发编程,多线程]
 categories: [并发编程]
 ---
 
+
+
+![java并发编程](java并发编程_6.jpg)
+
 # 并发编程的挑战
 
 ## 上下文切换
@@ -373,7 +377,6 @@ Executor框架的主要接口
 3. ScheduledThreadPoolExecutor是一个实现类，可以在给定的延迟后运行命令，或者定期执 行命令ScheduledThreadPoolExecutor比Timer更灵活，功能更强大。 
 4. Future接口和实现Future接口的FutureTask类，代表异步计算的结果。 
 5. Runnable接口和Callable接口的实现类，都可以被ThreadPoolExecutor或ScheduledThreadPoolExecutor执行。
-
 
 
 ---
