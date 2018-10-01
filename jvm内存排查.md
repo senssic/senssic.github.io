@@ -20,15 +20,15 @@ categories: [java]
 
 有事在tomcat的jvm配置时候需要添加一些额外参数,这样在系统宕机之前可以保留一些关键的信息
 
--XX:+PrintGCDetails
+​	-XX:+PrintGCDetails
 
--XX:+PrintGCDateStamps
+​	-XX:+PrintGCDateStamps
 
--XX:+HeapDumpOnOutOfMemoryError 
+​	-XX:+HeapDumpOnOutOfMemoryError 
 
--XX:HeapDumpPath=/usr/temp/dump 
+​	-XX:HeapDumpPath=/usr/temp/dump 
 
- -Xloggc:/usr/temp/dump/heap_trace.txt  [**确保/usr/temp目录存在**]
+​	 -Xloggc:/usr/temp/dump/heap_trace.txt  [**确保/usr/temp目录存在**]
 
 # 一般问题原因
 
@@ -49,6 +49,8 @@ categories: [java]
 - Btrace
 
 
+
+---
 
 [MAT使用进阶](https://www.jianshu.com/p/c8e0f8748ac0)
 
