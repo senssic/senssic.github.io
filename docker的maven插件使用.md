@@ -53,6 +53,14 @@ categories: [插件]
 
   ![上传标记的镜像](maven的docker插件_01.png)
 
+### 从私有仓库拉取
+
+pull的时候记得带"主机IP:5000",不然还是去Docker hub上下载而不是私有仓库下载
+
+`docker pull 127.0.0.1:5000/xxx/xxx`
+
+[Docker 私有仓库安装配置 (Registry v2)](https://www.khs1994.com/docker/registry.html)
+
 ### docker的maven插件使用
 
 ### 生成TLS认证远程访问 Docker
@@ -204,3 +212,30 @@ docker --tlsverify -H=tcp://207.246.117.90:2376 info
 
 
 
+可以看到执行成功
+
+```
+Step 1/3 : FROM java:8
+
+ ---> d23bdf5b1b1b
+Step 2/3 : ADD /sc-whorl-web-1.0.1-SNAPSHOT.jar //
+
+ ---> 274070714038
+Step 3/3 : ENTRYPOINT ["java", "-jar", "/sc-whorl-web-1.0.1-SNAPSHOT.jar"]
+
+ ---> Running in bff8020fa0f3
+Removing intermediate container bff8020fa0f3
+ ---> 1f1b1b0ca7a5
+ProgressMessage{id=null, status=null, stream=null, error=null, progress=null, progressDetail=null}
+Successfully built 1f1b1b0ca7a5
+Successfully tagged 127.0.0.1:5000/sc-whorl/sc-whorl-web:latest
+[INFO] Built 127.0.0.1:5000/sc-whorl/sc-whorl-web
+```
+
+
+
+参考：
+
+---
+
+[Docker 远程连接 -- dockerd 命令详解](https://cloud.tencent.com/developer/user/1020670/articles)
