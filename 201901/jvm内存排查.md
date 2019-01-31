@@ -50,6 +50,9 @@ categories: [java]
 
 
 
+
+![生产问题排查命令](生产问题排查命令.png)
+
 ---
 
 [MAT使用进阶](https://www.jianshu.com/p/c8e0f8748ac0)
