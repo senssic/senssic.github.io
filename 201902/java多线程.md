@@ -92,7 +92,27 @@ run() 方法正常退出而自然死亡；
 
 
 
+## ThreadLocal
+
+ThreadLocal 是一个泛型类，位于 java.lang 包。`ThreadLocal`，看名字就知道，”线程本地变量”、”线程局部变量”。
+
+**ThreadLocal 的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用，减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度**。
+
+**synchronized**：`以时间换空间`，只提供一份变量，让不同的线程排队访问；
+**ThreadLocal**：`以空间换时间`，为每个线程都创建一个变量副本，因此可以同时访问而互不影响。
+
+> synchronized 用于线程间的数据共享，而 ThreadLocal 则用于线程间的数据隔离。
 
 
 
+**ThreadLocal 实现原理**
+具体的源码分析过程这里就不贴出来了，我简略的概括一下：
 
+- 每个 Thread 对象中都有一个`ThreadLocal.ThreadLocalMap threadLocals = null`成员，ThreadLocalMap 就是一个普通的 Map，Key 为 ThreadLocal 类，Value 则为 Object 类；因此每个线程可以同时维护多个 ThreadLocal - Object 键值对。
+- ThreadLocalMap 的 Key 是**弱引用对象**（如果一个对象只存在弱引用，那么它随时都会被 GC）；而 Value 则是强引用的；为了避免内存泄漏，在`get()`、`set()`、`remove()`方法内部会自动清理所有 Key 为 null 的 Value；当然还是建议使用 remove() 来显式的释放。
+
+**ThreadLocal 使用建议**
+
+1. ThreadLocal 应定义为**静态成员变量**；
+2. 能通过传值传递的参数，不要通过 ThreadLocal 存储，以免造成 ThreadLocal 的滥用；
+3. 在使用线程池的情况下，当业务周期处理完成时，最好显式的调用 remove() 方法，清空旧值。
