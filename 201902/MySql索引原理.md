@@ -150,3 +150,10 @@ system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_su
 
 
 ## 参考
+
+
+
+[Mysql联合索引最左匹配原则](https://segmentfault.com/a/1190000015416513)
+
+[MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
+
