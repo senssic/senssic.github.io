@@ -17,7 +17,7 @@ categories: [java]
 
 线程:线程是进程的一个执行流,是CPU调度和分派的基本单位。一个线程就是一个独立的栈结构，每个进程至少有一个线程。
 
-![java线程状态](pic_001.jpg)
+![java线程状态](pic_001.png)
 
 
 
@@ -106,7 +106,6 @@ ThreadLocal 是一个泛型类，位于 java.lang 包。`ThreadLocal`，看名�
 
 
 **ThreadLocal 实现原理**
-具体的源码分析过程这里就不贴出来了，我简略的概括一下：
 
 - 每个 Thread 对象中都有一个`ThreadLocal.ThreadLocalMap threadLocals = null`成员，ThreadLocalMap 就是一个普通的 Map，Key 为 ThreadLocal 类，Value 则为 Object 类；因此每个线程可以同时维护多个 ThreadLocal - Object 键值对。
 - ThreadLocalMap 的 Key 是**弱引用对象**（如果一个对象只存在弱引用，那么它随时都会被 GC）；而 Value 则是强引用的；为了避免内存泄漏，在`get()`、`set()`、`remove()`方法内部会自动清理所有 Key 为 null 的 Value；当然还是建议使用 remove() 来显式的释放。
