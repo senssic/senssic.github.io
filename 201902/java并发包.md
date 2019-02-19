@@ -240,11 +240,7 @@ public ThreadPoolExecutor(int corePoolSize,     // 核心线程数的最大值
 
 - `keepAliveTime`：空闲线程的存活时间（默认针对临时线程）；
 
-- ```
-  unit
-  ```
-
-  ：keepAliveTime 单位；
+- `unit`：keepAliveTime 单位；
 
   - `TimeUnit.NANOSECONDS`纳秒
   - `TimeUnit.MICROSECONDS`微秒
@@ -254,12 +250,7 @@ public ThreadPoolExecutor(int corePoolSize,     // 核心线程数的最大值
   - `TimeUnit.HOURS`时
   - `TimeUnit.DAYS`天
 
-- ```
-  workQueue
-  ```
-
-  ：缓存任务的阻塞队列；
-
+- `workQueue`：缓存任务的阻塞队列；
   - `ArrayBlockingQueue`：一个由`数组结构`组成的`有界`阻塞队列；
   - `LinkedBlockingQueue`：一个由`链表结构`组成的`有界`阻塞队列；
   - `LinkedTransferQueue`：一个由`链表结构`组成的`无界`阻塞队列；
@@ -270,11 +261,7 @@ public ThreadPoolExecutor(int corePoolSize,     // 核心线程数的最大值
 
 - `threadFactory`：创建线程的工厂；
 
-- ```
-  handler
-  ```
-
-  ：当 workQueue 已满，且线程数达 maximumPoolSize 时，拒绝新任务采取的策略；
+- `handler`：当 workQueue 已满，且线程数达 maximumPoolSize 时，拒绝新任务采取的策略；
 
   - `ThreadPoolExecutor.AbortPolicy`：（默认）丢弃新任务并抛出 RejectedExecutionException 异常（RT）
   - `ThreadPoolExecutor.CallerRunsPolicy`：让调用线程执行新任务
@@ -461,7 +448,7 @@ public static Callable<Object> callable(Runnable task); // Future.get() 返回 n
 优点：能及时得到已完成的结果；
 缺点：不能依次得到有序的结果；
 
-```
+```java
 ExecutorService executor = Executors.newCachedThreadPool();
         ExecutorCompletionService<String> executorCompletion =
             new ExecutorCompletionService<>(executor);
@@ -823,7 +810,7 @@ synchronized使用的锁是存放在Java对象头里面，具体位置是对象�
 
 ![偏向锁的获取和释放过程](5.png)
 
-轻量级锁的获取过程**
+**轻量级锁的获取过程**
 
 1. 如果对象为无锁状态，即锁标志位为 01 且偏向锁标志位为 0；那么将在当前线程栈中创建锁记录（Lock Record）空间，用于存放当前对象头的 Mark Word 拷贝（称为 Displaced Mark Word）；
 2. 拷贝当前对象头的 Mark Word 字段至锁记录空间；
