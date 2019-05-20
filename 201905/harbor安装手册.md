@@ -1,9 +1,9 @@
 ```
-auth: qiss
-date: 2019年3月28日 16点08分
-version: V1.0
+title: 分布式锁的常见实现
+date: 2018年8月8日 14:24:24
+tags: [分布式,锁]
+categories: [分布式]
 ```
-
 
 
 ## 安装docker以及docker-compose
