@@ -10,6 +10,7 @@ categories: [harbor]
 ## 安装docker以及docker-compose
 
 ```shell
+yum update -y
 yum -y install docker 
 #临时关闭selinux
 setenforce 0 
