@@ -1,5 +1,8 @@
 ---
-
+title: 基于docker的messos安装
+date: 2019年05月21日21:01:43
+tags: [messos]
+categories: [messos]
 ---
 
 
