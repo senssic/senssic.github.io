@@ -6,6 +6,33 @@ categories: [harbor]
 ---
 
 
+## 前期准备
+- 查看此机器之前有无登陆过
+
+  ```shell
+  who /var/log/wtmp
+  last
+  ```
+
+- 查看linux版本
+
+  - centos
+
+    ```shell
+     lsb_release -a
+    ```
+
+  - 所有linux版本
+
+    ```shell
+    uname -a
+    ```
+
+  - RedHat,Centos
+
+    ```shell
+    cat /etc/redhat-release
+    ```
 
 ## 安装docker以及docker-compose
 
