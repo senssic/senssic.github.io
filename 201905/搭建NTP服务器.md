@@ -24,6 +24,8 @@ hwclock -w
 
 ## 安装NTP离线安装包以及其依赖包
 
+[下载NTP离线安装包](https://download.csdn.net/download/senssic/11221195)
+
 ### 服务器端-192.168.0.132
 
 ```shell
