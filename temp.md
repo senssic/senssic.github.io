@@ -49,3 +49,22 @@ bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --
 6.查询集群描述
 bin/kafka-topics.sh --describe --zookeeper 
 
+
+##### impala相关
+[常用修改操作][https://www.cnblogs.com/yhason/p/4724987.html]
+ 1.查看表的文件分布
+ show files in xxx;
+ 2.查看表的状态
+ show table stats xxx;
+ 3.表基本描述
+ describe xxx;
+ 4.查看表的见表语句
+ show CREATE TABLE xxx;
+ 5.compute stats 
+ 为表收集重要的与性能相关的信息,以便被 Impala 用于优化查询
+ 6.更新 impalad 元数据中表的存在性与结构
+ invalidate metadata
+ 7.刷新 impalad 元数据中 Impala 数据文件对应的 HDFS 块的位置
+ refresh xxx;
+ 
+ 
