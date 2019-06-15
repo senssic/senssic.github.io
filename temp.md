@@ -29,11 +29,11 @@ dhclient 网卡 -v
 4.固定NAT网络IP地址
    编辑/etc/sysconfig/network-scripts/对应的网卡信息如果没有则新建
    修改属性BOOTPROTO=static
+   修改属性NOBOOT=yes
    新增属性(对应网卡的属性)
-        IPADDR=10.0.1.101
+        IPADDR=10.0.2.101
         NETMASK=255.255.255.0
-        GATEWAY=10.0.1.1
-		NOBOOT=yes
+        GATEWAY=10.0.2.1
 5.同上固定virtual host连接的网络IP地址
 
 ##### kafka相关
