@@ -35,5 +35,17 @@ dhclient 网卡 -v
         GATEWAY=10.0.1.1
 5.同上固定virtual host连接的网络IP地址
 
-##### ...
+##### kafka相关
+1.查看指定topic
+bin/kafka-topics.sh --zookeeper zookeeper01:2181 --describe --topic topic_test
+2.删除topic
+bin/kafka-run-class.sh kafka.admin.DeleteTopicCommand --zookeeper zookeeper01:2181 --topic topic_test
+3.显示某个消费组的消费详情(CURRENT-OFFSET:已消费的,LOG-END-OFFSET:总数,LAG=LOG-END-OFFSET-CURRENT-OFFSET:堆积的消息)
+bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --describe --group test-consumer-group
+4.消费者列表查询
+bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
+5.所有新消费者列表
+bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --list
+6.查询集群描述
+bin/kafka-topics.sh --describe --zookeeper 
 
