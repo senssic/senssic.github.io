@@ -31,8 +31,9 @@ dhclient 网卡 -v
    修改属性BOOTPROTO=static
    新增属性(对应网卡的属性)
         IPADDR=10.0.1.101
-        NETMASK=255.255.255.255
+        NETMASK=255.255.255.0
         GATEWAY=10.0.1.1
+		NOBOOT=yes
 5.同上固定virtual host连接的网络IP地址
 
 ##### kafka相关
