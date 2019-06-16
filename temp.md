@@ -5,6 +5,10 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+##### linux相关
+1.设置hostname名称
+sudo hostnamectl set-hostname <newhostname>
+
 ##### 容器相关
 pod内部容器不可用
 echo $TERM  export TERM=dumb
