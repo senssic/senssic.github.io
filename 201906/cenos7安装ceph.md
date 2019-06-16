@@ -1,9 +1,9 @@
-```
+---
 title: centos7安装ceph
 date: 2019年06月16日22:28:28
 tags: [ceph]
 copyright: true
-```
+---
 
 ### 节点信息配置
 
