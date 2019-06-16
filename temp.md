@@ -9,6 +9,14 @@ copyright: true
 1.设置hostname名称
 sudo hostnamectl set-hostname <newhostname>
 
+2.查看磁盘
+
+lsblk
+
+3.设置磁盘分区
+
+fdisk /dev/sdf
+
 ##### 容器相关
 pod内部容器不可用
 echo $TERM  export TERM=dumb
@@ -71,5 +79,5 @@ bin/kafka-topics.sh --describe --zookeeper
  invalidate metadata
  7.刷新 impalad 元数据中 Impala 数据文件对应的 HDFS 块的位置
  refresh xxx;
- 
+
  
