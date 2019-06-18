@@ -49,19 +49,24 @@ dhclient 网卡 -v
 5.同上固定virtual host连接的网络IP地址
 
 ##### kafka相关
-1.查看指定topic
+1.新建topic
+bin/kafka-topics.sh --create --zookeeper node:2181 --topic test --partitions 2 --replication-factor 1
+2.修改partition数 只能增
+./bin/kafka-topics.sh --alter --topic test2 --zookeeper node:2181 --partitions 3  
+3.查看指定topic
 bin/kafka-topics.sh --zookeeper zookeeper01:2181 --describe --topic topic_test
-2.删除topic
-bin/kafka-run-class.sh kafka.admin.DeleteTopicCommand --zookeeper zookeeper01:2181 --topic topic_test
-3.显示某个消费组的消费详情(CURRENT-OFFSET:已消费的,LOG-END-OFFSET:总数,LAG=LOG-END-OFFSET-CURRENT-OFFSET:堆积的消息)
+4.删除topic
+bin/kafka-topics.sh  --delete --topic test --zookeeper node:2181
+5.显示某个消费组的消费详情(CURRENT-OFFSET:已消费的,LOG-END-OFFSET:总数,LAG=LOG-END-OFFSET-CURRENT-OFFSET:堆积的消息)
 bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --describe --group test-consumer-group
-4.消费者列表查询
+6.消费者列表查询
 bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
-5.所有新消费者列表
+7.所有新消费者列表
 bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --list
-6.查询集群描述
+8.查询集群描述
 bin/kafka-topics.sh --describe --zookeeper 
-
+9.从头开始消费
+bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginning
 
 ##### impala相关
 [常用修改操作][https://www.cnblogs.com/yhason/p/4724987.html]
@@ -80,4 +85,37 @@ bin/kafka-topics.sh --describe --zookeeper
  7.刷新 impalad 元数据中 Impala 数据文件对应的 HDFS 块的位置
  refresh xxx;
 
- 
+##### hdfs相关
+
+ `hadoop fs <选项>` 建议使用
+`hdfs dfs <选项>`
+
+| 选项名称       | **使用格式**                                                 | **含义**                                                     | Example                                           |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------- |
+| -ls            | -ls <路径>                                                   | 查看指定路径的当前目录结构                                   | `hadoop fs -ls /input`                            |
+| -lsr           | -lsr <路径>                                                  | 递归查看指定路径的目录结构                                   | `hadoop fs -lsr /`                                |
+| -du            | -du <路径>                                                   | 统计目录下文件的大小                                         | `hadoop fs -du /input`                            |
+| -dus           | -dus <路径>                                                  | 汇总统计目录下文件和文件夹的大小                             | `hadoop fs -du /`                                 |
+| -mv            | -mv <源路径> <目的路径>                                      | 移动或重命名                                                 | `hadoop fs -mv /input /tmp`                       |
+| -count         | -count [-q] <路径>                                           | 查询文件夹的磁盘空间限额和文件数目限额                       | `hadoop fs -count -p /tmp`                        |
+| -cp            | -cp <源路径> <目的路径>                                      | 复制文件(夹)到指定目录                                       | `hadoop fs -cp /one /two`                         |
+| -put           | -put <多个 Linux 上的文件>                                   | 上传文件到 HDFS 中                                           | `hadoop fs -put ~/Downloads/abc.txt /two/one/`    |
+| -copyFromLocal | -copyFromLocal <多个或单个 linux 上的文件>                   | 从本地复制文件到 HDFS                                        | `hadoop fs -copyFromLocal ~/Downloads/1.txt /two` |
+| -moveFromLocal | -moveFromLocal <多个或单个 linux 上的文件>                   | 从本地移动                                                   | `hadoop fs -copyFromLocal ~/Downloads/2.txt /two` |
+| -rm            | -rm [-skipTrash] <路径>                                      | 删除文件或空白文件夹, 加上 `-skipTrash` 删除不会放到回收站   | `hadoop -fs -rm -skipTrash /two/one/abc.txt`      |
+| -rmr           | -rmr [-skipTrash] <路径>                                     | 递归删除, 加上 `-skipTrash` 删除不会放到回收站               | `hadoop -fs -rmr -skipTrash /two/one`             |
+| -getmerge      | -getmerge <源路径> [addnl]                                   | 合并文件到本地, [addnl] 参数实在每一个文件末尾添加一个换行符 | `hadoop fs -getmerge /two/*.txt ~/Down addnl`     |
+| -cat           | -cat                                                         | 查看文件内容                                                 | `hadoop fs -cat /input/abc.txt`                   |
+| -text          | -text                                                        | 查看文件或者 zip 的内容                                      | `hadoop fs -text /input/abc.txt`                  |
+| -copyToLocal   | -copyToLocal [-ignoreCrc] [-crc] [hdfs 源路径] [linux 目的路径] | 从 hdfs 向本地复制                                           | `hadoop fs -copyToLocal /input/* ~/Downloads`     |
+| -moveToLocal   | -moveToLocal [-crc]                                          | 从 hdfs 向本地移动                                           | `hdfs dfs -moveToLocal /input/* ~/Downloads`      |
+| -mkdir         | -mkdir                                                       | 创建空白文件夹                                               | `hadoop fs -mkdir /666`                           |
+| -setrep        | -setrp [-R] [-w] <副本数> <路径>                             | `修改文件的副本系数。-R选项用于递归改变目录下所有文件的副本系数` | `hadoop fs -setrep -R -w 3 /user/hadoop/dir`      |
+| -touchz        | -touchz <文件路径>                                           | 创建空白文件                                                 | `hadoop fs -touchz /666/999.log`                  |
+| -stat          | -stat [format] <路径>                                        | 显示文件统计信息                                             | `hadoop fs -stat path`                            |
+| -tail          | -tail [-f] <文件>                                            | 查看文件尾部信息                                             | `hadoop fs -tail pathname`                        |
+| -chmod         | -chmod [-R] <权限模式> [路径]                                | 修改权限                                                     | `hadoop fs -chmod -R 777 /input`                  |
+| -chown         | -chown [-R] [属主][:[属组]] 路径                             | 修改属主                                                     | `hadoop fs -chown -R hadoop0 /input`              |
+| -chgrp         | -chgrp [-R] 属组名称 路径                                    | 修改属组                                                     | `hadoop fs -chgrp -R root /flume`                 |
+| -help          | -help [命令选项]                                             | 查看帮助                                                     | `hadoop fs -help`                                 |
+
