@@ -69,6 +69,9 @@ bin/kafka-topics.sh --describe --zookeeper
 bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginning
 10.从尾开始消费指定分区指定消费个数
 /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --offset latest --partition 0 --max-messages 1 
+11.获取主题(其分区)的最大偏移量
+bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic
+
 
 
 ##### impala相关
