@@ -67,6 +67,9 @@ bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --
 bin/kafka-topics.sh --describe --zookeeper 
 9.从头开始消费
 bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginning
+10.从尾开始消费指定分区指定消费个数
+/usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --offset latest --partition 0 --max-messages 1 
+
 
 ##### impala相关
 [常用修改操作][https://www.cnblogs.com/yhason/p/4724987.html]
