@@ -18,10 +18,13 @@ lsblk
 fdisk /dev/sdf
 
 ##### 容器相关
-pod内部容器不可用
+1.pod内部容器不可用top命令
 echo $TERM  export TERM=dumb
-通过 --previous参数可以看之前Pod的日志
+2.通过 --previous参数可以看之前Pod的日志
 kubectl logs zookeeper-1 --previous
+3.获取登陆dashbord相关
+kubectl cluster-info|grep dashboard
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 
 ##### log日志最优格式化以及配置每日文件滚动:
 log4j.rootLogger=INFO,stdout,fileAppender
