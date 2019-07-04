@@ -93,6 +93,13 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --of
  invalidate metadata
  7.刷新 impalad 元数据中 Impala 数据文件对应的 HDFS 块的位置
  refresh xxx;
+ 8.使用jar包查看parquet文件
+ https://github.com/apache/parquet-mr/tree/master/parquet-tools?spm=5176.doc52798.2.6.H3s2kL
+ http://logservice-resource.oss-cn-shanghai.aliyuncs.com/tools/parquet-tools-1.6.0rc3-SNAPSHOT.jar?spm=5176.doc52798.2.7.H3s2kL&file=parquet-tools-1.6.0rc3-SNAPSHOT.jar
+ 查看结构：
+ java -jar parquet-tools-1.6.0rc3-SNAPSHOT.jar schema -d activity.201711171437.0.parquet |head -n 30
+ 查看内容：
+ java -jar parquet-tools-1.6.0rc3-SNAPSHOT.jar head -n 2 activity.201711171437.0.parquet
 
 ##### hdfs相关
 
