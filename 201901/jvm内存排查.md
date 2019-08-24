@@ -14,7 +14,7 @@ categories: [java]
 - 打印堆栈信息	jstack java进程id
 - dump堆内存 jmap -dump:format=b,file=./jvmdump java进程id
 - 打印至少30秒的jvm垃圾回收情况 jstat -gcutil java进程id 1000
-- 查看堆内存占用情况 jmap -histo java进程id,或jmap -histo:live java进程id
+- 查看堆内存占用情况 jmap -histo java进程id,或jmap -histo:live java进程id |head -n 30
 - 查看堆情况  jmap -heap java进程id
 - 查询系统日志/var/log/messages  一般java进程突然消失,可以到这个里面查看信息
 - 查看JVM参数 jinfo -flag <name> PID  eg:jinfo -flag UseCompressedClassPointers 3212080
