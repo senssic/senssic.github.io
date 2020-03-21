@@ -51,6 +51,14 @@ dhclient 网卡 -v
         GATEWAY=10.0.2.1
 5.同上固定virtual host连接的网络IP地址
 
+> virtual boxs上网
+>
+> 1.使用NET网络选择准虚拟化网络(virtio-net),混杂模式拒绝
+>
+> 2.创建host-noly网络并选择,混杂模式拒绝
+
+
+
 ##### kafka相关
 1.新建topic
 bin/kafka-topics.sh --create --zookeeper node:2181 --topic test --partitions 2 --replication-factor 1
