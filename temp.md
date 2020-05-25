@@ -5,6 +5,13 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+##### mysql相关
+1.重置root密码
+update user set authentication_string = password(‘123456’), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
+2.刷新权限
+flush privileges
+
+
 ##### linux相关
 1.设置hostname名称
 sudo hostnamectl set-hostname <newhostname>
