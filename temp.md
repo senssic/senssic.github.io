@@ -5,7 +5,29 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+##### 脚本
+
+###### hexo
+
+```shell
+#!/bin/sh
+nowdate=$(date)
+echo ${nowdate}
+
+cd /Users/senssic/work/mkdown/githublog/senssic
+hexo clean
+hexo g
+hexo d
+cd ./source/_posts/senssic.github.io
+git pull
+git add .
+git commit -m 'updated:'$(date +%y年%m月%d日%H时%M分)
+git push
+cd /Users/senssic/work/mkdown/githublog
+```
+
 ##### mysql相关
+
 1.重置root密码
 update user set authentication_string = password(‘123456’), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
 2.刷新权限
@@ -22,37 +44,28 @@ lsblk
 
 3.设置磁盘分区
 
+```shell
 fdisk /dev/sdf
-
 输入 n 开始进行设置
-
 输入 p  设置主分区
-
 分区号默认
-
 起始扇区默认
-
 结束扇区默认
-
 输入 w 设置保存
-
 重启机器
-
 lsblk 查看磁盘信息
-
 mkfs.ext3 /dev/sda3  #格式化新创建的分区
-
 mkdir data #创建目录
-
 mount /dev/sda3  #挂载分区
-
 vim /etc/fstab #挂载重启生效，永久挂载
-
 df -h  #查看硬盘信息
-
 重启系统
+```
+
+
 
 ##### 容器相关
+
 1.pod内部容器不可用top命令
 echo $TERM  export TERM=dumb
 2.通过 --previous参数可以看之前Pod的日志
@@ -60,6 +73,8 @@ kubectl logs zookeeper-1 --previous
 3.获取登陆dashbord相关
 kubectl cluster-info|grep dashboard
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+
+
 
 ##### log日志最优格式化以及配置每日文件滚动:
 log4j.rootLogger=INFO,stdout,fileAppender
