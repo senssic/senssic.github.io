@@ -72,6 +72,12 @@ log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:m
 ##### 桥接网络虚拟机无法自动获取ip
 dhclient 网卡 -v
 
+##### virtual Boxs设置已存在的硬盘的大小
+
+**C:\Program Files\Oracle\VirtualBox\VBoxManage.exe modifyhd E:\vribox\k8s-temp\k8s-temp-disk1.vdi --resize 512000**
+
+
+
 ##### virtual Boxs使用virtual host和nat网络固定ip
 1.新建net网络(管理->全局设置->网络设置)
 2.虚拟机新建网卡1virtual host(可以指定网址段)，设置网络类型为virtual host
