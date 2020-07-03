@@ -24,6 +24,34 @@ lsblk
 
 fdisk /dev/sdf
 
+输入 n 开始进行设置
+
+输入 p  设置主分区
+
+分区号默认
+
+起始扇区默认
+
+结束扇区默认
+
+输入 w 设置保存
+
+重启机器
+
+lsblk 查看磁盘信息
+
+mkfs.ext3 /dev/sda3  #格式化新创建的分区
+
+mkdir data #创建目录
+
+mount /dev/sda3  #挂载分区
+
+vim /etc/fstab #挂载重启生效，永久挂载
+
+df -h  #查看硬盘信息
+
+重启系统
+
 ##### 容器相关
 1.pod内部容器不可用top命令
 echo $TERM  export TERM=dumb
@@ -58,7 +86,9 @@ dhclient 网卡 -v
         GATEWAY=10.0.2.1
 5.同上固定virtual host连接的网络IP地址
 
-> virtual boxs上网
+> virtual boxs上网
+>
+> 0.使用everthing的iso
 >
 > 1.使用NET网络选择准虚拟化网络(virtio-net),混杂模式拒绝
 >
