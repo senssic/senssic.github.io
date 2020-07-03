@@ -76,7 +76,19 @@ dhclient 网卡 -v
 
 **C:\Program Files\Oracle\VirtualBox\VBoxManage.exe modifyhd E:\vribox\k8s-temp\k8s-temp-disk1.vdi --resize 512000**
 
+##### 主盘扩容(/dev/mapper/centos-root 空间不足)
 
+```shell
+ls  /dev/sd*  #使用fdisk分区然后找一块空的分区
+pvcreate /dev/sda3 #使用空的分区创建pv
+vgs  #先使用vgs查看vg组大小
+vgextend centos /dev/sda3 #扩展vg
+vgs  #再查看一下vg组大小，看是否发生变化
+lvs #查看lv大小,虽然我们把vg扩展了，但是lv还没有扩展
+lvextend -L +20G /dev/mapper/centos-root #扩展lv,使用lvextend
+xfs_growfs /dev/mapper/centos-root #命令使系统重新读取大小
+df -h  #查看磁盘是否成功变化大小
+```
 
 ##### virtual Boxs使用virtual host和nat网络固定ip
 1.新建net网络(管理->全局设置->网络设置)
