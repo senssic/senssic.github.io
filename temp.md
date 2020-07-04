@@ -5,6 +5,24 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+##### 使用阿里源
+
+```shell
+yum install -y wget
+rm -rf /etc/yum.repos.d/*.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+sed -i '/aliyuncs/d' /etc/yum.repos.d/CentOS-Base.repo
+sed -i 's/$releasever/7/g' /etc/yum.repos.d/CentOS-Base.repo
+sed -i '/aliyuncs/d' /etc/yum.repos.d/epel.repo
+yum clean all
+yum makecache fast
+```
+
+
+
+
+
 ##### virtual Boxs使用virtual host和nat网络固定ip
 
 1.新建net网络(管理->全局设置->网络设置)
