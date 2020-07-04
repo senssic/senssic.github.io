@@ -5,6 +5,35 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+##### virtual Boxs使用virtual host和nat网络固定ip
+
+1.新建net网络(管理->全局设置->网络设置)
+2.虚拟机新建网卡1virtual host(可以指定网址段)，设置网络类型为virtual host
+3.虚拟机新建网卡2设置网络类型为NAT(选择新建的NAT网络,可以指定网址段)
+4.固定NAT网络IP地址
+   编辑/etc/sysconfig/network-scripts/对应的网卡信息如果没有则新建
+   修改属性BOOTPROTO=static
+   修改属性NOBOOT=yes
+   新增属性(对应网卡的属性)
+        IPADDR=10.0.2.101
+        NETMASK=255.255.255.0
+        GATEWAY=10.0.2.1
+5.同上固定virtual host连接的网络IP地址
+
+> virtual boxs上网
+>
+> 0.使用everthing的iso
+>
+> 1.使用NET网络选择准虚拟化网络(virtio-net),混杂模式拒绝
+>
+> 2.创建host-noly网络并选择选择准虚拟化网络(virtio-net),混杂模式拒绝
+>
+> 如果不启作用尝试将上面两个设置禁用->启动->关机重启->再重新启动上面的两个设置
+
+
+
+
+
 ##### 脚本
 
 ###### hexo
@@ -104,28 +133,6 @@ lvextend -L +20G /dev/mapper/centos-root #扩展lv,使用lvextend
 xfs_growfs /dev/mapper/centos-root #命令使系统重新读取大小
 df -h  #查看磁盘是否成功变化大小
 ```
-
-##### virtual Boxs使用virtual host和nat网络固定ip
-1.新建net网络(管理->全局设置->网络设置)
-2.虚拟机新建网卡1virtual host(可以指定网址段)，设置网络类型为virtual host
-3.虚拟机新建网卡2设置网络类型为NAT(选择新建的NAT网络,可以指定网址段)
-4.固定NAT网络IP地址
-   编辑/etc/sysconfig/network-scripts/对应的网卡信息如果没有则新建
-   修改属性BOOTPROTO=static
-   修改属性NOBOOT=yes
-   新增属性(对应网卡的属性)
-        IPADDR=10.0.2.101
-        NETMASK=255.255.255.0
-        GATEWAY=10.0.2.1
-5.同上固定virtual host连接的网络IP地址
-
-> virtual boxs上网
->
-> 0.使用everthing的iso
->
-> 1.使用NET网络选择准虚拟化网络(virtio-net),混杂模式拒绝
->
-> 2.创建host-noly网络并选择,混杂模式拒绝
 
 
 
