@@ -28,7 +28,7 @@ copyright: true
 >
 > 2.创建host-noly网络并选择选择准虚拟化网络(virtio-net),混杂模式拒绝
 >
-> 如果不启作用尝试将上面两个设置禁用->启动->关机重启->再重新启动上面的两个设置
+> **如果无法自动获取net和host-noly的ip,到/etc/sysconfig/network-scripts/目录下将这两个网卡的配置(ifcfg-xxx)删除然后重启**
 
 
 
