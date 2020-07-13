@@ -5,6 +5,10 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+
+
+
+
 ##### 使用阿里源
 
 ```shell
@@ -109,7 +113,11 @@ df -h  #查看硬盘信息
 重启系统
 ```
 
+4.tcpdump 网络抓包
 
+#详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160
+
+ tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
 
 ##### 容器相关
 
