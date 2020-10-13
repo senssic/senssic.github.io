@@ -1,9 +1,9 @@
-```
-title: java内存模型
+---
+title: spring扩展点
 date: 2020-10-13 14:02:10
-tags: [内存模型]
-categories: [java]
-```
+tags: [spring]
+categories: [spring]
+---
 
 ## 0.调用顺序图
 
