@@ -43,7 +43,7 @@ categories: [linux]
 
 官网地址:https://prometheus.io/download/
 
-  ![prometheus](pic_05.gif)
+  ![prometheus](pic_05.png)
 
 # 3.Nagios
 
@@ -70,6 +70,10 @@ github地址:https://github.com/nicolargo/glances
 ![zabbix](pic_08.png)
 
 
+
+# 参考
+
+---
 
 [Netdata](https://www.hi-linux.com/posts/42392.html)
 
