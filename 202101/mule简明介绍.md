@@ -44,27 +44,27 @@ anypoint Studio:https://docs.mulesoft.com/studio/6/to-download-and-install-studi
 2. 在Work with下拉框中选择Mule Runtimes for Anypoint Studio
 3. 输入http://studio.mulesoft.org/r6/studio-runtimes 选择Runtime 3.9.0 CE ,其中EE为企业版
 
-![选择mule的runtime](pic_01.jpg)
+![选择mule的runtime](pic_01.png)
 
 ### 0.1.2 导出工程部署到mule runtime运行
 
 1. 在工程的目录上右键选择export到处选择mule相关导出。导出一个app.zip安装包。
 
-   ![导出mule的应用包](pic_02.jpg)
+   ![导出mule的应用包](pic_02.png)
 
 2. 将导出的zip包放到解压好的mule runtime的app目录下面
 
-   ![导出的应用放置到mule的runtime中](pic_03.jpg)
+   ![导出的应用放置到mule的runtime中](pic_03.png)
 
 3. 在Mule Runtime的bin目录下执行`./mule`或`mule.bat`启动命令
 
-​       ![观察应用执行情况](pic_04.jpg)
+​       ![观察应用执行情况](pic_04.png)
 
 ### 0.1.3 mule应用的xm描述介绍
 
 ​         Mule的应用程序就是由一个或者多个Mule Configuration File组成，每个Mule Configuration File里面可以放置一个或者多个Flow。每一个FLow又是由Connector和Processor等组成。而Flow是Mule的核心概念，下图展示了Flow的结构。
 
-​      ![flow的结构](pic_05.jpg)
+​      ![flow的结构](pic_05.png)
 
 ### 0.1.4 Mule ESB构造元素 - Flow
 
@@ -76,7 +76,7 @@ Flow实际就是上图的边框。实际还有Sub Flow的概念，主要用于Fl
 
 Mule的Connector是其非常优秀的功能，数百个开箱即用Connector可以帮助开发者连接不同的应用。从常见的HTTP，TCP，FTP，LDAP等协议，Hadoop大数据，到大型的商用系统SAP，Oracle，Salesforce，Mule都提供了相应的Connector。
 
- ![常用的connector](pic_06.jpg)
+ ![常用的connector](pic_06.png)
 
 Connector又分成Source Connector（又称为Inbound Connector）和Target Connector（又称为Outbound Connector）。
 
@@ -86,7 +86,7 @@ Source Connector用来接收消息，可以理解成监听器，而Target Connec
 
 Mule的Processor包含的内容更广泛，从Studio右侧的工具箱可以看到很多的控件元素，除去上文讲述的Connector，余下的基本都可以归纳到Processor。
 
-![常用的Processor](pic_07.jpg)
+![常用的Processor](pic_07.png)
 
 Processor大概可以分成几类。
 
@@ -116,11 +116,11 @@ Processor大概可以分成几类。
 
    Flow的结构和构成元素，在Flow中流动的就是Mule Message。
 
-​	![muleFlow的流向](pic_08.jpg)
+​	![muleFlow的流向](pic_08.png)
 
 Mule Message是一个数据结构，也有相对应的Java Class。它包括几部分Payload，Property，Attachment。如下图所示
 
-​	![消息体结构](pic_09.jpg)
+​	![消息体结构](pic_09.png)
 
 - Property
 
@@ -128,11 +128,11 @@ Mule Message是一个数据结构，也有相对应的Java Class。它包括几�
 
   Inbound properties 入站参数:
 
-  ​	![inbound-properties](pic_10.jpg)
+  ​	![inbound-properties](pic_10.png)
 
   Outbound properties 出站参数:
 
-  ​	![outbound-properties](pic_11.jpg)
+  ​	![outbound-properties](pic_11.png)
 
 - Payload
 
@@ -590,11 +590,11 @@ message上下文对象的常用属性:
 
 5. 使用anypoint的help->install new software,重启后即可拖拽使用
 
-   ​	![outbound-properties](pic_12.jpg)
+   ​	![outbound-properties](pic_12.png)
 
 6. 根据上述三个的注解描述类生成相对应的处理控件
 
-   ​	![outbound-properties](pic_13.jpg)
+   ​	![outbound-properties](pic_13.png)
 
 ## 3.2 mule runtimeplugin编写
 
@@ -654,13 +654,13 @@ wrapper.java.additional.16=-Xnoagent
 wrapper.java.additional.17=-Djava.compiler=NONE
 wrapper.java.additional.18=-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
 ```
-![outbound-properties](pic_14.jpg)
+![outbound-properties](pic_14.png)
 
 ### 3.3.2 配置spring context
 
 按如下图增加spring配置文件和配置属性文件。因为muleRuntime本身的实现就是基于spring容器实现的所以很方便与spring集成做自己的业务。
 
-![outbound-properties](pic_15.jpg)
+![outbound-properties](pic_15.png)
 
 spring-context.xml
 
