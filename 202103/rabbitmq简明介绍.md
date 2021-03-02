@@ -73,10 +73,10 @@ Exchange分发消息时根据类型的不同分发策略有区别，目前共四
 
   ![exchange_fanout](pic_05.png)
 
-  ​         topic 交换器通过模式匹配分配消息的路由键属性，将路由键和某个模式进行匹配，此时队列需要绑定到一个模式上。它将路由键和绑定键的字符串切分成单词，这些单词之间用点隔开。它同样也会识别两个通配符：符号“#”和符号“*”。#匹配0个或多个单词，\*匹配不多不少一个单词。
+  ​         topic 交换器通过模式匹配分配消息的路由键属性，将路由键和某个模式进行匹配，此时队列需要绑定到一个模式上。它将路由键和绑定键的字符串切分成单词，这些单词之间用点隔开。它同样也会识别两个通配符：符号“#”和符号“&#42;”。#匹配0个或多个单词，&#42;匹配不多不少一个单词。
 
   ​        生产者所有发送到Topic Exchange的消息会通过指定Routing Key被转发到能和其匹配的Queue上。
-  Exchange指定Routing Key将路由进行模糊匹配。可以使用通配符进行模糊匹配，符号“#”匹配多个单词（可以是零个），符号“*”匹配一个单词。因此“usa.#”能够匹配到“usa.news.xxx、usa.weather.xxx”，但是“usa.\*” 只会匹配到“usa.news、usa.weather”。
+  Exchange指定Routing Key将路由进行模糊匹配。可以使用通配符进行模糊匹配，符号“#”匹配多个单词（可以是零个），符号“&#42;”匹配一个单词。因此“usa.#”能够匹配到“usa.news.xxx、usa.weather.xxx”，但是“usa.&#42;” 只会匹配到“usa.news、usa.weather”。
 
   
 
@@ -435,13 +435,14 @@ Exchange分发消息时根据类型的不同分发策略有区别，目前共四
    清除所有的队列：rabbitmqctl reset
    关闭应用：rabbitmqctl stop_app
    启动应用：rabbitmqctl start_app
+
 ## 3.2 角色权限设置
 
   **用户和权限设置**
    添加用户：rabbitmqctl add_user username password
    分配角色：rabbitmqctl set_user_tags username administrator
    新增虚拟主机：rabbitmqctl add_vhost  vhost_name
-   将新虚拟主机授权给新用户：`rabbitmqctl set_permissions -p vhost_name username “.*” “.*” “.*”`(后面三个”*”代表用户拥有配置、写、读全部权限)
+   将新虚拟主机授权给新用户：`rabbitmqctl set_permissions -p vhost_name username “.*” “.*” “.*”`(后面三个”&#42;”代表用户拥有配置、写、读全部权限)
 
   **角色说明**
 
