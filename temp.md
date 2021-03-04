@@ -1,15 +1,34 @@
 ---
 title: temp
-date: 2019年06月09日22:28:28
+date: 2021年03月03日22:28:28
 tags: [杂项,记录]
 copyright: true
 ---
 
 
 
+# 1.linux脚本
 
+## 1.1 hexo一键执行脚本
 
-##### 使用阿里源
+```shell
+#!/bin/sh
+nowdate=$(date)
+echo ${nowdate}
+
+cd /Users/senssic/work/mkdown/githublog/senssic
+hexo clean
+hexo g
+hexo d
+cd ./source/_posts/senssic.github.io
+git pull
+git add .
+git commit -m 'updated:'$(date +%y年%m月%d日%H时%M分)
+git push
+cd /Users/senssic/work/mkdown/githublog
+```
+
+## 1.2 使用阿里源
 
 ```shell
 yum install -y wget
@@ -23,11 +42,117 @@ yum clean all
 yum makecache fast
 ```
 
+## 1.3 linux操作系统相关
+
+1. 设置hostname名称
+   sudo hostnamectl set-hostname <newhostname>
+
+2. 查看磁盘
+
+   lsblk
+
+3. 新增磁盘进行分区
+
+   ```shell
+   fdisk /dev/sdf
+   输入 n 开始进行设置
+   输入 p  设置主分区
+   分区号默认
+   起始扇区默认
+   结束扇区默认
+   输入 w 设置保存
+   重启机器
+   lsblk 查看磁盘信息
+   mkfs.ext3 /dev/sda3  #格式化新创建的分区
+   mkdir data #创建目录
+   mount /dev/sda3  #挂载分区
+   vim /etc/fstab #挂载重启生效，永久挂载
+   df -h  #查看硬盘信息
+   重启系统
+   ```
+
+4. tcpdump的命令使用
+
+   ```shell
+   #详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160
+   tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
+   ```
+
+## 1.4 linux的初始化优化
+
+```shell
+# 1.设置主机名称
+hostnamectl set-hostname xxx # 将 xxx 替换为当前主机名
+# 2.设置host
+cat >> /etc/hosts <<EOF
+172.27.138.251 xxx-01
+172.27.137.229 xxx-02
+172.27.138.239 xxx-03
+EOF
+#3.添加节点信任关系
+ssh-keygen -t rsa 
+ssh-copy-id root@xxx-01
+ssh-copy-id root@xxx-02
+ssh-copy-id root@xxx-03
+#4.安装基础依赖
+yum install -y epel-release
+yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git
+#5.关闭防火墙
+systemctl stop firewalld
+systemctl disable firewalld
+iptables -F && iptables -X && iptables -F -t nat && iptables -X -t nat
+iptables -P FORWARD ACCEPT
+#6.关闭 swap 分区
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab 
+#7.关闭 SELinux
+setenforce 0
+sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+#8.优化内核参数
+cat > temp.conf <<EOF
+net.bridge.bridge-nf-call-iptables=1
+net.bridge.bridge-nf-call-ip6tables=1
+net.ipv4.ip_forward=1
+net.ipv4.tcp_tw_recycle=0
+net.ipv4.neigh.default.gc_thresh1=1024
+net.ipv4.neigh.default.gc_thresh1=2048
+net.ipv4.neigh.default.gc_thresh1=4096
+vm.swappiness=0
+vm.overcommit_memory=1
+vm.panic_on_oom=0
+fs.inotify.max_user_instances=8192
+fs.inotify.max_user_watches=1048576
+fs.file-max=52706963
+fs.nr_open=52706963
+net.ipv6.conf.all.disable_ipv6=1
+net.netfilter.nf_conntrack_max=2310720
+EOF
+cp temp.conf  /etc/sysctl.d/temp.conf
+sysctl -p /etc/sysctl.d/temp.conf
+#9.设置系统时区
+timedatectl set-timezone Asia/Shanghai
+#10.设置系统时钟同步
+systemctl enable chronyd
+systemctl start chronyd
+#11.关闭无关的服务
+systemctl stop postfix && systemctl disable postfix
+#12.升级内核
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+# 安装完成后检查 /boot/grub2/grub.cfg 中对应内核 menuentry 中是否包含 initrd16 配置，如果没有，再安装一次！
+yum --enablerepo=elrepo-kernel install -y kernel-lt
+# 设置开机从新内核启动
+grub2-set-default 0
+sync
+reboot
+#安装docker
+curl -sSL https://get.daocloud.io/docker | sh
+```
 
 
 
+# 2.虚拟机相关
 
-##### virtual Boxs使用virtual host和nat网络固定ip
+## 2.1 virtual Boxs使用virtual host和nat网络固定ip
 
 1.新建net网络(管理->全局设置->网络设置)
 2.虚拟机新建网卡1virtual host(可以指定网址段)，设置网络类型为virtual host
@@ -52,101 +177,15 @@ yum makecache fast
 >
 > **如果无法自动获取net和host-noly的ip,到/etc/sysconfig/network-scripts/目录下将这两个网卡的配置(ifcfg-xxx)删除然后重启**
 
+## 2.2 桥接网络虚拟机无法自动获取ip
 
-
-
-
-##### 脚本
-
-###### hexo
-
-```shell
-#!/bin/sh
-nowdate=$(date)
-echo ${nowdate}
-
-cd /Users/senssic/work/mkdown/githublog/senssic
-hexo clean
-hexo g
-hexo d
-cd ./source/_posts/senssic.github.io
-git pull
-git add .
-git commit -m 'updated:'$(date +%y年%m月%d日%H时%M分)
-git push
-cd /Users/senssic/work/mkdown/githublog
-```
-
-##### mysql相关
-
-1.重置root密码
-update user set authentication_string = password(‘123456’), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
-2.刷新权限
-flush privileges
-
-
-##### linux相关
-1.设置hostname名称
-sudo hostnamectl set-hostname <newhostname>
-
-2.查看磁盘
-
-lsblk
-
-3.设置磁盘分区
-
-```shell
-fdisk /dev/sdf
-输入 n 开始进行设置
-输入 p  设置主分区
-分区号默认
-起始扇区默认
-结束扇区默认
-输入 w 设置保存
-重启机器
-lsblk 查看磁盘信息
-mkfs.ext3 /dev/sda3  #格式化新创建的分区
-mkdir data #创建目录
-mount /dev/sda3  #挂载分区
-vim /etc/fstab #挂载重启生效，永久挂载
-df -h  #查看硬盘信息
-重启系统
-```
-
-4.tcpdump 网络抓包
-
-#详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160
-
- tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
-
-##### 容器相关
-
-1.pod内部容器不可用top命令
-echo $TERM  export TERM=dumb
-2.通过 --previous参数可以看之前Pod的日志
-kubectl logs zookeeper-1 --previous
-3.获取登陆dashbord相关
-kubectl cluster-info|grep dashboard
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
-
-
-
-##### log日志最优格式化以及配置每日文件滚动:
-log4j.rootLogger=INFO,stdout,fileAppender
-log4j.appender.fileAppender=org.apache.log4j.DailyRollingFileAppender
-log4j.appender.fileAppender.DatePattern='.'yyyy-MM-dd
-log4j.appender.fileAppender.File=/opt/config/fileAppender.log
-log4j.appender.fileAppender.layout=org.apache.log4j.PatternLayout
-log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:mm:ss.SSS}: (%c{1}.%M:line %L) - %m%n
-
-##### 桥接网络虚拟机无法自动获取ip
 dhclient 网卡 -v
 
-##### virtual Boxs设置已存在的硬盘的大小
+## 2.3 virtual Boxs设置已存在的硬盘的大小
 
 **C:\Program Files\Oracle\VirtualBox\VBoxManage.exe modifyhd E:\vribox\k8s-temp\k8s-temp-disk1.vdi --resize 512000**
 
-##### 主盘扩容(/dev/mapper/centos-root 空间不足)
+## 2.4 主盘扩容(/dev/mapper/centos-root 空间不足)
 
 ```shell
 ls  /dev/sd*  #使用fdisk分区然后找一块空的分区
@@ -160,9 +199,35 @@ xfs_growfs /dev/mapper/centos-root #命令使系统重新读取大小
 df -h  #查看磁盘是否成功变化大小
 ```
 
+# 3.数据库相关
 
+## 3.1 mysql数据库
 
-##### kafka相关
+1. 重置root密码
+   update user set authentication_string = password(‘123456’), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
+
+2. 刷新权限
+
+   flush privileges
+
+# 4.容器相关
+
+## 4.1 命令相关
+
+```shell
+1.pod内部容器不可用top命令
+echo $TERM  export TERM=dumb
+2.通过 --previous参数可以看之前Pod的日志
+kubectl logs zookeeper-1 --previous
+3.获取登陆dashbord相关
+kubectl cluster-info|grep dashboard
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+```
+
+# 5.大数据相关
+
+## 5.1 kafka相关
+```shell
 1.新建topic
 bin/kafka-topics.sh --create --zookeeper node:2181 --topic test --partitions 2 --replication-factor 1
 2.修改partition数 只能增
@@ -185,11 +250,11 @@ bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginnin
 bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic
 11.从尾开始消费指定分区指定消费个数
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --offset 10 --partition 0   --max-messages 1 
+```
 
-
-
-##### impala相关
-[常用修改操作][https://www.cnblogs.com/yhason/p/4724987.html]
+## 5.2 impala相关
+ ```shell
+ 常用修改操作: https://www.cnblogs.com/yhason/p/4724987.html
  1.查看表的文件分布
  show files in xxx;
  2.查看表的状态
@@ -211,10 +276,11 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --of
  java -jar parquet-tools-1.6.0rc3-SNAPSHOT.jar schema -d activity.201711171437.0.parquet |head -n 30
  查看内容：
  java -jar parquet-tools-1.6.0rc3-SNAPSHOT.jar head -n 2 activity.201711171437.0.parquet
+ ```
 
-##### hdfs相关
+## 5.3 hdfs相关
 
- `hadoop fs <选项>` 建议使用
+`hadoop fs <选项>` 建议使用
 `hdfs dfs <选项>`
 
 | 选项名称       | **使用格式**                                                 | **含义**                                                     | Example                                           |
@@ -242,12 +308,24 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --of
 | -stat          | -stat [format] <路径>                                        | 显示文件统计信息                                             | `hadoop fs -stat path`                            |
 | -tail          | -tail [-f] <文件>                                            | 查看文件尾部信息                                             | `hadoop fs -tail pathname`                        |
 | -chmod         | -chmod [-R] <权限模式> [路径]                                | 修改权限                                                     | `hadoop fs -chmod -R 777 /input`                  |
-| -chown         | -chown [-R] [属主][:[属组]] 路径                             | 修改属主                                                     | `hadoop fs -chown -R hadoop0 /input`              |
+| -chown         | -chown [-R] [属主]] 路径                                     | 修改属主                                                     | `hadoop fs -chown -R hadoop0 /input`              |
 | -chgrp         | -chgrp [-R] 属组名称 路径                                    | 修改属组                                                     | `hadoop fs -chgrp -R root /flume`                 |
 | -help          | -help [命令选项]                                             | 查看帮助                                                     | `hadoop fs -help`                                 |
 
+# 6.其他杂项相关
 
-##### 关于断电
+## 6.1 log日志最优格式化以及配置每日文件滚动:
+
+```properties
+log4j.rootLogger=INFO,stdout,fileAppender
+log4j.appender.fileAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.fileAppender.DatePattern='.'yyyy-MM-dd
+log4j.appender.fileAppender.File=/opt/config/fileAppender.log
+log4j.appender.fileAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:mm:ss.SSS}: (%c{1}.%M:line %L) - %m%n
+```
+
+## 6.2 关于断电
 
 1.客户端向服务端发送写操作（数据在客户端的内存中）
 2.数据库服务端接收到写请求的数据（数据在服务端的内存中）
