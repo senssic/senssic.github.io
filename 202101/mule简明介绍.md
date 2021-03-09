@@ -526,9 +526,9 @@ message上下文对象的常用属性:
            return muleEvent.getMessage().getPayload();
        }
       //首节点的处理器处理代码，可以有多个@Source根据名称不同供界面选择
-       @Source(name = "testSource", friendlyName = "Source控件显示名称")
-       public Object readFromTopic(String userName, String address, Integer age, final SourceCallback sourceCallback) {
-           return "传递数据";
+       @Source(friendlyName = "process控件显示名称")
+       public void readFromTopic(String userName, String address, Integer age, final SourceCallback sourceCallback)throws Exception {
+           sourceCallback.process("数据传递!");
        }
    	//节点停止会执行
        @Stop
