@@ -312,9 +312,75 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --of
 | -chgrp         | -chgrp [-R] 属组名称 路径                                    | 修改属组                                                     | `hadoop fs -chgrp -R root /flume`                 |
 | -help          | -help [命令选项]                                             | 查看帮助                                                     | `hadoop fs -help`                                 |
 
-# 6.其他杂项相关
+# 6.Java相关
 
-## 6.1 log日志最优格式化以及配置每日文件滚动:
+## 6.1 maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突
+
+### 6.1.1 排除不使用的类
+
+```xml
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <minimizeJar>true</minimizeJar>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+### 6.1.2 将依赖的类重命名并打包进来 （隔离方案）
+
+```xml
+<!--
+将“org.codehaus.plexus.util”重命名为“org.shaded.plexus.util”，原始jar包中的“org.codehaus.plexus.util.xml.Xpp3Dom”和“org.codehaus.plexus.util.xml.pull”不会被重命名到目的包中；
+-->
+<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <relocations>
+                <relocation>
+                  <pattern>org.codehaus.plexus.util</pattern>
+                  <shadedPattern>org.shaded.plexus.util</shadedPattern>
+                  <excludes>
+                    <exclude>org.codehaus.plexus.util.xml.Xpp3Dom</exclude>
+                    <exclude>org.codehaus.plexus.util.xml.pull.*</exclude>
+                  </excludes>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+# 7.其他杂项相关
+
+## 7.1 log日志最优格式化以及配置每日文件滚动:
 
 ```properties
 log4j.rootLogger=INFO,stdout,fileAppender
@@ -325,7 +391,7 @@ log4j.appender.fileAppender.layout=org.apache.log4j.PatternLayout
 log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:mm:ss.SSS}: (%c{1}.%M:line %L) - %m%n
 ```
 
-## 6.2 关于断电
+## 7.2 关于断电
 
 1.客户端向服务端发送写操作（数据在客户端的内存中）
 2.数据库服务端接收到写请求的数据（数据在服务端的内存中）
