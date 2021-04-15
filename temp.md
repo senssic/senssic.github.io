@@ -378,6 +378,14 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --of
   </build>
 ```
 
+### 6.1.3 Java执行单个编译类包括依赖
+
+比如，需要执行Simple.class以及其依赖包xxxa.jar以及xxxb.jar
+
+```java
+java -cp .:xxxa.jar;d:\classes\*.jar  Simple
+```
+
 # 7.其他杂项相关
 
 ## 7.1 log日志最优格式化以及配置每日文件滚动:
