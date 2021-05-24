@@ -105,7 +105,7 @@
 <meta property="og:description" content="一般线上JVM问题属于比较紧急的情况,需要立即保留现场信息,并及时回复生产。 保留现场 打印堆栈信息    jstack java进程id dump堆内存 jmap -dump:format=b,file=./jvmdump java进程id 打印至少30秒的jvm垃圾回收情况 jstat -gcutil java进程id 1000 查看堆内存占用情况 jmap -histo java进程id,或">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/10/01/senssic.github.io/201901/jvm内存排查/生产问题排查命令.png">
-<meta property="og:updated_time" content="2020-05-25T10:41:15.585Z">
+<meta property="og:updated_time" content="2021-05-24T05:48:33.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm内存排查">
 <meta name="twitter:description" content="一般线上JVM问题属于比较紧急的情况,需要立即保留现场信息,并及时回复生产。 保留现场 打印堆栈信息    jstack java进程id dump堆内存 jmap -dump:format=b,file=./jvmdump java进程id 打印至少30秒的jvm垃圾回收情况 jstat -gcutil java进程id 1000 查看堆内存占用情况 jmap -histo java进程id,或">
@@ -475,7 +475,7 @@
 <li>查看堆内存占用情况 jmap -histo java进程id,或jmap -histo:live java进程id |head -n 30</li>
 <li>查看堆情况  jmap -heap java进程id</li>
 <li>查询系统日志/var/log/messages  一般java进程突然消失,可以到这个里面查看信息</li>
-<li>查看JVM参数 jinfo -flag <name> PID  eg:jinfo -flag UseCompressedClassPointers 3212080<br>返回-XX:-UseCompressedClassPointers说明UseCompressedClassPointers参数为false<br>打印所有 XX 参数 java -XX:+PrintFlagsInitial</name></li>
+<li>查看JVM参数 jinfo -flag <name> PID  eg:jinfo -flag UseCompressedClassPointers 3212080<br>返回-XX:-UseCompressedClassPointers说明UseCompressedClassPointers参数为false<br>打印所有 XX 参数<strong>java -XX:+PrintFlagsFinal</strong></name></li>
 </ul>
 <p>有事在tomcat的jvm配置时候需要添加一些额外参数,这样在系统宕机之前可以保留一些关键的信息</p>
 <p>​    -XX:+PrintGCDetails</p>
