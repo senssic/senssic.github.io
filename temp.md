@@ -5,6 +5,8 @@ tags: [杂项,记录]
 copyright: true
 ---
 
+[TOC]
+
 
 
 # 1.linux脚本
@@ -385,6 +387,26 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --of
 ```java
 java -cp .:xxxa.jar;d:\classes\*.jar  Simple
 ```
+
+## 6.2 Java VisualVM 远程调试
+
+1. 创建all.policy文件
+
+   ```shell
+   cat > all.policy <<EOF
+   grant codebase "file:${java.home}/../lib/tools.jar" {
+   permission java.security.AllPermission;
+   };
+   EOF
+   ```
+
+2. 服务器端启动
+
+   ```shell
+   jstatd -J-Djava.security.policy=all.policy
+   ```
+
+3. 打开 Java VisualVM  文件>添加远程主机   填入服务端IP
 
 # 7.其他杂项相关
 
