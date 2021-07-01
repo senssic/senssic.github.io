@@ -54,3 +54,23 @@ route add 172.18.0.0 mask 255.255.255.0 192.168.137.200
 
 ```
 
+## 2.2 登录harhub
+
+docker build -t 10.19.151.227/test/docker-test .
+
+harbor地址：https://10.19.151.227 用户名：admin 密码：Xinzhiharbor123
+
+```
+vim /etc/docker/daemon.json
+{
+  "registry-mirrors": [
+    "https://dockerhub.azk8s.cn",
+    "https://hub-mirror.c.163.com"
+  ],
+  "insecure-registries": [
+    "10.19.151.227"
+  ]
+}
+docker login -u ${HARBOR_CREDS_USR} -p ${HARBOR_CREDS_PSW} harbor.zuoguocai.xyz:4443
+```
+
