@@ -105,7 +105,7 @@
 <meta property="og:description" content="1.linux下载并安装minikube并启动12345678910111213141516171819202122232425262728#1.创建非root用户adduser testpasswd  test#创建docker组sudo groupadd docker#将您的用户添加到该docker组sudo usermod -aG docker test#在Linux上，运行以下命令来激活对">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2021/06/15/senssic.github.io/202106/minikube试验田/minikube试验田/image-20210629173123932.png">
-<meta property="og:updated_time" content="2021-06-29T09:31:28.139Z">
+<meta property="og:updated_time" content="2021-07-01T08:42:13.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="minikube试验田">
 <meta name="twitter:description" content="1.linux下载并安装minikube并启动12345678910111213141516171819202122232425262728#1.创建非root用户adduser testpasswd  test#创建docker组sudo groupadd docker#将您的用户添加到该docker组sudo usermod -aG docker test#在Linux上，运行以下命令来激活对">
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  304
+                  378
                 </span>
               
 
@@ -470,6 +470,9 @@
         <h1 id="1-linux下载并安装minikube并启动"><a href="#1-linux下载并安装minikube并启动" class="headerlink" title="1.linux下载并安装minikube并启动"></a>1.linux下载并安装minikube并启动</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1.创建非root用户</span><br><span class="line">adduser test</span><br><span class="line">passwd  test</span><br><span class="line"><span class="meta">#</span>创建docker组</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span>将您的用户添加到该docker组</span><br><span class="line">sudo usermod -aG docker test</span><br><span class="line"><span class="meta">#</span>在Linux上，运行以下命令来激活对组的更改</span><br><span class="line">newgrp docker</span><br><span class="line"><span class="meta">#</span>2.安装docker</span><br><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun</span><br><span class="line"><span class="meta">#</span>3.安装kubectl</span><br><span class="line">curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl</span><br><span class="line">sudo chmod a+x ./kubectl</span><br><span class="line">sudo mv ./kubectl /usr/local/bin/kubectl</span><br><span class="line"><span class="meta">#</span>4.安装minikube</span><br><span class="line">curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.20.0/minikube-linux-amd64 &amp;&amp; chmod +x minikube &amp;&amp; sudo mv minikube /usr/local/bin/</span><br><span class="line"><span class="meta">#</span>5.多节点启动</span><br><span class="line"><span class="meta">#</span>#创建主集群(默认Profile为minikube,可以加 -p 创建不通的k8s集群)</span><br><span class="line">minikube start --force</span><br><span class="line"><span class="meta">#</span>#增加节点</span><br><span class="line">minikube node add</span><br><span class="line"><span class="meta">#</span>#查看节点</span><br><span class="line">minikube node list</span><br><span class="line"><span class="meta">#</span>#启动主节点仪表盘</span><br><span class="line">minikube dashboard</span><br><span class="line"><span class="meta">#</span>#删除集群</span><br><span class="line">minikube delete</span><br></pre></td></tr></table></figure>
 <h1 id="2-开启Kubernetes试验田"><a href="#2-开启Kubernetes试验田" class="headerlink" title="2.开启Kubernetes试验田"></a>2.开启Kubernetes试验田</h1><p><img src="minikube试验田/image-20210629173123932.png" alt="image-20210629173123932"></p>
 <h2 id="2-1-物理机访问虚拟机内部的容器"><a href="#2-1-物理机访问虚拟机内部的容器" class="headerlink" title="2.1 物理机访问虚拟机内部的容器"></a>2.1 物理机访问虚拟机内部的容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>虚拟机开启路由转发</span><br><span class="line">echo "net.ipv4.ip_forward=1" &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="meta">#</span>物理机 win10 路由表加入</span><br><span class="line">route add 172.18.0.0 mask 255.255.255.0 192.168.137.200</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-登录harhub"><a href="#2-2-登录harhub" class="headerlink" title="2.2 登录harhub"></a>2.2 登录harhub</h2><p>docker build -t 10.19.151.227/test/docker-test .</p>
+<p>harbor地址：<a href="https://10.19.151.227" target="_blank" rel="noopener">https://10.19.151.227</a> 用户名：admin 密码：Xinzhiharbor123</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://dockerhub.azk8s.cn&quot;,</span><br><span class="line">    &quot;https://hub-mirror.c.163.com&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;insecure-registries&quot;: [</span><br><span class="line">    &quot;10.19.151.227&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">docker login -u $&#123;HARBOR_CREDS_USR&#125; -p $&#123;HARBOR_CREDS_PSW&#125; harbor.zuoguocai.xyz:4443</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -647,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-linux下载并安装minikube并启动"><span class="nav-number">1.</span> <span class="nav-text">1.linux下载并安装minikube并启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-开启Kubernetes试验田"><span class="nav-number">2.</span> <span class="nav-text">2.开启Kubernetes试验田</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-物理机访问虚拟机内部的容器"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 物理机访问虚拟机内部的容器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-linux下载并安装minikube并启动"><span class="nav-number">1.</span> <span class="nav-text">1.linux下载并安装minikube并启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-开启Kubernetes试验田"><span class="nav-number">2.</span> <span class="nav-text">2.开启Kubernetes试验田</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-物理机访问虚拟机内部的容器"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 物理机访问虚拟机内部的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-登录harhub"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 登录harhub</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -682,7 +685,7 @@
     
       <span class="post-meta-item-text">本站总字数&#58;</span>
     
-    <span title="本站总字数">90.7k</span>
+    <span title="本站总字数">91.0k</span>
   
 </div>
 
