@@ -287,7 +287,7 @@ ARG MAVEN_BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/bina
 
 RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories \
   && echo "https://mirrors.aliyun.com/alpine/v3.8/community/" >> /etc/apk/repositories \
-  && apk add --no-cache tar procps tzdata shadow docker \
+  && apk add --no-cache openrc tar procps tzdata shadow docker \
   && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone \
   && mkdir -p /usr/share/maven /usr/share/maven/ref/repository \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${MAVEN_BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
@@ -296,7 +296,7 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories 
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
   && usermod -aG 999 jenkins \
   && chown 1000:1000 /usr/share/maven/ref/repository \
-  && apk del tzdata shadow tar
+  && apk del tzdata shadow tar && rc-update add docker boot
 
 ENV MAVEN_HOME /usr/share/maven
 VOLUME /usr/share/maven/ref/repository
@@ -304,6 +304,12 @@ VOLUME /usr/share/maven/ref/repository
 COPY settings.xml /usr/share/maven/conf/settings.xml
 
 USER jenkins
+```
+
+执行容器命令启动
+
+```shell
+docker run -d -p 10240:8080 -p 10241:50000 -v /root/test/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime -v "/var/run/docker.sock:/var/run/docker.sock:rw"  --name myjenkins f7b60faddb9e
 ```
 
 
