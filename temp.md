@@ -287,7 +287,7 @@ ARG MAVEN_BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/bina
 
 RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories \
   && echo "https://mirrors.aliyun.com/alpine/v3.8/community/" >> /etc/apk/repositories \
-  && apk add --no-cache openrc tar procps tzdata shadow docker \
+  && apk add --no-cache curl  ca-certificates openrc tar procps tzdata shadow docker \
   && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone \
   && mkdir -p /usr/share/maven /usr/share/maven/ref/repository \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${MAVEN_BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
@@ -297,10 +297,6 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories 
   && usermod -aG 999 jenkins \
   && chown 1000:1000 /usr/share/maven/ref/repository \
   && apk del tzdata shadow tar && rc-update add docker boot
-RUN apk add -U openssl curl tar gzip bash ca-certificates && \
-  wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk && \
-  apk add glibc-2.23-r3.apk && \
-  rm glibc-2.23-r3.apk
   
 ENV MAVEN_HOME /usr/share/maven
 VOLUME /usr/share/maven/ref/repository
