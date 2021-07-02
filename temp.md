@@ -273,11 +273,11 @@ vi  hudson.model.UpdateCenter.xml
 
 ## 4.4 自定义jenkins的镜像
 
+当前目录下存在:  config  Dockerfile  glibc-2.23-r3.apk  kubectl  settings.xml 文件
+
 ```shell
-# =====================================================================
-# Jenkins with DooD (Docker outside of Docker) and integration maven
-# =====================================================================
 FROM jenkins/jenkins:alpine
+LABEL auth="qisensen"
 
 USER root
 
@@ -296,14 +296,14 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories 
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
   && usermod -aG 999 jenkins \
   && chown 1000:1000 /usr/share/maven/ref/repository \
-  && apk del tzdata shadow tar && rc-update add docker boot
-  
+  && apk del tzdata shadow tar && rc-update add docker boot && mkdir -p ~/.kube/
+COPY kubectl /usr/local/bin/
+COPY config ~/.kube/
 ENV MAVEN_HOME /usr/share/maven
+ENV KUBECONFIG ~/.kube/config
 VOLUME /usr/share/maven/ref/repository
-# 本地使用公司的settings进行settings文件替换
-COPY settings.xml /usr/share/maven/conf/settings.xml
 
-USER jenkins
+COPY settings.xml /usr/share/maven/conf/settings.xml
 ```
 
 执行容器命令启动
