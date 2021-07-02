@@ -297,7 +297,11 @@ RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" > /etc/apk/repositories 
   && usermod -aG 999 jenkins \
   && chown 1000:1000 /usr/share/maven/ref/repository \
   && apk del tzdata shadow tar && rc-update add docker boot
-
+RUN apk add -U openssl curl tar gzip bash ca-certificates && \
+  wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk && \
+  apk add glibc-2.23-r3.apk && \
+  rm glibc-2.23-r3.apk
+  
 ENV MAVEN_HOME /usr/share/maven
 VOLUME /usr/share/maven/ref/repository
 # 本地使用公司的settings进行settings文件替换
