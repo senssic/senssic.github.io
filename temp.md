@@ -217,13 +217,23 @@ df -h  #查看磁盘是否成功变化大小
 ## 4.1 命令相关
 
 ```shell
-1.pod内部容器不可用top命令
-echo $TERM  export TERM=dumb
-2.通过 --previous参数可以看之前Pod的日志
-kubectl logs zookeeper-1 --previous
-3.获取登陆dashbord相关
-kubectl cluster-info|grep dashboard
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+1.列出所有的容器 ID
+docker ps -aq
+2.停止所有的容器
+docker stop $(docker ps -aq)
+3.删除所有的容器
+docker rm $(docker ps -aq)
+或
+docker container prune -f
+4.删除所有镜像
+docker rmi $(docker images -q)
+或
+docker image prune -f -a
+5.删除所有网络
+docker network prune -f -a
+6.复制文件
+docker cp mycontainer:/opt/file.txt /opt/local/
+docker cp /opt/local/file.txt mycontainer:/opt/
 ```
 
 ## 4.2 安装docker和minikube
