@@ -234,6 +234,12 @@ docker network prune -f -a
 6.复制文件
 docker cp mycontainer:/opt/file.txt /opt/local/
 docker cp /opt/local/file.txt mycontainer:/opt/
+7.查看镜像的启动命令
+alias runlike="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike"
+runlike -p 容器
+8.查看镜像的构建Dockerfile(大致)
+alias whaler="docker run -t --rm -v /var/run/docker.sock:/var/run/docker.sock:ro pegleg/whaler"
+whaler -sV=1.36  容器
 ```
 
 ## 4.2 安装docker和minikube
