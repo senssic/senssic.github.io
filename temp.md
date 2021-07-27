@@ -240,6 +240,10 @@ runlike -p 容器
 8.查看镜像的构建Dockerfile(大致)
 alias whaler="docker run -t --rm -v /var/run/docker.sock:/var/run/docker.sock:ro pegleg/whaler"
 whaler -sV=1.36  容器
+9.调试k8s的pod容器
+#如果是私有仓库需要自己将debug-agent:v0.1.1 和 nicolaka/netshoot:latest push到私有仓库,docker tag,docker push
+kubectl-debug -n dev pod-xxx --agentless=true --port-forward=true --agent-image=aylei/debug-agent:v0.1.1
+
 ```
 
 ## 4.2 安装docker和minikube
