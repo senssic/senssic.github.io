@@ -7,7 +7,21 @@ copyright: true
 
 [TOC]
 
+# 0.windows脚本
 
+## 0.0 windows关于端口查询和自启动目录
+
+```shell
+# 查看被占用的端口的进程
+netstat -aon|findstr "8081"
+#杀死进程PID以及子进程
+taskkill /T /F /PID 9088
+#自启动脚本的.vbs文件不弹框
+set ws=WScript.CreateObject("WScript.Shell")
+ws.Run "C:\start\bat-start.bat",0
+#将上面的代码文本编辑重命名.vbs文件放到下面的自启动目录
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
+```
 
 # 1.linux脚本
 
