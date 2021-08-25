@@ -346,7 +346,19 @@ COPY settings.xml /usr/share/maven/conf/settings.xml
 docker run -d -p 10240:8080 -p 10241:50000 -v /root/test/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime -v "/var/run/docker.sock:/var/run/docker.sock:rw"  --name myjenkins f7b60faddb9e
 ```
 
+## 4.5 运行的容器制作成镜像，以及镜像打包和推送到远程仓库
 
+```dockerfile
+# 1.对于运行的容器打包成镜像使用commit命令
+docker commit -m '增加' 运行容器的名字 ip.xx.xx.xxx/dev/test:v2.0
+# 2.对于已存在的镜像打tag,以便推送到私有仓库上
+docker tag jenkins ip.xx.xxx.xxx/dev/jenkins:v2.0
+# 3.推送tag或者镜像文件到私有仓库上
+## 3.1登录私有仓库
+docker login -u admin  -p admin ip.xx.xx.xxx
+## 3.2推送镜像文件
+docker push ip.xx.xxx.xxx/dev/jenkins:v2.0
+```
 
 # 5.大数据相关
 
