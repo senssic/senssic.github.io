@@ -131,5 +131,5 @@ M00/00/00/wKg4C1tFmTWAFPKBAADdeFFxlXA240.png
 
 ​     由于FastDFS本身不能对重复上传的文件进行去重，而FastDHT可以做到去重。FastDHT是一个高性能的分布式哈希系统，它是基于键值对存储的，而且它需要依赖于Berkeley DB作为数据存储的媒介，同时需要依赖于libfastcommon。
 
-![image-20210903173022244](fastdfs常用能力/image-20210903173022244-16306614236722.png)
+![image-20210903173022244](image-20210903173022244-16306614236722.png)
 
