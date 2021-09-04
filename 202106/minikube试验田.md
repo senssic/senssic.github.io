@@ -42,7 +42,7 @@ minikube delete
 
 # 2.开启Kubernetes试验田
 
-![image-20210629173123932](minikube试验田/image-20210629173123932.png)
+![image-20210629173123932](image-20210629173123932.png)
 
 ## 2.1 物理机访问虚拟机内部的容器
 
