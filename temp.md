@@ -7,7 +7,7 @@ copyright: true
 
 [TOC]
 
-# 0.windows脚本
+# 0.windows相关
 
 ## 0.0 windows关于端口查询和自启动目录
 
@@ -23,7 +23,7 @@ ws.Run "C:\start\bat-start.bat",0
 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
 ```
 
-# 1.linux脚本
+# 1.linux相关
 
 ## 1.1 hexo一键执行脚本
 
@@ -93,6 +93,37 @@ yum makecache fast
    #详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160
    tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
    ```
+
+## 1.3 centos8 root用户忘记密码
+
+- 1.启动centos8系统,在开机界面选择第一行，按e
+
+  - ![img](1663629-20200827235901806-297834126.png)
+
+- 2.进入以下界面，找到ro并将其修改为rw init=/sysroot/bin/bash
+
+  - ![img](1663629-20200828000604276-1504908204.png)
+
+- 3.同时按住ctrl和x键，系统进入以下紧急模式界面
+
+  - ![img](1663629-20200828000852659-163415984.png)
+
+- 4.输入以下命令修改密码
+
+  - ```shell
+    chroot /sysroot/          #切换回原始系统
+    LANG=en                   #把语言改为英文
+    passwd                    #设置新密码
+    touch /.autorelabel       #使密码生效
+    ```
+
+  - ![img](1663629-20200828001445506-1267469068.png)
+
+- 5.同时按住Ctrl和d键，进入以下界面，输入reboot，重启系统,直接使用新密码操作即可
+
+  - ![img](1663629-20200828001027831-2089731344.png)
+
+
 
 ## 1.4 linux的初始化优化
 
@@ -541,6 +572,28 @@ java -cp .:xxxa.jar;d:\classes\*.jar  Simple
    ```
 
 3. 打开 Java VisualVM  文件>添加远程主机   填入服务端IP
+
+
+
+## 6.3 springboot的可执行jar不能替换lib目录下jar文件
+
+```java
+springboot项目在使用压缩软件替换lib下的依赖包后，启动报错
+​Exception in thread "main" java.lang.IllegalStateException: Failed to get nested archive for entry BOOT-INF/lib/xxx
+```
+
+原因是:替换或者导入jar包时，jar包被自动压缩，springboot规定嵌套的jar包不能在被压缩的情况下存储。需要使用jar命令解压jar包，在压缩包外重新替换jar包，在进行压缩。
+
+```shell
+#1.解压springboot的可执行jar
+jar -xvf *.jar
+#2.替换相关依赖lib目录下的jar
+mv  xxx BOOT-INF/lib/
+#3.重新压缩jar
+jar -cfM0 new.jar BOOT-INF/ META-INF/ org/  xxx
+```
+
+
 
 # 7.其他杂项相关
 
