@@ -94,7 +94,7 @@ yum makecache fast
    tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
    ```
 
-## 1.3 centos8 root用户忘记密码
+## 1.4 centos8 root用户忘记密码
 
 - 1.启动centos8系统,在开机界面选择第一行，按e
 
@@ -125,7 +125,7 @@ yum makecache fast
 
 
 
-## 1.4 linux的初始化优化
+## 1.5 linux的初始化优化
 
 ```shell
 # 1.设置主机名称
@@ -193,6 +193,29 @@ sync
 reboot
 #安装docker
 curl -sSL https://get.daocloud.io/docker | sh
+```
+
+## 1.6 linux双网卡NAT路由映射
+
+```shell
+# 前提:
+#   服务器 A ：配有外网 IP 地址 1.1.1.1 和内网 IP 地址 192.168.1.1 ，操作系统为 CentOS Linux 7 ；
+#   数据库服务器 B ：仅配有内网 IP 地址 192.168.1.2 ，操作系统没有限制，Windows 也可。
+# 需求:
+#   需要通过外网去访问数据库服务器 B 的 3306 端口，即将 1.1.1.1:30000 映射为 192.168.1.2:3306 。
+# 开启 IP 路由转发
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+sysctl -p
+# 清除原有的 NAT 表中的规则
+iptables -t nat -F
+# 清除原有的 filter 表中的规则
+iptables -F
+# 缺省允许 IP 转发
+iptables -P FORWARD ACCEPT
+# SNAT(source NAT,对源 IP 地址做 NAT)将 x.x.x.x:yyyy → 192.168.1.2:3306 转换为 192.168.1.1:zzzz → 192.168.1.2:3306 
+iptables -t nat -A PREROUTING -p tcp --dport 30000 -j DNAT --to-destination 192.168.1.2:3306
+#  DNAT（ destination NAT ，对目的 IP 地址做 NAT ），即将 x.x.x.x:yyyy → 1.1.1.1:30000 转换为 x.x.x.x:yyyy → 192.168.1.2:3306 
+iptables -t nat -A POSTROUTING -d 192.168.1.2 -p tcp --dport 3306 -j SNAT --to 192.168.1.1
 ```
 
 
