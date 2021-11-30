@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/25/senssic.github.io/temp/1663629-20200828000852659-163415984.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/25/senssic.github.io/temp/1663629-20200828001445506-1267469068.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/25/senssic.github.io/temp/1663629-20200828001027831-2089731344.png">
-<meta property="og:updated_time" content="2021-10-09T07:49:22.586Z">
+<meta property="og:updated_time" content="2021-11-30T03:02:16.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="temp">
 <meta name="twitter:description" content="[TOC] 0.windows相关0.0 windows关于端口查询和自启动目录123456789# 查看被占用的端口的进程netstat -aon|findstr &quot;8081&quot;#杀死进程PID以及子进程taskkill /T /F /PID 9088#自启动脚本的.vbs文件不弹框set ws=WScript.CreateObject(&quot;WScript.Shell&quot;)ws.Run &quot;C:\sta">
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,004
+                  5,048
                 </span>
               
 
@@ -428,7 +428,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  24
+                  25
                 </span>
               
             </div>
@@ -464,6 +464,9 @@
 </li>
 <li><p>tcpdump的命令使用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160</span><br><span class="line">tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings &gt; tcpdump.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用ffmpeg命令拉流并截图保存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -an -vf select='eq(pict_type\,I)' -vsync 2 -f image2 -strftime 1 "%H_%M_%S.jpg" -i  rtsp://admin:admin@192.168.1.12:554/h264/ch33/main/av_stream</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="1-4-centos8-root用户忘记密码"><a href="#1-4-centos8-root用户忘记密码" class="headerlink" title="1.4 centos8 root用户忘记密码"></a>1.4 centos8 root用户忘记密码</h2><ul>
