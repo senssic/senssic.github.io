@@ -94,6 +94,12 @@ yum makecache fast
    tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
    ```
 
+5. 使用ffmpeg命令拉流并截图保存
+
+   ```shell
+   ffmpeg -an -vf select='eq(pict_type\,I)' -vsync 2 -f image2 -strftime 1 "%H_%M_%S.jpg" -i  rtsp://admin:admin@192.168.1.12:554/h264/ch33/main/av_stream
+   ```
+
 ## 1.4 centos8 root用户忘记密码
 
 - 1.启动centos8系统,在开机界面选择第一行，按e
