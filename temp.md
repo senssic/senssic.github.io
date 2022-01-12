@@ -437,6 +437,8 @@ services:
   prometheus:
     image: prom/prometheus:v2.17.1
     container_name: prometheus
+    ports:
+      - "9090:9090"    
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
@@ -457,6 +459,8 @@ services:
   grafana:
     image: grafana/grafana:6.7.2
     container_name: grafana
+    ports:
+      - "3000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
