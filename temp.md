@@ -311,12 +311,16 @@ docker cp /opt/local/file.txt mycontainer:/opt/
 7.查看镜像的启动命令
 alias runlike="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike"
 runlike -p 容器
-8.查看镜像的构建Dockerfile(大致)
+8.查看镜像的构建Dockerfile命令
+#使用命令
+docker history 容器 --no-trunc
+#使用其他容器命令
 alias whaler="docker run -t --rm -v /var/run/docker.sock:/var/run/docker.sock:ro pegleg/whaler"
 whaler -sV=1.36  容器
 9.调试k8s的pod容器
 #如果是私有仓库需要自己将debug-agent:v0.1.1 和 nicolaka/netshoot:latest push到私有仓库,docker tag,docker push
 kubectl-debug -n dev pod-xxx --agentless=true --port-forward=true --agent-image=aylei/debug-agent:v0.1.1
+
 
 ```
 
@@ -475,6 +479,33 @@ services:
       - monitor-net
     labels:
       org.label-schema.group: "monitoring"
+```
+
+## 4.7 基于ubuntu机器学习的环境Dockerfile
+
+```dockerfile
+FROM ubuntu:21.10
+USER root
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ENV DEBIAN_FRONTEND=noninteractive
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN apt-get clean
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6 wget make build-essential libssl-dev zlib1g-dev libbz2-dev \
+            libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+            xz-utils tk-dev libffi-dev liblzma-dev zlib1g-dev python3-distutils -y
+RUN wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz --no-check-certificate \
+          && tar -xf Python-3.8.0.tgz && cd Python-3.8.0 &&  ./configure --prefix=/usr/local/python3 --enable-optimizations \
+          && make && make install
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+RUN mkdir -p /opt/data/deploy/discernment_ai
+WORKDIR /opt/data/deploy/discernment_ai
+COPY . .
+RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+VOLUME /opt/data/deploy/discernment_ai
+EXPOSE 5003
+ENTRYPOINT ["python3","-u"]
+CMD ["app.py"]
 ```
 
 # 5.大数据相关
