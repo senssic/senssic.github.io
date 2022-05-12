@@ -724,7 +724,7 @@ jar -cfM0 new.jar BOOT-INF/ META-INF/ org/  xxx
 
 ## 6.4 cpu100%线上排查
 
-![jvm垃圾回收导致CPU100%排查](951e5d60-c1b9-4f7f-b3d2-d57cea175bf8.png)
+![c1b9](951e5d60-c1b9-4f7f-b3d2-d57cea175bf8.png)
 
 **线程CPU100%可能导致的原因**
 
