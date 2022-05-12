@@ -224,7 +224,33 @@ iptables -t nat -A PREROUTING -p tcp --dport 30000 -j DNAT --to-destination 192.
 iptables -t nat -A POSTROUTING -d 192.168.1.2 -p tcp --dport 3306 -j SNAT --to 192.168.1.1
 ```
 
+## 1.7 主盘扩容(/dev/mapper/centos-root 空间不足)
 
+```shell
+ls  /dev/sd*  #使用fdisk分区然后找一块空的分区
+pvcreate /dev/sda3 #使用空的分区创建pv
+vgs  #先使用vgs查看vg组大小
+vgextend centos /dev/sda3 #扩展vg
+vgs  #再查看一下vg组大小，看是否发生变化
+lvs #查看lv大小,虽然我们把vg扩展了，但是lv还没有扩展
+lvextend -L +20G /dev/mapper/centos-root #扩展lv,使用lvextend
+xfs_growfs /dev/mapper/centos-root #命令使系统重新读取大小
+df -h  #查看磁盘是否成功变化大小
+```
+
+## 1.8 新增磁盘挂载
+
+```shell
+#列出新的的磁盘
+fdisk -l
+#格式化此磁盘
+mkfs -t ext4 /dev/xvde
+#创建新目录并挂载此磁盘
+mkdir -p /mnt/home
+mount /dev/xvde /mnt/home
+#设置开机挂载
+/dev/xvde /mnt/home ext4 defaults 1  2
+```
 
 # 2.虚拟机相关
 
@@ -260,20 +286,6 @@ dhclient 网卡 -v
 ## 2.3 virtual Boxs设置已存在的硬盘的大小
 
 **C:\Program Files\Oracle\VirtualBox\VBoxManage.exe modifyhd E:\vribox\k8s-temp\k8s-temp-disk1.vdi --resize 512000**
-
-## 2.4 主盘扩容(/dev/mapper/centos-root 空间不足)
-
-```shell
-ls  /dev/sd*  #使用fdisk分区然后找一块空的分区
-pvcreate /dev/sda3 #使用空的分区创建pv
-vgs  #先使用vgs查看vg组大小
-vgextend centos /dev/sda3 #扩展vg
-vgs  #再查看一下vg组大小，看是否发生变化
-lvs #查看lv大小,虽然我们把vg扩展了，但是lv还没有扩展
-lvextend -L +20G /dev/mapper/centos-root #扩展lv,使用lvextend
-xfs_growfs /dev/mapper/centos-root #命令使系统重新读取大小
-df -h  #查看磁盘是否成功变化大小
-```
 
 # 3.数据库相关
 
@@ -709,6 +721,54 @@ mv  xxx BOOT-INF/lib/
 #3.重新压缩jar
 jar -cfM0 new.jar BOOT-INF/ META-INF/ org/  xxx
 ```
+
+## 6.4 cpu100%线上排查
+
+![jvm垃圾回收导致CPU100%排查](jvm垃圾回收导致CPU100%排查.png)
+
+**线程CPU100%可能导致的原因**
+
+https://www.cnblogs.com/jajian/p/10578628.html
+
+
+
+```shell
+#找出消耗cpu最高的线程
+top  #找到占用最高的进程
+top -H -p pid #找到占用最高进程的最高线程
+printf "%x\n" tid #将占用最高的线程id转换为16进制
+#打印jvm线程信息并查看占用CPU最高的线程执行了什么代码
+jstack pid>stack.txt #保留现场
+cat stack.txt|grep 十六进制的tid #查看线程忙什么
+jstack pid |grep tid -A 50 #查询忙线程执行什么
+#每秒打印GC日志查看gc情况
+jstat -gcutil pid 1000
+#dump jvm内存信息,并使用MAT进行分析
+jmap -dump:format=b,file=./java.dump pid
+#查看队内存情况和使用的垃圾回收器
+jmap -heap pid
+
+#打印垃圾回收日志
+-XX:+PrintGCDetails
+-XX:+PrintGCDateStamps
+-XX:+PrintTenuringDistribution
+-XX:+PrintHeapAtGC
+-XX:+PrintReferenceGC
+-XX:+PrintGCApplicationStoppedTime
+-Xloggc:/data/gc-%t.log
+
+#使用G1垃圾回收器
+-XX:+UseG1GC
+-XX:MaxGCPauseMillis=500
+-XX:-TieredCompilation
+-XX:ReservedCodeCacheSize=128m
+-XX:+UseCodeCacheFlushing
+#G1常用参数，和介绍
+https://blog.csdn.net/Megustas_JJC/article/details/105470675
+https://www.cnblogs.com/klvchen/articles/11672058.html
+```
+
+
 
 
 
