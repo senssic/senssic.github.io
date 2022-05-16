@@ -329,7 +329,10 @@ docker history 容器 --no-trunc
 #使用其他容器命令
 alias whaler="docker run -t --rm -v /var/run/docker.sock:/var/run/docker.sock:ro pegleg/whaler"
 whaler -sV=1.36  容器
-9.调试k8s的pod容器
+9.调试docker容器
+#安装docker-debug
+https://github.com/zeromake/docker-debug/blob/master/README-zh-Hans.md
+10.调试k8s的pod容器
 #如果是私有仓库需要自己将debug-agent:v0.1.1 和 nicolaka/netshoot:latest push到私有仓库,docker tag,docker push
 kubectl-debug -n dev pod-xxx --agentless=true --port-forward=true --agent-image=aylei/debug-agent:v0.1.1
 
