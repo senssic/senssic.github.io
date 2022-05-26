@@ -287,6 +287,10 @@ dhclient 网卡 -v
 
 **C:\Program Files\Oracle\VirtualBox\VBoxManage.exe modifyhd E:\vribox\k8s-temp\k8s-temp-disk1.vdi --resize 512000**
 
+## 2.4  实验室主机虚拟化软件
+
+VMware ESXi 和 Proxmox 一般研发推荐Proxmox
+
 # 3.数据库相关
 
 ## 3.1 mysql数据库
