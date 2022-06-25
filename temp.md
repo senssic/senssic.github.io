@@ -254,18 +254,41 @@ mount /dev/xvde /mnt/home
 
 ## 1.9 linux虚拟网卡和路由
 
+![img](WX20220625-112140@2x.png)
+
 ```shell
-#新增虚拟网卡
+#1.新增虚拟网卡
+#***********ubuntu 配置开始**************
 vi /etc/network/interfaces
 # 需替换为实际物理网卡
-auto eth0 eth0:1
+auto  eth0:1
 iface eth0:1 inet static
 address 192.168.2.10
 netmask 255.255.255.0
 gateway 192.168.1.3
+#重启网络
+/etc/init.d/networking restart
+#***********ubuntu 配置结束**************
+#***********centos 配置开始**************
+vi /etc/sysconfig/network-scripts/ifcfg-eth0:1
+# 需替换为实际物理网卡
+DEVICE=eth0:1
+ONBOOT=yes
+BOOTPROTO=static
+IPADDR=192.168.2.10
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.3
+#重启网络
+service network restart
+#***********centos 配置结束**************
 
+#2.若需要上级网段访问下级网段可以配置路由
+#配置转发，Linux 本身开启转发功能后就是一个路由器
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf 
+sysctl -p
+#https://www.cnblogs.com/embedded-linux/p/10200831.html
 #设置路由          目标                子网掩码         网关/下一跳
-route add -net 10.10.20.0 netmask 255.255.255.0 gw 10.10.10.1
+route add -net 10.10.20.0 netmask 255.255.255.0 gw  10.10.10.1
 ```
 
 
