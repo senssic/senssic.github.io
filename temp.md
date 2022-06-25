@@ -254,10 +254,12 @@ mount /dev/xvde /mnt/home
 
 ## 1.9 linux虚拟网卡和路由
 
+![img](WX20220625-185011@2x.png)
+
 https://www.linuxidc.com/Linux/2017-09/146914.htm
 
 ```shell
-#1.新增虚拟网卡,或者直接使用虚拟机创建两个实体网卡
+#1.新增虚拟网卡,【或者直接使用虚拟机创建两个实体网卡】
 #***********ubuntu 配置开始**************
 vi /etc/network/interfaces
 # 需替换为实际物理网卡
@@ -279,7 +281,6 @@ NETMASK=255.255.255.0
 #重启网络
 service network restart
 #***********centos 配置结束**************
-
 #2.若需要上级网段访问下级网段可以配置路由
 #配置转发，Linux 本身开启转发功能后就是一个路由器
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf 
@@ -287,6 +288,13 @@ sysctl -p
 #https://www.cnblogs.com/embedded-linux/p/10200831.html
 #设置路由          目标                子网掩码         网关/下一跳
 route add -net 10.10.20.0 netmask 255.255.255.0 gw  10.10.10.1
+#3.配置nat转发（在虚拟路由服务器执行）
+#清除原有的nat表中的规则
+iptables -F && iptables -X && iptables -F -t nat && iptables -X -t nat
+#缺省允许IP转发
+iptables -P FORWARD ACCEPT
+#利用iptables 实现nat MASQUERADE 共享上网，eth0为可以上网的网卡
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
 
