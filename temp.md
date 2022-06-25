@@ -252,6 +252,24 @@ mount /dev/xvde /mnt/home
 /dev/xvde /mnt/home ext4 defaults 1  2
 ```
 
+## 1.9 linux虚拟网卡和路由
+
+```shell
+#新增虚拟网卡
+vi /etc/network/interfaces
+# 需替换为实际物理网卡
+auto eth0 eth0:1
+iface eth0:1 inet static
+address 192.168.2.10
+netmask 255.255.255.0
+gateway 192.168.1.3
+
+#设置路由          目标                子网掩码         网关/下一跳
+route add -net 10.10.20.0 netmask 255.255.255.0 gw 10.10.10.1
+```
+
+
+
 # 2.虚拟机相关
 
 ## 2.1 virtual Boxs使用virtual host和nat网络固定ip
