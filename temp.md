@@ -254,10 +254,10 @@ mount /dev/xvde /mnt/home
 
 ## 1.9 linux虚拟网卡和路由
 
-![img](WX20220625-114244@2x.png)
+https://www.linuxidc.com/Linux/2017-09/146914.htm
 
 ```shell
-#1.新增虚拟网卡
+#1.新增虚拟网卡,或者直接使用虚拟机创建两个实体网卡
 #***********ubuntu 配置开始**************
 vi /etc/network/interfaces
 # 需替换为实际物理网卡
@@ -265,7 +265,6 @@ auto  eth0:1
 iface eth0:1 inet static
 address 192.168.2.10
 netmask 255.255.255.0
-gateway 192.168.1.3
 #重启网络
 /etc/init.d/networking restart
 #***********ubuntu 配置结束**************
@@ -277,7 +276,6 @@ ONBOOT=yes
 BOOTPROTO=static
 IPADDR=192.168.2.10
 NETMASK=255.255.255.0
-GATEWAY=192.168.1.3
 #重启网络
 service network restart
 #***********centos 配置结束**************
