@@ -254,7 +254,7 @@ mount /dev/xvde /mnt/home
 
 ## 1.9 linux虚拟网卡和路由
 
-![img](WX20220625-112140@2x.png)
+![img](WX20220625-114244@2x.png)
 
 ```shell
 #1.新增虚拟网卡
