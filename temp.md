@@ -338,6 +338,16 @@ dhclient 网卡 -v
 
 VMware ESXi 和 Proxmox 一般研发推荐Proxmox
 
+## 2.5 pve 设置虚拟机分辨率
+
+```shell
+#1.虚拟BIOS需要使用OVMF(UEFI),并再启动时候点击 esc键进入bios
+#2.依次选择 Device Manager>OVMF Platform Configuration>Change Preferred 选择对应的分辨率就行
+#3.选择Commit Changes adn Exit 退出bios继续进入系统即可
+```
+
+
+
 # 3.数据库相关
 
 ## 3.1 mysql数据库
