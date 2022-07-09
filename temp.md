@@ -63,30 +63,6 @@ yum makecache fast
 1. 设置hostname名称
    sudo hostnamectl set-hostname <newhostname>
 
-2. 查看磁盘
-
-   lsblk
-
-3. 新增磁盘进行分区
-
-   ```shell
-   fdisk /dev/sdf
-   输入 n 开始进行设置
-   输入 p  设置主分区
-   分区号默认
-   起始扇区默认
-   结束扇区默认
-   输入 w 设置保存
-   重启机器
-   lsblk 查看磁盘信息
-   mkfs.ext3 /dev/sda3  #格式化新创建的分区
-   mkdir data #创建目录
-   mount /dev/sda3  #挂载分区
-   vim /etc/fstab #挂载重启生效，永久挂载
-   df -h  #查看硬盘信息
-   重启系统
-   ```
-
 4. tcpdump的命令使用
 
    ```shell
@@ -243,13 +219,21 @@ df -h  #查看磁盘是否成功变化大小
 ```shell
 #列出新的的磁盘
 fdisk -l
+#若需要划分分区，执行如下操作，若不需要分区直接格式化挂载即可，如果使用分区则需要挂载分区后的比如xvde1
+#fdisk /dev/xvde
+#输入 n 开始进行设置
+#输入 p  设置主分区
+#分区号默认
+#起始扇区默认
+#结束扇区默认
+#输入 w 设置保存
 #格式化此磁盘
 mkfs -t ext4 /dev/xvde
 #创建新目录并挂载此磁盘
 mkdir -p /mnt/home
 mount /dev/xvde /mnt/home
-#设置开机挂载
-/dev/xvde /mnt/home ext4 defaults 1  2
+#设置开机挂载 编辑 vim /etc/fstab 增加如下
+/dev/xvde /mnt/home ext4 defaults 0 0
 ```
 
 ## 1.9 linux虚拟网卡和路由
