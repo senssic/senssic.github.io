@@ -571,30 +571,65 @@ CMD ["app.py"]
 # 5.大数据相关
 
 ## 5.1 kafka相关
-```shell
-1.新建topic
-bin/kafka-topics.sh --create --zookeeper node:2181 --topic test --partitions 2 --replication-factor 1
-2.修改partition数 只能增
-./bin/kafka-topics.sh --alter --topic test2 --zookeeper node:2181 --partitions 3  
-3.查看指定topic
-bin/kafka-topics.sh --zookeeper zookeeper01:2181 --describe --topic topic_test
-4.删除topic
-bin/kafka-topics.sh  --delete --topic test --zookeeper node:2181
-5.显示某个消费组的消费详情(CURRENT-OFFSET:已消费的,LOG-END-OFFSET:总数,LAG=LOG-END-OFFSET-CURRENT-OFFSET:堆积的消息)
-bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --describe --group test-consumer-group
-6.消费者列表查询
-bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
-7.所有新消费者列表
-bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --list
-8.查询集群描述
-bin/kafka-topics.sh --describe --zookeeper 
-9.从头开始消费
-bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginning
-10.获取主题(其分区)的最大偏移量
-bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic
-11.从尾开始消费指定分区指定消费个数
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --offset 10 --partition 0   --max-messages 1 
-```
+
+-  集群相关配置
+
+  - zookeeper
+
+    ```shell
+    #重要配置，需要在此目录下生成myid文件,即为集群标记
+    dataDir=/mnt/data/
+    #zk链接端口
+    clientPort=2181
+    #集群id和集群ip配置
+    server.0=ip1:2888:3888
+    server.1=ip2:2888:3888
+    server.2=ip3:2888:3888
+    ```
+
+  - kafka
+
+    ```shell
+    #集群标记,每个需递增
+    borker.id=1
+    #日志文件
+    log.dir=/mnt/data/kafka
+    #配置zk集群
+    zookeeper.connect=ip1:2181,ip2:2181,ip3:2181
+    #配置端口
+    port=9092
+    #绑定机器
+    host.name=ip
+    ```
+
+- 常用命令
+
+  ```shell
+  1.新建topic
+  bin/kafka-topics.sh --create --zookeeper node:2181 --topic test --partitions 2 --replication-factor 1
+  2.修改partition数 只能增
+  ./bin/kafka-topics.sh --alter --topic test2 --zookeeper node:2181 --partitions 3  
+  3.查看指定topic
+  bin/kafka-topics.sh --zookeeper zookeeper01:2181 --describe --topic topic_test
+  4.删除topic
+  bin/kafka-topics.sh  --delete --topic test --zookeeper node:2181
+  5.显示某个消费组的消费详情(CURRENT-OFFSET:已消费的,LOG-END-OFFSET:总数,LAG=LOG-END-OFFSET-CURRENT-OFFSET:堆积的消息)
+  bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --describe --group test-consumer-group
+  6.消费者列表查询
+  bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
+  7.所有新消费者列表
+  bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --list
+  8.查询集群描述
+  bin/kafka-topics.sh --describe --zookeeper 
+  9.从头开始消费
+  bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginning
+  10.获取主题(其分区)的最大偏移量
+  bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic
+  11.从尾开始消费指定分区指定消费个数
+  kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --offset 10 --partition 0   --max-messages 1
+  ```
+
+   
 
 ## 5.2 impala相关
  ```shell
