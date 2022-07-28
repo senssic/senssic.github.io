@@ -627,8 +627,10 @@ CMD ["app.py"]
   bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic
   11.从尾开始消费指定分区指定消费个数
   kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --offset 10 --partition 0   --max-messages 1
+  12.使用命令对指定topic发送kafka消息
+  bin/kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic test
   ```
-
+  
    
 
 ## 5.2 impala相关
