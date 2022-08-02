@@ -334,14 +334,95 @@ VMware ESXi 和 Proxmox 一般研发推荐Proxmox
 
 # 3.数据库相关
 
-## 3.1 mysql数据库
+## 3.1 mysql数据库常用操作
 
-1. 重置root密码
-   update user set authentication_string = password(‘123456’), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
+```sql
+-- 重置root密码,并刷新权限
+update user set authentication_string = password(‘123456’), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
+flush privileges;
+```
 
-2. 刷新权限
+## 3.2 数据库问题排查语句
 
-   flush privileges
+### 3.2.1 数据库诊断命令
+
+```sql
+show processlist
+show status
+show variables
+show table status
+show index
+show engine
+show master status
+show slave status
+```
+
+### 3.3.2 数据库死锁排查语句
+
+```sql
+# 查看当前连接
+show processlist;
+show full processlist;
+SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST;
+# 查看当前未提交的事务（如果死锁等待超时,事务可能还没有关闭）
+SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX;
+
+# 查看正在被访问的表
+show OPEN TABLES where In_use > 0;
+# 查看最近的死锁记录
+SHOW ENGINE INNODB STATUS;
+# 死锁日志
+show variables like 'innodb_print_all_deadlocks';
+
+# 若一直请求不到资源，默认50秒则出现锁等待超时。
+show variables like 'innodb_lock_wait_timeout';
+# 设置全局变量 锁等待超时为60秒（新的连接生效）
+set session innodb_lock_wait_timeout=50;
+set global innodb_lock_wait_timeout=60;
+#上面测试中，当事务中的某个语句超时只回滚该语句，事务的完整性属于被破坏了。为了回滚这个事务，启用以下参数：
+show variables like 'innodb_rollback_on_timeout';
+show processlist;
+SELECT trx_mysql_thread_id,trx_state,trx_started,trx_weight FROM INFORMATION_SCHEMA.INNODB_TRX;
+# 表锁级别
+# NEVER：加了读锁之后，不允许其他 session 并发插入。
+# AUTO：加了读锁之后，如果表里没有删除过数据，其他 session 就可以并发插入。
+# ALWAYS：加了读锁之后，允许其他 session 并发插入。
+show global variables like '%concurrent_insert%';
+show master logs;
+```
+
+### 3.3.3 数据库慢查询链接数过多CPU升高排查语句
+
+```sql
+-- ***Mysql 开启慢查询***----
+#查看是否开启了慢查询日志
+SHOW VARIABLES LIKE '%slow_query_log%'
+#用命令方式开启慢查询日志，但是重启MySQL后此设置会失效
+set global slow_query_log = 1
+#永久生效开启方式可以在my.cnf里进行配置，在[mysqld]下新增以下两个参数，重启MySQL即可生效
+slow_query_log = 1
+slow_query_log_file = 日志文件存储路径
+
+-- ***Mysql 线程执行时间问题***----
+-- 按客户端 IP 分组，看哪个客户端的链接数最多
+SELECT client_ip,COUNT(client_ip) AS client_num FROM (SELECT SUBSTRING_INDEX(HOST,':' ,1) AS client_ip FROM information_schema.processlist ) AS connect_info GROUP BY client_ip ORDER BY client_num DESC;
+-- 查看正在执行的线程，并按 Time 倒排序，看看有没有执行时间特别长的线程
+SELECT * FROM information_schema.processlist WHERE Command != 'Sleep' ORDER BY TIME DESC;
+-- 找出所有执行时间超过 3 分钟的线程(排除守护线程)，拼凑出 kill 语句，方便后面查杀 （此处 5分钟 可根据自己的需要调整SQL标红处）可复制查询结果到控制台，直接执行，杀死堵塞进程
+SELECT CONCAT('kill ', id, ';') FROM information_schema.processlist WHERE Command != 'Sleep' AND Command != 'Daemon' AND TIME > 180 ORDER BY TIME DESC;
+-- 查询线程及相关信息 (ID 为此线程ID，Time为线程运行时间，Info为此线程SQL)
+SHOW FULL PROCESSLIST
+-- 上面的语句等同于下面
+SELECT * FROM information_schema.processlist
+-- 查看最大连接数
+SHOW VARIABLES LIKE '%max_connection%';
+-- 重新设置最大连接数
+SET GLOBAL max_connections=1000;
+-- mysql查看连接数（连接总数、活跃数、最大并发数）
+SHOW STATUS LIKE  'Threads%';
+-- 查询服务器thread_cache_size的值
+SHOW VARIABLES LIKE 'thread_cache_size';
+```
 
 # 4.容器相关
 
