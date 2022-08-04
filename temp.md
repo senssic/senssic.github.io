@@ -961,3 +961,17 @@ log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:m
 
 当数据库系统故障时，这时候系统内核还是正常运行的，此时只要执行完了第3步，数据就是安全的，操作系统会完成后面几步，保证数据最终会落到磁盘上。
  当系统断电，这时候上面5项中提到的所有缓存都会失效，并且数据库和操作系统都会停止工作，数据都会丢失，只有当数据在完成第5步后，机器断电才能保证数据不丢失。
+
+## 7.3 流媒体服务器SRS拉取摄像头流并推流
+
+```shell
+#容器部署SRS
+docker run --rm -it -p 1935:1935 -p 1985:1985 -p 8080:8080     registry.cn-hangzhou.aliyuncs.com/ossrs/srs:latest ./objs/srs -c conf/docker.conf
+#同机器容器使用ffmpeg拉取摄像头流并推送给本机SRS流服务
+docker run --network host --rm -it -v $(pwd):/config  linuxserver/ffmpeg -rtsp_transport tcp  -i  rtsp://xx:xx@ip:554/h264/ch33/main/av_stream  -acodec aac -strict experimental -ar 44100 -ac 2 -b:a 96k -r 25 -b:v 500k -s 640*480 -f flv rtmp://127.0.0.1/live/livestream
+#客户端可以访问路径
+RTMP (by VLC): rtmp://srsip/live/livestream
+H5(HTTP-FLV): http://srsip:8080/live/livestream.flv
+H5(HLS): http://srsip:8080/live/livestream.m3u8
+```
+
