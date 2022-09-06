@@ -934,9 +934,21 @@ https://blog.csdn.net/Megustas_JJC/article/details/105470675
 https://www.cnblogs.com/klvchen/articles/11672058.html
 ```
 
+## 6.5 git使用代理
 
+如果仅设置当前项目的git代理需要在当前项目目录进入命令行，如果需要设置全局git代理，需要在每个*git config* 命令后加上 *--global*
 
-
+```shell
+#代理
+git config http.proxy http://192.168.15.40:3128
+git config https.proxy https://192.168.15.40:3128
+#取消代理
+git config --unset http.proxy
+git config --unset https.proxy
+#查询是否使用
+git config http.proxy 
+git config https.proxy 
+```
 
 # 7.其他杂项相关
 
