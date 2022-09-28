@@ -424,6 +424,15 @@ SHOW STATUS LIKE  'Threads%';
 SHOW VARIABLES LIKE 'thread_cache_size';
 ```
 
+## 3.3 mysqldump常用命令
+
+```shell
+ # 导出多个数据库数据到指定目录文件
+ mysqldump -u root -p --databases db_1 db_2  > /home/appadmin/aa.sql
+ # 导出数据库中的某几个表到指定目录文件
+ mysqldump -u root -p db_1 tab_1 tab_2  > /home/appadmin/aa.sql
+```
+
 # 4.容器相关
 
 ## 4.1 命令相关
