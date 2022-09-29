@@ -427,10 +427,30 @@ SHOW VARIABLES LIKE 'thread_cache_size';
 ## 3.3 mysqldump常用命令
 
 ```shell
- # 导出多个数据库数据到指定目录文件
- mysqldump -u root -p --databases db_1 db_2  > /home/appadmin/aa.sql
- # 导出数据库中的某几个表到指定目录文件
- mysqldump -u root -p db_1 tab_1 tab_2  > /home/appadmin/aa.sql
+# 备份全部数据库（包含存储过程、自定义函数及事件） 
+mysqldump -uroot -pxxxxxx --single-transaction -R -E --all-databases > /tmp/all_database.sql 
+# 要求记录 binlog 位点信息 可用于搭建从库 
+mysqldump -uroot -pxxxxxx --single-transaction -R -E --all-databases --master-data=2 > /tmp/all_database.sql 
+# 备份指定数据库 
+mysqldump -uroot -pxxxxxx --single-transaction -R -E --databases db1 > /tmp/db1.sql 
+mysqldump -uroot -pxxxxxx --single-transaction -R -E --databases db1 db2 > /tmp/db1_db2.sql 
+# 备份部分表 
+mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 > /tmp/tb1.sql 
+mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 tb2 tb3 > /tmp/tb.sql 
+# 导出某个表，数据以单行insert显示 
+mysqldump -uroot -pxxxxxx --single-transaction --skip-extended-insert db1 tb1 > /tmp/tb1.sql 
+# 导出单表的部分数据 
+mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 --where=" create_time >= '2021-06-01 00:00:00' " > /tmp/tb1.sql 
+mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 --where='id < 10' > /tmp/tb1.sql 
+# 排除某些表导出 
+mysqldump -uroot -pxxxxxx --single-transaction --databases db1 --ignore-table=db1.tb1 --ignore-table=db1.tb2 > /tmp/db1.sql 
+# 只导出结构或只导出数据 
+mysqldump -uroot -pxxxxxx db1 --no-data > /tmp/db1_jiegou.sql 
+mysqldump -uroot -pxxxxxx db1 --no-create-info > /tmp/db1_data.sql 
+# 只导出某个库的存储过程及自定义函数 
+mysqldump -uroot -pxxxxxx -d -t -R db1 > /tmp/db1_routine.sql 
+# 远程导出 即MySQL服务端不在本地 
+mysqldump -uroot -pxxxxxx -hxxx.xxx.xx -P3306 --single-transaction --databases db1 > /tmp/db1.sql
 ```
 
 # 4.容器相关
