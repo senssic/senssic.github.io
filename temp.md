@@ -979,9 +979,105 @@ git config http.proxy
 git config https.proxy 
 ```
 
-# 7.其他杂项相关
+# 7.中间件
 
-## 7.1 log日志最优格式化以及配置每日文件滚动:
+## 7.1 fastdfs扩容
+
+Ⅰ.扩容基于goup的store_path进行扩容,**扩充group的存储空间，配置多个存储文件目录地址**
+
+```shell
+# 1.停止现有的tracker服务，fdfs_nginx，storage服务。
+# 2.挂载新的磁盘（过程略）
+# 3.修改tracker.conf配置文件
+vi /etc/fdfs/tracker.conf
+#修改以下参数为2，上传时选择路径规则。（取值只有0和2。0：轮询（默认）；2：负载均衡，选择可用空间最大的文件夹）
+store_path=2
+# 4.修改storage.conf配置文件
+vi /etc/fdfs/storage.conf
+#将以下参数值改为2
+store_path_count=2 
+#新增存储路径store_path1(必须存在的路径，需提前手动创建 mkdir -p /data/fastdfs)
+store_path1=/data/fastdfs
+# 5.修改mod_fastdfs.conf配置文件
+vi /etc/fdfs/mod_fastdfs.conf
+#修改以下参数为2
+store_path_count=2
+#新增存储路径store_path1
+store_path1=/data/fastdfs（同storage.conf 一致）
+# 6.启动tracker，storage服务
+#7.查看状态
+fdfs_monitor /etc/fdfs/client.conf
+# 8.修改nginx.conf配置文件并重载nginx
+vi /usr/local/nginx/conf/nginx.conf
+# 添加store_path1的路径
+location ~/group[0-9]/M00 {
+            alias   /opt/fastdfs/data/;
+            ngx_fastdfs_module;
+        }
+location ~/group[0-9]/M01 {
+            alias   /data/fastdfs/data/;
+            ngx_fastdfs_module;
+        }
+#dfs_nginx加载配置文件
+nginx -s reload
+# 9.测试上传
+/usr/bin/fdfs_test /etc/fdfs/client.conf upload test.txt
+```
+
+Ⅱ.扩容新的goup,**扩充存储节点，新加服务器配置多个storage**
+
+```shell
+#背景,xx.1 xx.2作为tracker,xx.3,xx.4作为storage两个从属group1,新增一台storage xx.5为group2
+# 1.停止现有的tracker服务，fdfs_nginx，storage服务。
+# 2.新的机器装新的storage（过程略）
+# 3.修改xx.1 xx.2的tracker.conf配置文件
+vi /etc/fdfs/tracker.conf
+# the method of selecting group to upload files
+# 0: group组负载均衡，1: 指定组 2: 负载均衡，选择可用空间最大group
+store_lookup=1
+# which group to upload file
+# when store_lookup set to 1, must set store_group to the group name
+store_group=group2
+
+# 4.修改xx.5 storage.conf配置文件
+vi /etc/fdfs/storage.conf
+#指定之前的xx.1 xx.2的tracker地址和端口
+tracker_server=x.x.1:22122
+tracker_server=x.x.2:22122
+group_name=group2
+
+
+# 5.修改xx.5 mod_fastdfs.conf配置文件
+vi /etc/fdfs/mod_fastdfs.conf
+#指定之前的xx.1 xx.2的tracker地址和端口
+tracker_server=x.x.1:22122
+tracker_server=x.x.2:22122
+url_have_group_name=true
+group_name=group2
+group_count=1
+[group1]
+group_name=group2
+
+
+# 6.启动tracker，storage服务
+#7.查看状态
+fdfs_monitor /etc/fdfs/client.conf
+# 8.修改修改xx.5  fds的nginx.conf配置文件并重载nginx
+vi /usr/local/nginx/conf/nginx.conf
+# 添加store_path1的路径
+location ~/group[0-9]/M00 {
+            alias   /opt/fastdfs/data/;
+            ngx_fastdfs_module;
+        }
+#dfs_nginx加载配置文件
+nginx -s reload
+# 9.测试上传
+/usr/bin/fdfs_test /etc/fdfs/client.conf upload test.txt
+```
+
+# 8.其他杂项相关
+
+## 8.1 log日志最优格式化以及配置每日文件滚动:
 
 ```properties
 log4j.rootLogger=INFO,stdout,fileAppender
@@ -992,7 +1088,7 @@ log4j.appender.fileAppender.layout=org.apache.log4j.PatternLayout
 log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:mm:ss.SSS}: (%c{1}.%M:line %L) - %m%n
 ```
 
-## 7.2 关于断电
+## 8.2 关于断电
 
 1.客户端向服务端发送写操作（数据在客户端的内存中）
 2.数据库服务端接收到写请求的数据（数据在服务端的内存中）
@@ -1003,7 +1099,7 @@ log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d{yyyy-MM-dd HH:m
 当数据库系统故障时，这时候系统内核还是正常运行的，此时只要执行完了第3步，数据就是安全的，操作系统会完成后面几步，保证数据最终会落到磁盘上。
  当系统断电，这时候上面5项中提到的所有缓存都会失效，并且数据库和操作系统都会停止工作，数据都会丢失，只有当数据在完成第5步后，机器断电才能保证数据不丢失。
 
-## 7.3 流媒体服务器SRS拉取摄像头流并推流
+## 8.3 流媒体服务器SRS拉取摄像头流并推流
 
 ```shell
 #容器部署SRS
