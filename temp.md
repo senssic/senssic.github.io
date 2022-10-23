@@ -1055,7 +1055,7 @@ tracker_server=x.x.2:22122
 url_have_group_name=true
 group_name=group2
 group_count=1
-[group1]
+[group2]
 group_name=group2
 
 
