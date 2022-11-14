@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="senssic">
 <meta property="og:description" content="Ⅰ kafka配置SASL认证https://blog.csdn.net/weixin_38251332/article/details/105637628  kafka安全机制kakfa 的安全机制主要分为两部分：  身份认证（Authentication）： 对客户端的身份进行认证 权限控制（Authorization）： 对topic级别的权限进行控制  kafka 目前支持 SSL，SAS">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-11-12T08:55:59.248Z">
+<meta property="og:updated_time" content="2022-11-14T09:59:27.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka相关">
 <meta name="twitter:description" content="Ⅰ kafka配置SASL认证https://blog.csdn.net/weixin_38251332/article/details/105637628  kafka安全机制kakfa 的安全机制主要分为两部分：  身份认证（Authentication）： 对客户端的身份进行认证 权限控制（Authorization）： 对topic级别的权限进行控制  kafka 目前支持 SSL，SAS">
@@ -428,7 +428,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,531
+                  1,559
                 </span>
               
 
@@ -657,8 +657,8 @@
 </blockquote>
 <p>​       建议在配，监听地址的时候通过域名配置，这样可以通过配置不同的host解决基于NAT暴露给外部的情况。比如，只用listeners ，采用域名的方式，内部hosts配置kafka本机，外部客户端链接的时候也是同样的域名但是ip配置为外网的ip，由于端口是外网ip端口映射到这个内网端口地址上，所以直接可以请求成功，效果类似于内网穿透。</p>
 <p>效果等同如下:</p>
-<p>内网ip: 192.168.0.213,  外网ip: 101.89.163.9 但是无网卡</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">listener.security.protocol.map=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT</span><br><span class="line">listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://192.168.0.213:19092</span><br><span class="line">advertised.listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://101.89.163.9:19092</span><br><span class="line">inter.broker.listener.name=INTERNAL</span><br></pre></td></tr></table></figure>
+<p>内网ip: 192.168.0.213,  外网ip: 101.89.163.9 但是无网卡，SASL认证</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">listener.security.protocol.map=INTERNAL:SASL_PLAINTEXT,EXTERNAL:SASL_PLAINTEXT</span><br><span class="line">listeners=INTERNAL://192.168.0.213:19092,EXTERNAL://192.168.0.213:443</span><br><span class="line">advertised.listeners=INTERNAL://192.168.0.213:19092,EXTERNAL://101.89.163.9:443</span><br><span class="line">inter.broker.listener.name=INTERNAL</span><br><span class="line">sasl.mechanism.inter.broker.protocol=PLAIN</span><br><span class="line">sasl.enabled.mechanisms=PLAIN</span><br><span class="line">authorizer.class.name = kafka.security.auth.SimpleAclAuthorizer</span><br><span class="line">super.users=User:admin</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -871,7 +871,7 @@
     
       <span class="post-meta-item-text">本站总字数&#58;</span>
     
-    <span title="本站总字数">99.0k</span>
+    <span title="本站总字数">99.1k</span>
   
 </div>
 
