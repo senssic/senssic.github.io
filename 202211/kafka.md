@@ -223,13 +223,17 @@ https://juejin.cn/post/6893410969611927566
 
 效果等同如下:
 
-内网ip: 192.168.0.213,  外网ip: 101.89.163.9 但是无网卡
+内网ip: 192.168.0.213,  外网ip: 101.89.163.9 但是无网卡，SASL认证
 
 ```shell
-listener.security.protocol.map=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
-listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://192.168.0.213:19092
-advertised.listeners=INTERNAL://192.168.0.213:9092,EXTERNAL://101.89.163.9:19092
+listener.security.protocol.map=INTERNAL:SASL_PLAINTEXT,EXTERNAL:SASL_PLAINTEXT
+listeners=INTERNAL://192.168.0.213:19092,EXTERNAL://192.168.0.213:443
+advertised.listeners=INTERNAL://192.168.0.213:19092,EXTERNAL://101.89.163.9:443
 inter.broker.listener.name=INTERNAL
+sasl.mechanism.inter.broker.protocol=PLAIN
+sasl.enabled.mechanisms=PLAIN
+authorizer.class.name = kafka.security.auth.SimpleAclAuthorizer
+super.users=User:admin
 ```
 
 
