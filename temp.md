@@ -281,6 +281,32 @@ iptables -P FORWARD ACCEPT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
+## 1.20 增加或扩容swap
+
+```shell
+#********创建和扩容**************
+#创建10G的swap文件在 /mnt/swap文件，若是扩容swap注意此路径不与之前的swap文件相同
+dd if=/dev/zero of=/mnt/swap bs=1M count=10240
+#将刚才创建的文件格式为swap文件，并记录返回的磁盘UUID
+mkswap /mnt/swap
+#挂载swap分区
+swapon /mnt/swap
+#查看swap分区
+free -h
+swapon -s
+#写入开启磁盘加载文件
+echo 'UUID=替换为刚才记录的UUID swap                    swap    defaults        0 0' >>   /etc/fstab
+
+
+#********卸载和缩容**************
+#卸载缩容swap文件
+swapoff /mnt/swap
+#删除对应的swap磁盘挂载
+vim /etc/fstab
+#删除对应swap文件
+rm /mnt/swap
+```
+
 
 
 # 2.虚拟机相关
