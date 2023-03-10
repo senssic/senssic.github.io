@@ -516,8 +516,8 @@ https://github.com/zeromake/docker-debug/blob/master/README-zh-Hans.md
 10.调试k8s的pod容器
 #如果是私有仓库需要自己将debug-agent:v0.1.1 和 nicolaka/netshoot:latest push到私有仓库,docker tag,docker push
 kubectl-debug -n dev pod-xxx --agentless=true --port-forward=true --agent-image=aylei/debug-agent:v0.1.1
-
-
+#docker一键清理所有没有用到的网络，镜像，磁盘挂载等
+docker system prune -a
 ```
 
 ## 4.2 安装docker和minikube
