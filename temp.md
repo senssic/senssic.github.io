@@ -516,8 +516,11 @@ https://github.com/zeromake/docker-debug/blob/master/README-zh-Hans.md
 10.调试k8s的pod容器
 #如果是私有仓库需要自己将debug-agent:v0.1.1 和 nicolaka/netshoot:latest push到私有仓库,docker tag,docker push
 kubectl-debug -n dev pod-xxx --agentless=true --port-forward=true --agent-image=aylei/debug-agent:v0.1.1
-#docker一键清理所有没有用到的网络，镜像，磁盘挂载等
+11.docker一键清理所有没有用到的网络，镜像，磁盘挂载等
 docker system prune -a
+12.安装docker-compose
+curl -L https://get.daocloud.io/docker/compose/releases/download/v2.16.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 ```
 
 ## 4.2 安装docker和minikube
@@ -608,16 +611,47 @@ docker run -d -p 10240:8080 -p 10241:50000 -v /root/test/jenkins:/var/jenkins_ho
 
 ## 4.5 运行的容器制作成镜像，以及镜像打包和推送到远程仓库
 
-```dockerfile
+```shell
+#结尾添加"非安全的 IP地址\域名" 
+vim /lib/systemd/system/docker.service
+...
+[Service]
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --insecure-registry 192.168.1.102:5000
+
+或者,等效，只能配置其一
+/etc/docker/daemon.json
+{
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn/",
+    "https://1rlt72n0.mirror.aliyuncs.com",
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://reg-mirror.qiniu.com",
+    "https://dockerhub.azk8s.cn",
+    "https://mirror.ccs.tencentyun.com"
+  ],
+  "insecure-registries": [
+    "192.168.1.102:5000"
+  ],
+  "dns" : [//dns可以配置私有dns
+    "114.114.114.114"
+  ]
+}
+...
+systemctl daemon-reload
+systemctl restart docker
+#其他机器登录
+docker login 192.168.1.102:5000
 # 1.对于运行的容器打包成镜像使用commit命令
-docker commit -m '增加' 运行容器的名字 ip.xx.xx.xxx/dev/test:v2.0
+docker commit -m '增加' 运行容器的名字 192.168.1.102:5000/dev/test:v2.0
 # 2.对于已存在的镜像打tag,以便推送到私有仓库上
-docker tag jenkins ip.xx.xxx.xxx/dev/jenkins:v2.0
+docker tag jenkins 192.168.1.102:5000/dev/jenkins:v2.0
 # 3.推送tag或者镜像文件到私有仓库上
 ## 3.1登录私有仓库
-docker login -u admin  -p admin ip.xx.xx.xxx
+docker login -u admin  -p admin 192.168.1.102:5000
 ## 3.2推送镜像文件
-docker push ip.xx.xxx.xxx/dev/jenkins:v2.0
+docker push 192.168.1.102:5000/dev/jenkins:v2.0
 ```
 
 ## 4.6 docker-compose安装grafana和prometheus
