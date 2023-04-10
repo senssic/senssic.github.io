@@ -60,21 +60,26 @@ yum makecache fast
 
 ## 1.3 linux操作系统相关
 
+```shell
 1. 设置hostname名称
-   sudo hostnamectl set-hostname <newhostname>
-
-4. tcpdump的命令使用
-
-   ```shell
-   #详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160
-   tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
-   ```
-
-5. 使用ffmpeg命令拉流并截图保存
-
-   ```shell
-   ffmpeg -an -vf select='eq(pict_type\,I)' -vsync 2 -f image2 -strftime 1 "%H_%M_%S.jpg" -i  rtsp://admin:admin@192.168.1.12:554/h264/ch33/main/av_stream
-   ```
+sudo hostnamectl set-hostname <newhostname>
+2. tcpdump的命令使用
+#详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160
+tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings > tcpdump.txt
+3. 使用ffmpeg命令拉流并截图保存
+ffmpeg -an -vf select='eq(pict_type\,I)' -vsync 2 -f image2 -strftime 1 "%H_%M_%S.jpg" -i  rtsp://admin:admin@192.168.1.12:554/h264/ch33/main/av_stream
+4.linux系统增加只读账号对某个目录只读限定
+#增加只读用户
+useradd readonly
+#修改密码
+passwd readonly
+#添加用户对文件的只读r权限
+setfacl -R -m u:readonly:rX /data/software
+#收回对应的权限
+setfacl -R -x u:readonly:rX /data/software
+#查看文件权限赋权信息
+getfacl /data/software/
+```
 
 ## 1.4 centos8 root用户忘记密码
 
