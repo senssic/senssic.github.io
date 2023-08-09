@@ -743,6 +743,36 @@ ENTRYPOINT ["python3","-u"]
 CMD ["app.py"]
 ```
 
+## 4.8 已存在的容器调试方法
+
+有些三方的镜像已经被构建且没有构建相关的Dockerfile，但是我们又想调试可以尝试覆盖进入命令进行覆盖启动
+
+> 别忘了同步修改暴露5005端口
+
+```shell
+#1.使用docker inspect获取启动的cmd或者Entrypoint命令
+docker inspect <容器名称>  >path_to_modified_json.json
+#2.更新容器的配置
+docker update --config <path_to_modified_json> <container>
+```
+
+还可以使用修改启动镜像命令的方式覆盖启动命令
+
+```shell
+docker run -p 5005:5005 --entrypoint new-entrypoint.sh image_name
+或者直接修改docker-compose的entrypoint
+services:
+  your_service:
+    image: your_image
+    entrypoint:
+      - java
+      - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+      - org.maxkey.MyApplication
+    ports:
+      - "9527:9527"
+      - "5005:5005"
+```
+
 # 5.大数据相关
 
 ## 5.1 kafka相关
