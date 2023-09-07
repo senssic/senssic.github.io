@@ -286,7 +286,7 @@ iptables -P FORWARD ACCEPT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
-## 1.20 增加或扩容swap
+## 1.10 增加或扩容swap
 
 ```shell
 #********创建和扩容**************
@@ -311,6 +311,22 @@ vim /etc/fstab
 #删除对应swap文件
 rm /mnt/swap
 ```
+
+## 1.11 centos下载应离线安装包
+
+```shell
+##从功能定位上来说推荐使用方式1
+#方式1:使用yumdownloader若没有先安装yum install yum-utils
+yumdownloader -y <package-name>
+#方式2:使用localinstall只下载的方式实现
+yum localinstall -y --downloadonly --downloaddir=<目录路径> <package-name>
+```
+
+
+
+
+
+
 
 
 
