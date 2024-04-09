@@ -286,6 +286,17 @@ iptables -P FORWARD ACCEPT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
+windows增加路由,访问192.168.x.x的所有请求都经由192.168.176.1网关
+
+```shell
+
+route add -p 192.168.0.0 mask 255.255.240.0 192.168.176.1 metric 1
+```
+
+
+
+
+
 ## 1.10 增加或扩容swap
 
 ```shell
