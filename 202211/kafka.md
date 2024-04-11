@@ -20,128 +20,95 @@ https://blog.csdn.net/weixin_38251332/article/details/105637628
 >
 > kafka 目前支持 SSL，SASL(Kerberos)，SASL（PLAIN) 三种认证机制。 这里只讲解最容易实现的SASL（PLAIN）机制，值的注意的是SASL(PLAIN)是通过明文传输用户名和密码的。因此在不安全的网络环境下需要建立在TLS安全层之上。
 
-①zookeeper配置SASL认证
+kafka的service配置SASL用户名密码
 
-vi /opt/kafka/config/zookeeper.properties
-
-```shell
-#追加如下内容
-authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
-requireClientAuthScheme=sasl
-jaasLoginRenew=3600000
-```
-
-②创建zookeeper的jaas配置文件，zk_server_jaas.conf
-
-vi /opt/kafka/config/zk_server_jaas.conf
-
-```shell
-Server {
-    org.apache.kafka.common.security.plain.PlainLoginModule required
-    username="zk_cluster"
-    password="zk_cluster_passwd"
-    #急用户名为:kafka,密码为:zk_kafka_client_passwd
-    user_kafka="zk_kafka_client_passwd";
-};
-```
-
-③在zk的启动脚本增加变量，export EXTRA_ARGS="-Djava.security.auth.login.config=/opt/kafka/config/zk_server_jaas.conf"
-
-vi /opt/kafka/bin/zookeeper-server-start.sh
-
-```shell
-…………
-if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
-    export KAFKA_HEAP_OPTS="-Xmx512M -Xms512M"
-fi
-#增加如下一行
-export EXTRA_ARGS="-Djava.security.auth.login.config=/opt/kafka/config/zk_server_jaas.conf"
-EXTRA_ARGS=${EXTRA_ARGS-'-name zookeeper -loggc'}
-…………
-```
-
-④创建kafka的jaas配置文件，kafka_server_jaas.conf
-
-vi /opt/kafka/config/kafka_server_jaas.conf
+1.在配置文件所在目录添加jaas的文件 **kafka_server_jaas.conf**
 
 ```properties
 KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username="admin"
-    password="admin-juanwang2022"
-    user_admin="admin-juanwang2022";
+    password="admin-123"
+    user_admin="admin-123";
 };
-# 与kafka的配置用户名密码保持一致
-Client{
- org.apache.kafka.common.security.plain.PlainLoginModule required
- username="kafka"
- password="zk_kafka_client_passwd";
-};
+
 ```
 
-⑤在kafka的启动脚本增加变量，export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/kafka/config/kafka_server_jaas.conf"
+2.修改kafka服务配置文件 server.properties 增加
 
-vi /opt/kafka/bin/kafka-run-class.sh
-
-```shell
-………………
-# If Cygwin is detected, LOG_DIR is converted to Windows format.
-(( CYGWIN )) && LOG_DIR=$(cygpath --path --mixed "${LOG_DIR}")
-KAFKA_LOG4J_OPTS="-Dkafka.logs.dir=$LOG_DIR $KAFKA_LOG4J_OPTS"
-# Generic jvm settings you want to add
-# 增加如下一行
-export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/kafka/config/kafka_server_jaas.conf"
-if [ -z "$KAFKA_OPTS" ]; then
-  KAFKA_OPTS=""
-fi
-………………
-```
-
-⑥配置kafka的配置文件
-
-vi /opt/kafka/config/server.properties
-
-```shell
-security.inter.broker.protocol=SASL_PLAINTEXT
+```properties
+#追加如下内容
+inter.broker.listener.name=INTERNAL
+#inter.broker.listener.name=SASL_PLAINTEXT
 sasl.mechanism.inter.broker.protocol=PLAIN
 sasl.enabled.mechanisms=PLAIN
 authorizer.class.name = kafka.security.auth.SimpleAclAuthorizer
-#超级用户,即为kafka的jaas配置的用户,超级用户无需ACL认证，
 super.users=User:admin
-listeners=SASL_PLAINTEXT://kafka-single:9092
 ```
 
-⑦重启kafka和zookeeper
-
-⑧客户端访问方式
-
-命令行消费者，生产者认证(拼接sasl认证)
+3.在服务启动脚本增加对于认证的配置**kafka-server-start.sh**
 
 ```shell
-#consumer
-kafka-console-consumer.sh --bootstrap-server 10.194.202.17:8092 \
---consumer-property "sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username='admin' password='adminpasswd';" \
---consumer-property security.protocol=SASL_PLAINTEXT \
---consumer-property sasl.mechanism=PLAIN \
---consumer-property client.id=consumer_01 \
---topic test.1 \
---group c1
-#producer
-kafka-console-producer.sh --broker-list 10.194.202.17:8092 \
---consumer-property "sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username='admin' password='adminpasswd';" \
---consumer-property security.protocol=SASL_PLAINTEXT \
---consumer-property sasl.mechanism=PLAIN \
---consumer-property client.id=producer_01 \
---topic test.1
+#增加加载jaas的配置，替换上述文件的最后两行
+export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/kafka/config/kafka_server_jaas.conf"
+exec $base_dir/kafka-run-class.sh $EXTRA_ARGS kafka.Kafka "$@"
 ```
 
-Java客户端链接,无配置文件模式
+若此时客户端想链接需要配置如下
+
+1.假设你有一个用户名为`user`，密码为`password`，你可以将这些凭据添加到命令中，如下所示：
+
+```shell
+kafka-consumer-groups.bat --bootstrap-server INTERNAL://kafka.test.cn:9092 --command-config client-sasl.properties --list
+```
+
+2.在这里，`client-sasl.properties`文件是包含认证凭据信息的配置文件，其内容可能类似于：
+
+```shell
+security.protocol=SASL_PLAINTEXT
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="user" password="password";
+```
+
+你需要根据你的实际情况修改用户名和密码。
+
+然后执行就会自动认证链接上kafka了
+
+
+
+3.Java客户端链接,无配置文件模式
 
 ```java
 props.put("security.protocol", "SASL_PLAINTEXT");
 props.put("sasl.mechanism", "PLAIN");
 props.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"admin\" password=\"adminpasswd\";");
 ```
+
+springboot链接模式
+
+```yaml
+spring:
+  kafka:
+    bootstrap-servers: kafka.test.cn:443
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        sasl.mechanism: PLAIN
+        security.protocol: SASL_PLAINTEXT
+    jaas:
+      enabled: true
+      loginModule: org.apache.kafka.common.security.plain.PlainLoginModule
+      controlFlag: REQUIRED
+      options:
+        username: admin
+        password: admin-123
+```
+
+
 
 # Ⅱ kafka 权限控制的配置(ACL控制)
 
