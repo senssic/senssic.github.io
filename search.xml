@@ -148,8 +148,8 @@
         <category>分布式</category>
       </categories>
       <tags>
-        <tag>分布式</tag>
         <tag>锁</tag>
+        <tag>分布式</tag>
       </tags>
   </entry>
   <entry>
@@ -284,8 +284,8 @@
         <category>并发编程</category>
       </categories>
       <tags>
-        <tag>多线程</tag>
         <tag>并发编程</tag>
+        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
