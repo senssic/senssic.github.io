@@ -335,7 +335,21 @@ yum localinstall -y --downloadonly --downloaddir=<目录路径> <package-name>
 
 
 
+## 1.12 linux查询系统进行被杀
 
+```shell
+journalctl -xb | egrep -i 'killed process'
+dmesg | egrep -i 'killed process'
+egrep -i -r 'killed process' /var/log
+#增加kill的日志审计，能看到被哪个进程和用户杀死的
+sudo apt install auditd
+systemctl enable auditd.service
+systemctl restart auditd.service
+#使用auditctl命令添加
+auditctl -a exit,always -F arch=b64 -S kill -F a1=9
+#查看日志审计
+sudo ausearch -sc kill
+```
 
 
 
