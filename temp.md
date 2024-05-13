@@ -23,6 +23,17 @@ ws.Run "C:\start\bat-start.bat",0
 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
 ```
 
+## 0.1 windows使用自带命令监听本地端口转发到其他服务器
+
+```shell
+#这条命令会监听所有本地的3306端口的请求，并将它们转发到xx.xx.xx.xx的3306端口上。以管理员权限启动cmd
+netsh interface portproxy add v4tov4 listenport=3306 listenaddress=0.0.0.0 connectport=3306 connectaddress=xx.xx.xx.xx
+#删除本条转发规则
+netsh interface portproxy delete v4tov4 listenport=3306 listenaddress=0.0.0.0
+#查看所有正在转发的规则
+netsh interface portproxy show all
+```
+
 # 1.linux相关
 
 ## 1.1 hexo一键执行脚本
