@@ -836,8 +836,8 @@ mkdir -p /etc/systemd/system/docker.service.d
 vi /etc/systemd/system/docker.service.d/http-proxy.conf
 ## 添加如下内容
 [Service]
-Environment="HTTP_PROXY=http://proxy.example.com:8080/"
-Environment="HTTPS_PROXY=http://proxy.example.com:8080/"
+Environment="HTTP_PROXY=socks5://proxy.example.com:8080/"
+Environment="HTTPS_PROXY=socks5://proxy.example.com:8080/"
 Environment="NO_PROXY=localhost,127.0.0.1,.example.com"
 ```
 
@@ -851,8 +851,8 @@ vim ~/.docker/config.json
  {
    "default":
    {
-     "httpProxy": "http://proxy.example.com:8080/",
-     "httpsProxy": "http://proxy.example.com:8080/",
+     "httpProxy": "socks5://proxy.example.com:8080/",
+     "httpsProxy": "socks5://proxy.example.com:8080/",
      "noProxy": "localhost,127.0.0.1,.example.com"
    }
  }
@@ -860,21 +860,42 @@ vim ~/.docker/config.json
 # 第二种方式通过启动容器时 --env HTTP_PROXY="http://proxy.example.com:8080/"  去设置代理
 ```
 
+**Docker客户端使用代理**
+
+```shell
+#vim ~/.docker/config.json
+{
+  "proxies": {
+    "default": {
+      "httpProxy": "socks5://proxy.example.com:8080",
+      "httpsProxy": "socks5://proxy.example.com:8080",
+      "noProxy": "localhost,127.0.0.1"
+    }
+  }
+}
+```
+
+
+
 **docker build 过程设置网络代理**
 
 ```shell
 # 第一种方式启动时候指定变量
 docker build \
-    --build-arg "HTTP_PROXY=http://proxy.example.com:8080/" \
-    --build-arg "HTTPS_PROXY=http://proxy.example.com:8080/" \
+    --build-arg "HTTP_PROXY=socks5://proxy.example.com:8080/" \
+    --build-arg "HTTPS_PROXY=socks5://proxy.example.com:8080/" \
     --build-arg "NO_PROXY=localhost,127.0.0.1,.example.com" .
     
 # 第二种方式在Dockfile中添加变量
 # vim Dockfile添加如下变量内容
-ENV HTTP_PROXY="http://proxy.example.com:8080/"
-ENV HTTPS_PROXY="http://proxy.example.com:8080/"
+ENV HTTP_PROXY="socks5://proxy.example.com:8080/"
+ENV HTTPS_PROXY="socks5://proxy.example.com:8080/"
 ENV NO_PROXY="localhost,127.0.0.1,.example.com"
 ```
+
+
+
+
 
 
 
