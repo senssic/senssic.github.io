@@ -34,6 +34,47 @@ netsh interface portproxy delete v4tov4 listenport=3306 listenaddress=0.0.0.0
 netsh interface portproxy show all
 ```
 
+## 0.2 hyper-v开启centos的虚拟化并安装docker的Windows镜像
+
+```shell
+1.开启hyper-v的centos虚拟机的KVM虚拟化
+#1.0查看centos虚拟机有没有开启
+egrep -o 'vmx|svm' /proc/cpuinfo
+#1.1 若没开启，关闭centos，打开宿主机的powershell使用管理员身份打开
+##列出虚拟机
+Get-VM
+##查看虚拟化选项参数，ExposeVirtualizationExtensions参数发现是false
+Get-VMProcessor -VMName centos虚拟机名称 | fl
+##将ExposeVirtualizationExtensions参数设置为True
+Set-VMProcessor -ExposeVirtualizationExtensions $true -VMName centos虚拟机名称
+## 重新虚拟机并查看是否已经支持kvm，发现执行后会有多个VMX，有几个意味着有几个cpu
+egrep -o 'vmx|svm' /proc/cpuinfo
+## 参考github开源docker部署windows
+https://github.com/dockur/windows
+## docker-compose书写如下，启动成功后可以使用远程链接，或者http浏览器访问
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "winxp"
+      LANGUAGE: "cn"
+      DISK_SIZE: "128G"
+    volumes:
+      - /opt/win:/storage
+    devices:
+      - /dev/kvm
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    stop_grace_period: 2m
+```
+
+
+
 # 1.linux相关
 
 ## 1.1 hexo一键执行脚本
