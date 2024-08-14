@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spring,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="spring注解1.声明bean的注解@Component 组件，没有明确的角色 @Service 在业务逻辑层使用（service层） @Repository 在数据访问层使用（dao层） @Controller 在展现层使用，控制器的声明（C） 2.注入bean的注解@Autowired：由Spring提供 @Inject：由JSR-330提供 @Resource：由JSR-250提供 都可以">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring和springboot主要注解">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/senssic.github.io/201902/spring和springboot主要注解/index.html">
+<meta property="og:site_name" content="senssic">
+<meta property="og:description" content="spring注解1.声明bean的注解@Component 组件，没有明确的角色 @Service 在业务逻辑层使用（service层） @Repository 在数据访问层使用（dao层） @Controller 在展现层使用，控制器的声明（C） 2.注入bean的注解@Autowired：由Spring提供 @Inject：由JSR-330提供 @Resource：由JSR-250提供 都可以">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-26T14:36:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring和springboot主要注解">
+<meta name="twitter:description" content="spring注解1.声明bean的注解@Component 组件，没有明确的角色 @Service 在业务逻辑层使用（service层） @Repository 在数据访问层使用（dao层） @Controller 在展现层使用，控制器的声明（C） 2.注入bean的注解@Autowired：由Spring提供 @Inject：由JSR-330提供 @Resource：由JSR-250提供 都可以">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/26/senssic.github.io/201902/spring和springboot主要注解/">
+
+
+
+
+
+  <title>spring和springboot主要注解 | senssic</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5516360d09ce586c528149c2afdd3fcc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">senssic</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/senssic.github.io/201902/spring和springboot主要注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="senssic">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="senssic">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring和springboot主要注解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T21:21:10+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/senssic.github.io/201902/spring和springboot主要注解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/senssic.github.io/201902/spring和springboot主要注解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/02/26/senssic.github.io/201902/spring和springboot主要注解/" class="leancloud_visitors" data-flag-title="spring和springboot主要注解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+                
+			   <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,648
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="spring注解"><a href="#spring注解" class="headerlink" title="spring注解"></a>spring注解</h1><h2 id="1-声明bean的注解"><a href="#1-声明bean的注解" class="headerlink" title="1.声明bean的注解"></a>1.声明bean的注解</h2><p>@Component 组件，没有明确的角色</p>
+<p>@Service 在业务逻辑层使用（service层）</p>
+<p>@Repository 在数据访问层使用（dao层）</p>
+<p>@Controller 在展现层使用，控制器的声明（C）</p>
+<h2 id="2-注入bean的注解"><a href="#2-注入bean的注解" class="headerlink" title="2.注入bean的注解"></a>2.注入bean的注解</h2><p>@Autowired：由Spring提供</p>
+<p>@Inject：由JSR-330提供</p>
+<p>@Resource：由JSR-250提供</p>
+<p>都可以注解在set方法和属性上，推荐注解在属性上（一目了然，少写代码）。</p>
+<h2 id="3-java配置类相关注解"><a href="#3-java配置类相关注解" class="headerlink" title="3.java配置类相关注解"></a>3.java配置类相关注解</h2><p>@Configuration 声明当前类为配置类，相当于xml形式的Spring配置（类上）</p>
+<p>@Bean 注解在方法上，声明当前方法的返回值为一个bean，替代xml中的方式（方法上）</p>
+<p>@Configuration 声明当前类为配置类，其中内部组合了@Component注解，表明这个类是一个bean（类上）</p>
+<p>@ComponentScan 用于对Component进行扫描，相当于xml中的（类上）</p>
+<p>@WishlyConfiguration 为@Configuration与@ComponentScan的组合注解，可以替代这两个注解</p>
+<h2 id="4-切面（AOP）相关注解"><a href="#4-切面（AOP）相关注解" class="headerlink" title="4.切面（AOP）相关注解"></a>4.切面（AOP）相关注解</h2><p>Spring支持AspectJ的注解式切面编程。</p>
+<p>@Aspect 声明一个切面（类上）<br>使用@After、@Before、@Around定义建言（advice），可直接将拦截规则（切点）作为参数。</p>
+<p>@After 在方法执行之后执行（方法上）<br>@Before 在方法执行之前执行（方法上）<br>@Around 在方法执行之前与之后执行（方法上）</p>
+<p>@PointCut 声明切点<br>在java配置类中使用@EnableAspectJAutoProxy注解开启Spring对AspectJ代理的支持（类上）</p>
+<h2 id="5-Bean的属性支持"><a href="#5-Bean的属性支持" class="headerlink" title="5.@Bean的属性支持"></a>5.@Bean的属性支持</h2><p>@Scope 设置Spring容器如何新建Bean实例（方法上，得有@Bean）<br>其设置类型包括：</p>
+<p>Singleton （单例,一个Spring容器中只有一个bean实例，默认模式）,<br>Protetype （每次调用新建一个bean）,<br>Request （web项目中，给每个http request新建一个bean）,<br>Session （web项目中，给每个http session新建一个bean）,<br>GlobalSession（给每一个 global http session新建一个Bean实例）</p>
+<p>@StepScope 在Spring Batch中还有涉及</p>
+<p>@PostConstruct 由JSR-250提供，在构造函数执行完之后执行，等价于xml配置文件中bean的initMethod</p>
+<p>@PreDestory 由JSR-250提供，在Bean销毁之前执行，等价于xml配置文件中bean的destroyMethod</p>
+<h2 id="6-Value注解"><a href="#6-Value注解" class="headerlink" title="6.@Value注解"></a>6.@Value注解</h2><p>@Value 为属性注入值（属性上）<br>支持如下方式的注入：<br>》注入普通字符</p>
+<p>@Value(“Michael Jackson”)String name;</p>
+<p>》注入操作系统属性</p>
+<p>@Value(“#{systemProperties[‘os.name’]}”)String osName;</p>
+<p>》注入表达式结果</p>
+<p>@Value(“#{ T(java.lang.Math).random() * 100 }”) String randomNumber;</p>
+<p>》注入其它bean属性</p>
+<p>@Value(“#{domeClass.name}”)String name;</p>
+<p>》注入文件资源</p>
+<p>@Value(“classpath:com/hgs/hello/test.txt”)String Resource file;</p>
+<p>》注入网站资源</p>
+<p>@Value(“<a href="http://www.javastack.cn&quot;)Resource" target="_blank" rel="noopener">http://www.javastack.cn&quot;)Resource</a> url;</p>
+<p>》注入配置文件</p>
+<p>Value(“${book.name}”)String bookName;</p>
+<p>注入配置使用方法：<br>① 编写配置文件（test.properties）</p>
+<p>book.name=《三体》</p>
+<p>② @PropertySource 加载配置文件(类上)</p>
+<p>@PropertySource(“classpath:com/hgs/hello/test/test.propertie”)</p>
+<p>③ 还需配置一个PropertySourcesPlaceholderConfigurer的bean。</p>
+<h2 id="7-环境切换"><a href="#7-环境切换" class="headerlink" title="7.环境切换"></a>7.环境切换</h2><p>@Profile 通过设定Environment的ActiveProfiles来设定当前context需要使用的配置环境。（类或方法上）</p>
+<p>@Conditional Spring4中可以使用此注解定义条件话的bean，通过实现Condition接口，并重写matches方法，从而决定该bean是否被实例化。（方法上）</p>
+<h2 id="8-异步相关"><a href="#8-异步相关" class="headerlink" title="8.异步相关"></a>8.异步相关</h2><p>@EnableAsync 配置类中，通过此注解开启对异步任务的支持，叙事性AsyncConfigurer接口（类上），点击<a href="http://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&amp;mid=2247484241&amp;idx=1&amp;sn=2d0378b4842db91985f61c5388584b0c&amp;chksm=eb538667dc240f71c1746f6dd74cc9b3d94a58868139c4a102a8bd794f821467dddb06b543b0&amp;scene=21#wechat_redirect" target="_blank" rel="noopener"><em>这里</em></a>了解使用详情。</p>
+<p>@Async 在实际执行的bean方法使用该注解来申明其是一个异步任务（方法上或类上<em>所有的方法都将异步</em>，需要@EnableAsync开启异步任务）</p>
+<h2 id="9-定时任务相关"><a href="#9-定时任务相关" class="headerlink" title="9.定时任务相关"></a>9.定时任务相关</h2><p>@EnableScheduling 在配置类上使用，开启计划任务的支持（类上）</p>
+<p>@Scheduled 来申明这是一个任务，包括cron,fixDelay,fixRate等类型（方法上，需先开启计划任务的支持）</p>
+<h2 id="10-Enable-注解说明"><a href="#10-Enable-注解说明" class="headerlink" title="10.@Enable*注解说明"></a>10.@Enable*注解说明</h2><p>这些注解主要用来开启对xxx的支持。<br>@EnableAspectJAutoProxy 开启对AspectJ自动代理的支持</p>
+<p>@EnableAsync 开启异步方法的支持</p>
+<p>@EnableScheduling 开启计划任务的支持</p>
+<p>@EnableWebMvc 开启Web MVC的配置支持</p>
+<p>@EnableConfigurationProperties 开启对@ConfigurationProperties注解配置Bean的支持</p>
+<p>@EnableJpaRepositories 开启对SpringData JPA Repository的支持</p>
+<p>@EnableTransactionManagement 开启注解式事务的支持</p>
+<p>@EnableTransactionManagement 开启注解式事务的支持</p>
+<p>@EnableCaching 开启注解式的缓存支持</p>
+<h2 id="11-测试相关注解"><a href="#11-测试相关注解" class="headerlink" title="11.测试相关注解"></a>11.测试相关注解</h2><p>@RunWith 运行器，Spring中通常用于对JUnit的支持</p>
+<p>@RunWith(SpringJUnit4ClassRunner.class)</p>
+<p>@ContextConfiguration 用来加载配置ApplicationContext，其中classes属性用来加载配置类</p>
+<p>@ContextConfiguration(classes={TestConfig.class})</p>
+<h2 id="12-SpringMVC相关注解"><a href="#12-SpringMVC相关注解" class="headerlink" title="12.SpringMVC相关注解"></a>12.SpringMVC相关注解</h2><p>@EnableWebMvc 在配置类中开启Web MVC的配置支持，如一些ViewResolver或者MessageConverter等，若无此句，重写WebMvcConfigurerAdapter方法（用于对SpringMVC的配置）。</p>
+<p>@Controller 声明该类为SpringMVC中的Controller</p>
+<p>@RequestMapping 用于映射Web请求，包括访问路径和参数（类或方法上）</p>
+<p>@ResponseBody 支持将返回值放在response内，而不是一个页面，通常用户返回json数据（返回值旁或方法上）</p>
+<p>@RequestBody 允许request的参数在request体中，而不是在直接连接在地址后面。（放在参数前）</p>
+<p>@PathVariable 用于接收路径参数，比如@RequestMapping(“/hello/{name}”)申明的路径，将注解放在参数中前，即可获取该值，通常作为Restful的接口实现方法。</p>
+<p>@RestController 该注解为一个组合注解，相当于@Controller和@ResponseBody的组合，注解在类上，意味着，该Controller的所有方法都默认加上了@ResponseBody。</p>
+<p>@ControllerAdvice 通过该注解，我们可以将对于控制器的全局配置放置在同一个位置，注解了@Controller的类的方法可使用@ExceptionHandler、@InitBinder、@ModelAttribute注解到方法上，<br>这对所有注解了 @RequestMapping的控制器内的方法有效。</p>
+<p>@ExceptionHandler 用于全局处理控制器里的异常</p>
+<p>@InitBinder 用来设置WebDataBinder，WebDataBinder用来自动绑定前台请求参数到Model中。</p>
+<p>@ModelAttribute 本来的作用是绑定键值对到Model里，在@ControllerAdvice中是让全局的@RequestMapping都能获得在此处设置的键值对。</p>
+<h1 id="springboot相关"><a href="#springboot相关" class="headerlink" title="springboot相关"></a>springboot相关</h1><p><strong>1、@SpringBootApplication</strong></p>
+<p>这是 Spring Boot 最最最核心的注解，用在 Spring Boot 主类上，标识这是一个 Spring Boot 应用，用来开启 Spring Boot 的各项能力。</p>
+<p>其实这个注解就是 <code>@SpringBootConfiguration</code>、<code>@EnableAutoConfiguration</code>、<code>@ComponentScan</code> 这三个注解的组合，也可以用这三个注解来代替 <code>@SpringBootApplication</code> 注解。</p>
+<p><strong>2、@EnableAutoConfiguration</strong></p>
+<p>允许 Spring Boot 自动配置注解，开启这个注解之后，Spring Boot 就能根据当前类路径下的包或者类来配置 Spring Bean。</p>
+<p>如：当前类路径下有 Mybatis 这个 JAR 包，<code>MybatisAutoConfiguration</code> 注解就能根据相关参数来配置 Mybatis 的各个 Spring Bean。</p>
+<p><strong>3、@Configuration</strong></p>
+<p>这是 Spring 3.0 添加的一个注解，用来代替 applicationContext.xml 配置文件，所有这个配置文件里面能做到的事情都可以通过这个注解所在类来进行注册。</p>
+<p><strong>4、@SpringBootConfiguration</strong></p>
+<p>这个注解就是 @Configuration 注解的变体，只是用来修饰是 Spring Boot 配置而已，或者可利于 Spring Boot 后续的扩展。</p>
+<p><strong>5、@ComponentScan</strong></p>
+<p>这是 Spring 3.1 添加的一个注解，用来代替配置文件中的 component-scan 配置，开启组件扫描，即自动扫描包路径下的 @Component 注解进行注册 bean 实例到 context 中。</p>
+<p>前面 5 个注解可以在这篇文章《<a href="https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&amp;mid=2247487381&amp;idx=2&amp;sn=89de186873960e5a1f0f90904c2e7cef&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">Spring Boot 最核心的 3 个注解详解</a>》中了解更多细节的。</p>
+<p><strong>6、@Conditional</strong></p>
+<p>这是 Spring 4.0 添加的新注解，用来标识一个 Spring Bean 或者  Configuration 配置文件，当满足指定的条件才开启配置。</p>
+<p><strong>7、@ConditionalOnBean</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当容器中有指定的 Bean 才开启配置。</p>
+<p><strong>8、@ConditionalOnMissingBean</strong></p>
+<p>组合 <code>@Conditional</code> 注解，和 <code>@ConditionalOnBean</code> 注解相反，当容器中没有指定的 Bean 才开启配置。</p>
+<p><strong>9、@ConditionalOnClass</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当容器中有指定的 Class 才开启配置。</p>
+<p><strong>10、@ConditionalOnMissingClass</strong></p>
+<p>组合 <code>@Conditional</code> 注解，和 <code>@ConditionalOnMissingClass</code> 注解相反，当容器中没有指定的 Class 才开启配置。</p>
+<p><strong>11、@ConditionalOnWebApplication</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当前项目类型是 WEB 项目才开启配置。</p>
+<p>当前项目有以下 3 种类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">enum Type &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Any web application will match.</span><br><span class="line">     */</span><br><span class="line">    ANY,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Only servlet-based web application will match.</span><br><span class="line">     */</span><br><span class="line">    SERVLET,</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Only reactive-based web application will match.</span><br><span class="line">     */</span><br><span class="line">    REACTIVE</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>12、@ConditionalOnNotWebApplication</strong></p>
+<p>组合 <code>@Conditional</code> 注解，和 <code>@ConditionalOnWebApplication</code> 注解相反，当前项目类型不是 WEB 项目才开启配置。</p>
+<p><strong>13、@ConditionalOnProperty</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当指定的属性有指定的值时才开启配置。</p>
+<p><strong>14、@ConditionalOnExpression</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当 SpEL 表达式为 true 时才开启配置。</p>
+<p><strong>15、@ConditionalOnJava</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当运行的 Java JVM 在指定的版本范围时才开启配置。</p>
+<p><strong>16、@ConditionalOnResource</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当类路径下有指定的资源才开启配置。</p>
+<p><strong>17、@ConditionalOnJndi</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当指定的 JNDI 存在时才开启配置。</p>
+<p><strong>18、@ConditionalOnCloudPlatform</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当指定的云平台激活时才开启配置。</p>
+<p><strong>19、@ConditionalOnSingleCandidate</strong></p>
+<p>组合 <code>@Conditional</code> 注解，当指定的 class 在容器中只有一个 Bean，或者同时有多个但为首选时才开启配置。</p>
+<p><strong>20、@ConfigurationProperties</strong></p>
+<p>用来加载额外的配置（如 .properties 文件），可用在 <code>@Configuration</code> 注解类，或者 <code>@Bean</code> 注解方法上面。</p>
+<p>关于这个注解的用法可以参考《<a href="https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&amp;mid=2247484575&amp;idx=1&amp;sn=56c88cd7283374345d891e85a800539b&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">Spring Boot读取配置的几种方式</a>》这篇文章。</p>
+<p><strong>21、@EnableConfigurationProperties</strong></p>
+<p>一般要配合 <code>@ConfigurationProperties</code> 注解使用，用来开启对 <code>@ConfigurationProperties</code> 注解配置 Bean 的支持。</p>
+<p><strong>22、@AutoConfigureAfter</strong></p>
+<p>用在自动配置类上面，表示该自动配置类需要在另外指定的自动配置类配置完之后。</p>
+<p>如 Mybatis 的自动配置类，需要在数据源自动配置类之后。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@AutoConfigureAfter(DataSourceAutoConfiguration.class)</span><br><span class="line">public class MybatisAutoConfiguration &#123;</span><br></pre></td></tr></table></figure>
+<p><strong>23、@AutoConfigureBefore</strong></p>
+<p>这个和 <code>@AutoConfigureAfter</code> 注解使用相反，表示该自动配置类需要在另外指定的自动配置类配置之前。</p>
+<p><strong>24、@Import</strong></p>
+<p>这是 Spring 3.0 添加的新注解，用来导入一个或者多个 <code>@Configuration</code> 注解修饰的类，这在 Spring Boot 里面应用很多。</p>
+<p><strong>25、@ImportResource</strong></p>
+<p>这是 Spring 3.0 添加的新注解，用来导入一个或者多个 Spring  配置文件，这对 Spring Boot 兼容老项目非常有用，因为有些配置无法通过 Java Config 的形式来配置就只能用这个注解来导入。</p>
+<h1 id="springcloud相关"><a href="#springcloud相关" class="headerlink" title="springcloud相关"></a>springcloud相关</h1><h3 id="1-EnableEurekaServer"><a href="#1-EnableEurekaServer" class="headerlink" title="1.@EnableEurekaServer:"></a>1.@EnableEurekaServer:</h3><p>用在springboot启动类上，表示这是一个eureka服务注册中心；</p>
+<h3 id="2-EnableDiscoveryClient"><a href="#2-EnableDiscoveryClient" class="headerlink" title="2.@EnableDiscoveryClient:"></a>2.@EnableDiscoveryClient:</h3><p>用在springboot启动类上，表示这是一个服务，可以被注册中心找到；</p>
+<h3 id="3-LoadBalanced"><a href="#3-LoadBalanced" class="headerlink" title="3.@LoadBalanced:"></a>3.@LoadBalanced:</h3><p>开启负载均衡能力；</p>
+<h3 id="4-EnableCircuitBreaker"><a href="#4-EnableCircuitBreaker" class="headerlink" title="4.@EnableCircuitBreaker:"></a>4.@EnableCircuitBreaker:</h3><p>用在启动类上，开启断路器功能；</p>
+<h3 id="5-HystrixCommand-fallbackMethod-”backMethod”"><a href="#5-HystrixCommand-fallbackMethod-”backMethod”" class="headerlink" title="5.@HystrixCommand(fallbackMethod=”backMethod”):"></a>5.@HystrixCommand(fallbackMethod=”backMethod”):</h3><p>用在方法上，fallbackMethod指定断路回调方法；</p>
+<h3 id="6-EnableConfigServer"><a href="#6-EnableConfigServer" class="headerlink" title="6.@EnableConfigServer:"></a>6.@EnableConfigServer:</h3><p>用在启动类上，表示这是一个配置中心，开启Config Server；</p>
+<h3 id="7-EnableZuulProxy"><a href="#7-EnableZuulProxy" class="headerlink" title="7.@EnableZuulProxy:"></a>7.@EnableZuulProxy:</h3><p>开启zuul路由，用在启动类上；</p>
+<h3 id="8-SpringCloudApplication"><a href="#8-SpringCloudApplication" class="headerlink" title="8.@SpringCloudApplication:"></a>8.@SpringCloudApplication:</h3><p>包含@SpringBootApplication、@EnableDiscoveryClient、@EnableCircuitBreaker这三个注解。</p>
+<h1 id="呜谢"><a href="#呜谢" class="headerlink" title="呜谢"></a>呜谢</h1><p><a href="https://blog.csdn.net/IT_faquir/article/details/78025203" target="_blank" rel="noopener">spring注解大全</a></p>
+<p><a href="https://blog.csdn.net/qq_34870296/article/details/78581799" target="_blank" rel="noopener">springboot注解详解</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring/" rel="tag"><i class="fa fa-tag"></i>
+
+ spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/19/senssic.github.io/201902/java并发包/" rel="next" title="java并发包">
+                <i class="fa fa-chevron-left"></i> java并发包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/10/13/senssic.github.io/202010/spring扩展点/" rel="prev" title="spring扩展点">
+                spring扩展点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="senssic">
+            
+              <p class="site-author-name" itemprop="name">senssic</p>
+              <p class="site-description motion-element" itemprop="description">不要在生活中迷失</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring注解"><span class="nav-number">1.</span> <span class="nav-text">spring注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-声明bean的注解"><span class="nav-number">1.1.</span> <span class="nav-text">1.声明bean的注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-注入bean的注解"><span class="nav-number">1.2.</span> <span class="nav-text">2.注入bean的注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-java配置类相关注解"><span class="nav-number">1.3.</span> <span class="nav-text">3.java配置类相关注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-切面（AOP）相关注解"><span class="nav-number">1.4.</span> <span class="nav-text">4.切面（AOP）相关注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Bean的属性支持"><span class="nav-number">1.5.</span> <span class="nav-text">5.@Bean的属性支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Value注解"><span class="nav-number">1.6.</span> <span class="nav-text">6.@Value注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-环境切换"><span class="nav-number">1.7.</span> <span class="nav-text">7.环境切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-异步相关"><span class="nav-number">1.8.</span> <span class="nav-text">8.异步相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-定时任务相关"><span class="nav-number">1.9.</span> <span class="nav-text">9.定时任务相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Enable-注解说明"><span class="nav-number">1.10.</span> <span class="nav-text">10.@Enable*注解说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-测试相关注解"><span class="nav-number">1.11.</span> <span class="nav-text">11.测试相关注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-SpringMVC相关注解"><span class="nav-number">1.12.</span> <span class="nav-text">12.SpringMVC相关注解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot相关"><span class="nav-number">2.</span> <span class="nav-text">springboot相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springcloud相关"><span class="nav-number">3.</span> <span class="nav-text">springcloud相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-EnableEurekaServer"><span class="nav-number">3.0.1.</span> <span class="nav-text">1.@EnableEurekaServer:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-EnableDiscoveryClient"><span class="nav-number">3.0.2.</span> <span class="nav-text">2.@EnableDiscoveryClient:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-LoadBalanced"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.@LoadBalanced:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-EnableCircuitBreaker"><span class="nav-number">3.0.4.</span> <span class="nav-text">4.@EnableCircuitBreaker:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-HystrixCommand-fallbackMethod-”backMethod”"><span class="nav-number">3.0.5.</span> <span class="nav-text">5.@HystrixCommand(fallbackMethod=”backMethod”):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-EnableConfigServer"><span class="nav-number">3.0.6.</span> <span class="nav-text">6.@EnableConfigServer:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-EnableZuulProxy"><span class="nav-number">3.0.7.</span> <span class="nav-text">7.@EnableZuulProxy:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-SpringCloudApplication"><span class="nav-number">3.0.8.</span> <span class="nav-text">8.@SpringCloudApplication:</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#呜谢"><span class="nav-number">4.</span> <span class="nav-text">呜谢</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">senssic</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">本站总字数&#58;</span>
+    
+    <span title="本站总字数">100.6k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>  
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ToiHpMxSkLspg2H7q3UJLq9f-gzGzoHsz',
+        appKey: 'WYyGqASXqv7lSRTxb7TCO0N0',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！快点呀 ~',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('3');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ToiHpMxSkLspg2H7q3UJLq9f-gzGzoHsz", "WYyGqASXqv7lSRTxb7TCO0N0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

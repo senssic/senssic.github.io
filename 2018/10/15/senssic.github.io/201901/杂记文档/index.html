@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<script>
+    (function(){
+        if('senssic'){
+            if (prompt('请输入文章密码') !== 'senssic'){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="记录,杂记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="缓存队列相关1.为什么使用mq？mq的优点？解耦,异步,削峰(可以限流发送或接收) 2.mq的缺点有哪些？系统可用性降低(mq挂掉),数据丢失问题,一致性问题,消息顺序问题,消息积压,消息重复问题等需要考虑，导致系统复杂性增加。 3.主流MQ框架的对比   特性 ActiveMQ RabbitMQ RocketMQ Kafka     单机吞吐量 万级，吞吐量比RocketMQ和Kafka要低了一">
+<meta name="keywords" content="记录,杂记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杂记文档">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/senssic.github.io/201901/杂记文档/index.html">
+<meta property="og:site_name" content="senssic">
+<meta property="og:description" content="缓存队列相关1.为什么使用mq？mq的优点？解耦,异步,削峰(可以限流发送或接收) 2.mq的缺点有哪些？系统可用性降低(mq挂掉),数据丢失问题,一致性问题,消息顺序问题,消息积压,消息重复问题等需要考虑，导致系统复杂性增加。 3.主流MQ框架的对比   特性 ActiveMQ RabbitMQ RocketMQ Kafka     单机吞吐量 万级，吞吐量比RocketMQ和Kafka要低了一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-08T15:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="杂记文档">
+<meta name="twitter:description" content="缓存队列相关1.为什么使用mq？mq的优点？解耦,异步,削峰(可以限流发送或接收) 2.mq的缺点有哪些？系统可用性降低(mq挂掉),数据丢失问题,一致性问题,消息顺序问题,消息积压,消息重复问题等需要考虑，导致系统复杂性增加。 3.主流MQ框架的对比   特性 ActiveMQ RabbitMQ RocketMQ Kafka     单机吞吐量 万级，吞吐量比RocketMQ和Kafka要低了一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/15/senssic.github.io/201901/杂记文档/">
+
+
+
+
+
+  <title>杂记文档 | senssic</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5516360d09ce586c528149c2afdd3fcc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">senssic</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/senssic.github.io/201901/杂记文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="senssic">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="senssic">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">杂记文档</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-15T14:26:46+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">杂记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/15/senssic.github.io/201901/杂记文档/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/15/senssic.github.io/201901/杂记文档/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/15/senssic.github.io/201901/杂记文档/" class="leancloud_visitors" data-flag-title="杂记文档">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+                
+			   <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  19,590
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  71
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="缓存队列相关"><a href="#缓存队列相关" class="headerlink" title="缓存队列相关"></a>缓存队列相关</h1><h2 id="1-为什么使用mq？mq的优点？"><a href="#1-为什么使用mq？mq的优点？" class="headerlink" title="1.为什么使用mq？mq的优点？"></a>1.为什么使用mq？mq的优点？</h2><p>解耦,异步,削峰(可以限流发送或接收)</p>
+<h2 id="2-mq的缺点有哪些？"><a href="#2-mq的缺点有哪些？" class="headerlink" title="2.mq的缺点有哪些？"></a>2.mq的缺点有哪些？</h2><p>系统可用性降低(mq挂掉),数据丢失问题,一致性问题,消息顺序问题,消息积压,消息重复问题等需要考虑，导致系统复杂性增加。</p>
+<h2 id="3-主流MQ框架的对比"><a href="#3-主流MQ框架的对比" class="headerlink" title="3.主流MQ框架的对比"></a>3.主流MQ框架的对比</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>ActiveMQ</th>
+<th>RabbitMQ</th>
+<th>RocketMQ</th>
+<th>Kafka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单机吞吐量</td>
+<td>万级，吞吐量比RocketMQ和Kafka要低了一个数量级</td>
+<td>万级，吞吐量比RocketMQ和Kafka要低了一个数量级</td>
+<td>10万级，RocketMQ也是可以支撑高吞吐的一种MQ</td>
+<td>10万级别，这是kafka最大的优点，就是吞吐量高。 一般配合大数据类的系统来进行实时数据计算、日志采集等场景</td>
+</tr>
+<tr>
+<td>topic数量对吞吐量的影响</td>
+<td></td>
+<td></td>
+<td>topic可以达到几百，几千个的级别，吞吐量会有较小幅度的下降 这是RocketMQ的一大优势，在同等机器下，可以支撑大量的topic</td>
+<td>topic从几十个到几百个的时候，吞吐量会大幅度下降 所以在同等机器下，kafka尽量保证topic数量不要过多。如果要支撑大规模topic，需要增加更多的机器资源</td>
+</tr>
+<tr>
+<td>时效性</td>
+<td>ms级</td>
+<td>微秒级，这是rabbitmq的一大特点，延迟是最低的</td>
+<td>ms级</td>
+<td>延迟在ms级以内</td>
+</tr>
+<tr>
+<td>可用性</td>
+<td>高，基于主从架构实现高可用性</td>
+<td>高，基于主从架构实现高可用性</td>
+<td>非常高，分布式架构</td>
+<td>非常高，kafka是分布式的，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用</td>
+</tr>
+<tr>
+<td>消息可靠性</td>
+<td>有较低的概率丢失数据</td>
+<td></td>
+<td>经过参数优化配置，可以做到0丢失</td>
+<td>经过参数优化配置，消息可以做到0丢失</td>
+</tr>
+<tr>
+<td>功能支持</td>
+<td>MQ领域的功能极其完备</td>
+<td>基于erlang开发，所以并发能力很强，性能极其好，延时很低</td>
+<td>MQ功能较为完善，还是分布式的，扩展性好</td>
+<td>功能较为简单，主要支持简单的MQ功能，在大数据领域的实时计算以及日志采集被大规模使用，是事实上的标准</td>
+</tr>
+<tr>
+<td>优劣势总结</td>
+<td>非常成熟，功能强大，在业内大量的公司以及项目中都有应用 偶尔会有较低概率丢失消息 而且现在社区以及国内应用都越来越少，官方社区现在对ActiveMQ 5.x维护越来越少，几个月才发布一个版本 而且确实主要是基于解耦和异步来用的，较少在大规模吞吐的场景中使用</td>
+<td>erlang语言开发，性能极其好，延时很低； 吞吐量到万级，MQ功能比较完备 而且开源提供的管理界面非常棒，用起来很好用 社区相对比较活跃，几乎每个月都发布几个版本分 在国内一些互联网公司近几年用rabbitmq也比较多一些 但是问题也是显而易见的，RabbitMQ确实吞吐量会低一些，这是因为他做的实现机制比较重。 而且erlang开发，国内有几个公司有实力做erlang源码级别的研究和定制？如果说你没这个实力的话，确实偶尔会有一些问题，你很难去看懂源码，你公司对这个东西的掌控很弱，基本职能依赖于开源社区的快速维护和修复bug。 而且rabbitmq集群动态扩展会很麻烦，不过这个我觉得还好。其实主要是erlang语言本身带来的问题。很难读源码，很难定制和掌控。</td>
+<td>接口简单易用，而且毕竟在阿里大规模应用过，有阿里品牌保障 日处理消息上百亿之多，可以做到大规模吞吐，性能也非常好，分布式扩展也很方便，社区维护还可以，可靠性和可用性都是ok的，还可以支撑大规模的topic数量，支持复杂MQ业务场景 而且一个很大的优势在于，阿里出品都是java系的，我们可以自己阅读源码，定制自己公司的MQ，可以掌控 社区活跃度相对较为一般，不过也还可以，文档相对来说简单一些，然后接口这块不是按照标准JMS规范走的有些系统要迁移需要修改大量代码 还有就是阿里出台的技术，你得做好这个技术万一被抛弃，社区黄掉的风险，那如果你们公司有技术实力我觉得用RocketMQ挺好的</td>
+<td>kafka的特点其实很明显，就是仅仅提供较少的核心功能，但是提供超高的吞吐量，ms级的延迟，极高的可用性以及可靠性，而且分布式可以任意扩展 同时kafka最好是支撑较少的topic数量即可，保证其超高吞吐量 而且kafka唯一的一点劣势是有可能消息重复消费，那么对数据准确性会造成极其轻微的影响，在大数据领域中以及日志采集中，这点轻微影响可以忽略 这个特性天然适合大数据实时计算以及日志收集</td>
+</tr>
+</tbody>
+</table>
+<p>不过现在确实越来越多的公司，会去用RocketMQ，确实很不错，但是我提醒一下自己想好社区万一突然黄掉的风险，对自己公司技术实力有绝对自信的，我推荐用RocketMQ，否则回去老老实实用RabbitMQ吧，人是活跃开源社区，绝对不会黄</p>
+<p>所以中小型公司，技术实力较为一般，技术挑战不是特别高，用RabbitMQ是不错的选择；大型公司，基础架构研发实力较强，用RocketMQ是很好的选择</p>
+<p>如果是大数据领域的实时计算、日志采集等场景，用Kafka是业内标准的，绝对没问题，社区活跃度很高，绝对不会黄，何况几乎是全世界这个领域的事实性规范</p>
+<h2 id="4-mq的高可用模式"><a href="#4-mq的高可用模式" class="headerlink" title="4.mq的高可用模式"></a>4.mq的高可用模式</h2><ol>
+<li><p>RabbitMQ的高可用性</p>
+<p>rabbitmq有三种模式：单机模式，普通集群模式，镜像集群模式</p>
+<ol>
+<li><p>单机模式</p>
+<p>一般就是你本地启动了玩玩儿的，没人生产用单机模式</p>
+</li>
+<li><p>普通集群模式</p>
+<p>在多台机器上启动多个rabbitmq实例，每个机器启动一个。但是你创建的queue，<strong><em>只会放在一个rabbtimq实例上</em></strong>，但是每个实例都同步queue的元数据。消费的时候，<em>实际上如果连接到了另外一个实例，那么那个实例会从queue所在实例上拉取数据过来</em>。</p>
+<p>这种方式非真正的集群,没有高可用,实例节点挂掉mq就会不可用,只是提高了连接的吞吐量,而且由于数据位于不同的实例上,当访问不在连接的实例上会有很多这样的mq内部通讯。</p>
+</li>
+<li><p>镜像集群模式</p>
+<p>真正的rabbitmq的高可用模式，跟普通集群模式不一样的是，创建的queue，无论元数据还是queue里的消息都会存在于多个实例上，每次写消息到queue的时候，都会自动把消息到多个实例的queue里进行消息同步。</p>
+<p> 坏处在于，第一，性能开销也大，消息同步所有机器，导致网络带宽压力和消耗很重！第二，就没有扩展性可言了，如果某个queue负载很重，加机器，新增的机器也包含了这个queue的所有数据，并没有办法线性扩展的queue </p>
+</li>
+</ol>
+</li>
+<li><p>kafka的高可用性</p>
+<p>kafka一个最基本的架构认识：多个broker组成，每个broker是一个节点；创建一个topic，这个topic可以划分为多个partition，每个partition可以存在于不同的broker上，每个partition就放一部分数据。</p>
+<p>这是天然的分布式消息队列，就是说一个topic的数据，是分散放在多个机器上的，每个机器就放一部分数据。</p>
+<p>实际上rabbitmq之类的，并不是分布式消息队列，他就是传统的消息队列，只不过提供了一些集群、HA的机制，因为无论怎么玩，rabbitmq一个queue的数据都是放在一个节点里的，镜像集群下，也是每个节点都放这个queue的完整数据。</p>
+<p>kafka 0.8以前，是没有HA机制的，就是任何一个broker宕机了，那个broker上的partition就废了，没法写也没法读，没有什么高可用性可言。</p>
+<p>kafka 0.8以后，提供了HA机制，就是replica副本机制。每个partition的数据都会同步到其他机器上，形成自己的多个replica副本。然后所有replica会选举一个leader出来，那么生产和消费都跟这个leader打交道，然后其他replica就是follower。写的时候，leader会负责把数据同步到所有follower上去，读的时候就直接读leader上数据即可。只能读写leader？很简单，要是你可以随意读写每个follower，那么就要care数据一致性的问题，系统复杂度太高，很容易出问题。kafka会均匀的将一个partition的所有replica分布在不同的机器上，这样才可以提高容错性。如果某个broker宕机了，没事儿，那个broker上面的partition在其他机器上都有副本的，如果这上面有某个partition的leader，那么此时会重新选举一个新的leader出来，大家继续读写那个新的leader即可。这就有所谓的高可用性了。</p>
+<p> 写数据的时候，生产者就写leader，然后leader将数据落地写本地磁盘，接着其他follower自己主动从leader来pull数据。一旦所有follower同步好数据了，就会发送ack给leader，leader收到所有follower的ack之后，就会返回写成功的消息给生产者。（当然，这只是其中一种模式，还可以适当调整这个行为）</p>
+<p>消费的时候，只会从leader去读，但是只有一个消息已经被所有follower都同步成功返回ack的时候，这个消息才会被消费者读到。</p>
+</li>
+</ol>
+<h2 id="5-消息重复的处理"><a href="#5-消息重复的处理" class="headerlink" title="5.消息重复的处理"></a>5.消息重复的处理</h2><p>​    一般mq是不保证发送消息的重复,有极低的概率可能会消息重复.需要靠业务自己保证幂性的,一般使用数据库,redis等来判断幂等。</p>
+<h2 id="6-消息丢失情况分析"><a href="#6-消息丢失情况分析" class="headerlink" title="6.消息丢失情况分析"></a>6.消息丢失情况分析</h2><ol>
+<li><p>rabbitmq</p>
+<ul>
+<li><p>生产者弄丢数据</p>
+<p>因为网络或其他通讯原因,数据半路可能丢失,一般通过</p>
+<p>开启事务（channel.txSelect），然后发送消息，如果消息没有成功被rabbitmq接收到，那么生产者会收到异常报错，此时就可以回滚事务（channel.txRollback），然后重试发送消息；如果收到了消息，那么可以提交事务（channel.txCommit）。但是问题是，rabbitmq事务机制一搞，基本上吞吐量会下来，因为太耗性能。</p>
+<p>开启confirm模式，每次写的消息都会分配一个唯一的id，然后如果写入了rabbitmq中，rabbitmq会给你回传一个ack消息，告诉你说这个消息ok了。如果rabbitmq没能处理这个消息，会回调你一个nack接口，告诉你这个消息接收失败，你可以重试。因为确认模式是异步的,所以一般发送端消息丢失都是使用开启confirm模式进行处理避免消息丢失。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>rabbitmq弄丢了数据</p>
+<p>一般必须开始rabbitmq持久化,这样就算mq挂了,也可以读取之前存储的数据,一般不会丢失,当然也有极其罕见的情况数据还未写入磁盘mq挂了导致的数据丢失,这种概率极低。</p>
+<p>设置持久化有两个步骤</p>
+<p>第一个是创建queue的时候将其设置为持久化的，这样就可以保证rabbitmq持久化queue的元数据，但是不会持久化queue里的数据；</p>
+<p>第二个是发送消息的时候将消息的deliveryMode设置为2，就是将消息设置为持久化的，此时rabbitmq就会将消息持久化到磁盘上去。必须要同时设置这两个持久化才行，rabbitmq哪怕是挂了，再次重启，也会从磁盘上重启恢复queue，恢复这个queue里的数据。</p>
+<p>而且持久化可以跟生产者那边的confirm机制配合起来，只有消息被持久化到磁盘之后，才会通知生产者ack了，所以哪怕是在持久化到磁盘之前，rabbitmq挂了，数据丢了，生产者收不到ack，你也是可以自己重发的。 </p>
+</li>
+<li><p>消费端弄丢了数据</p>
+<p>一般使用rabbitmq提供的手动ack机制,未被ack的消息,mq会重复进行投递(死信队列).</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>kafka</p>
+<ul>
+<li><p>消费者丢失数据</p>
+<p>如果设置为消费者自动提交offset,此时你刚接到消息还未处理,此消息可能就丢失了,一般的做法是关闭自动提交offset，在处理完之后自己手动提交offset，就可以保证数据不会丢。</p>
+</li>
+<li><p>kafka数据丢失</p>
+<p>kafka某个broker宕机，然后重新选举partiton的leader时。此时其他的follower刚好还有些数据没有同步，结果此时leader挂了，然后选举某个follower成leader之后，就少了一些数据。</p>
+<p>此时一般是要求起码设置如下4个参数：</p>
+<p>给这个topic设置replication.factor参数：这个值必须大于1，要求每个partition必须有至少2个副本</p>
+<p>在kafka服务端设置min.insync.replicas参数：这个值必须大于1，这个是要求一个leader至少感知到有至少一个follower还跟自己保持联系，没掉队，这样才能确保leader挂了还有一个follower吧</p>
+<p>在producer端设置acks=all：这个是要求每条数据，必须是写入所有replica之后，才能认为是写成功了</p>
+<p>在producer端设置retries=MAX（很大很大很大的一个值，无限次重试的意思）：这个是要求一旦写入失败，就无限重试，卡在这里了</p>
+<p>这样配置之后，至少在kafka broker端就可以保证在leader所在broker发生故障，进行leader切换时，数据不会丢失</p>
+</li>
+<li><p>生产者不会丢数据</p>
+<p>如果按照上述的思路设置了ack=all，一定不会丢，你的leader接收到消息，所有的follower都同步到了消息之后，才认为本次写成功了。如果没满足这个条件，生产者会自动不断的重试，重试无限次。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="7-保证消息的顺序性"><a href="#7-保证消息的顺序性" class="headerlink" title="7.保证消息的顺序性"></a>7.保证消息的顺序性</h2><p>​    场景：比如下单操作，下单成功之后，会发布创建订单和扣减库存消息，但扣减库存消息执行会先于创建订单消息，也就说前者执行成功之后，才能执行后者。</p>
+<p>​    在 MQ 层面支持消息的顺序处理开销太大，为了极少量的需求，增加整体上的复杂度得不偿失。</p>
+<p>所以，<strong>还是在应用层面处理比较好，或者业务逻辑进行处理</strong>。</p>
+<p>应用层解决方式：</p>
+<ul>
+<li><strong>1.</strong> 消息实体中增加：版本号 &amp; 状态机 &amp; msgid &amp; parent_msgid，通过 parent_msgid 判断消息的顺序（需要全局存储，记录消息的执行状态）。当处理完后更新parent_msgid然后触发mq重试机制,继续其他消费</li>
+<li><strong>2.</strong> “同步执行”：当一个消息执行完之后，再发布下一个消息。</li>
+<li><strong>3.</strong>确保只有一个消费者消费,消费者内部使用队列,然后启动多个线程消费队列。</li>
+</ul>
+<h2 id="8-处理消息积压"><a href="#8-处理消息积压" class="headerlink" title="8.处理消息积压"></a>8.处理消息积压</h2><p>​    由于某些业务场景导致有些队列没有被消费(消费者挂了,或者消费能力弱),一般处理的方式有如下方式.</p>
+<p>消费者积极扩容,当发现百万级的消息积压,首先是先把消费者逻辑处理给修正,想办法临时扩容消费者,加大消费者的处理吞吐量</p>
+<p>1）先修复consumer的问题，确保其恢复消费速度，然后将现有cnosumer都停掉</p>
+<p>2）新建一个topic，partition是原来的10倍，临时建立好原先10倍或者20倍的queue数量</p>
+<p>3）然后写一个临时的分发数据的consumer程序，这个程序部署上去消费积压的数据，消费之后不做耗时的处理，直接均匀轮询写入临时建立好的10倍数量的queue</p>
+<p>4）接着临时征用10倍的机器来部署consumer，每一批consumer消费一个临时queue的数据</p>
+<p>5）这种做法相当于是临时将queue资源和consumer资源扩大10倍，以正常的10倍速度来消费数据</p>
+<p>6）等快速消费完积压数据之后，得恢复原先部署架构，重新用原先的consumer机器来消费消息</p>
+<p>对于一些消息已被超时丢弃(一般线上不允许设置小时超时),只能通过补录丢失的消息了,在高峰期过后,一点点的将业务数据查询出来,在低谷的时候写个程序模拟生产消息。</p>
+<p>这里还是要提醒,要有主动监控消息积压的流程,当发生消息积压的初期就及时处理,如果发现对业务不影响的消息还可以直接删除。</p>
+<h1 id="分布式搜索引擎"><a href="#分布式搜索引擎" class="headerlink" title="分布式搜索引擎"></a>分布式搜索引擎</h1><h2 id="es的基础知识"><a href="#es的基础知识" class="headerlink" title="es的基础知识"></a>es的基础知识</h2><ul>
+<li><p>倒排索引</p>
+<p>也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。它是文档检索系统中最常用的数据结构。</p>
+</li>
+<li><p>ES索引</p>
+<p>ES一些概念和数据库进行对比</p>
+<p>Relational DB -&gt; Databases -&gt; Tables -&gt; Rows -&gt; Columns</p>
+<p>Elasticsearch -&gt; Index -&gt; Types -&gt; Documents -&gt; Fields</p>
+</li>
+<li><p>es分布式结构</p>
+<p>一个索引可以拆分成多个shard,每个shard存储部分数据。就是说每个shard都有一primary shard，负责写入数据，还有一个或多个replica shard。primary shard写入数据之后,会将数据同步到其他replica shard上去。</p>
+</li>
+<li><p>es分布式master节点</p>
+<p>es集群多个节点,会自动选举一个节点为master节点,主要负责管理工作,维护索引元数据拉,切换primary shard和replica shard身份之类。要是master节点宕机了,会重新选举一个节点为master节点。</p>
+</li>
+<li><p>es分布式非master</p>
+<p>master节点会让宕机节点上的primary shard的身份转移到其他一个机器上的replica shard。宕机节点重启之后,master节点会控制将缺失的replica shard分配过去,同步后续修改的数据,让集群恢复正常。</p>
+</li>
+</ul>
+<h2 id="es的工作原理"><a href="#es的工作原理" class="headerlink" title="es的工作原理"></a>es的工作原理</h2><ol>
+<li><p>es写数据过程</p>
+<p>1）客户端选择一个node发送请求过去,这个node就被称作coordinating node（协调节点）</p>
+<p>2）coordinating node,对document进行路由,将请求转发给对应的node（有primary shard）</p>
+<p>3）实际的node上的primary shard处理请求,然后将数据同步到replica node</p>
+<p>4）coordinating node,如果发现primary node和所有replica node都处理好之后,就返回响应结果给客户端</p>
+</li>
+<li><p>es读数据过程</p>
+<p>当es写入一个docment时候,会自动给你分配一个全局唯一的doc id,同时es也是根据doc id进行hash路由到对应的primary shard上面去</p>
+<p>1）客户端发送请求到任意一个node，成为coordinate node</p>
+<p>2）coordinate node对document进行路由，将请求转发到对应的node，此时会使用round-robin随机轮询算法，在primary shard以及其所有replica中随机选择一个，让读请求负载均衡</p>
+<p>3）接收请求的node返回document给coordinate node</p>
+<p>4）coordinate node返回document给客户端</p>
+</li>
+<li><p>es搜索数据过程</p>
+<p>1）客户端发送请求到一个coordinate node</p>
+<p>2）协调节点将搜索请求转发到所有的shard对应的primary shard或replica shard也可以</p>
+<p>3）query phase：每个shard将自己的搜索结果（其实就是一些doc id），返回给协调节点，由协调节点进行数据的合并、排序、分页等操作，产出最终结果</p>
+<p>4）fetch phase：接着由协调节点，根据doc id去各个节点上拉取实际的document数据，最终返回给客户端</p>
+</li>
+<li><p>写数据底层原理</p>
+<p>1）先写入buffer,在buffer里的时候数据是搜索不到的;同时将数据写入translog日志文件</p>
+<p>2）如果buffer快满了,或者到一定时间,就会将buffer数据refresh到一个新的segment file中,但是此时数据不是直接进入segment file的磁盘文件的,而是先进入os cache的,这个过程就是refresh。每隔1秒钟，es将buffer中的数据写入一个新的segment file,每秒钟会产生一个新的磁盘文件,segment file,这个segment file中就存储最近1秒内buffer中写入的数据,但是如果buffer里面此时没有数据,不会执行refresh操作,每秒创建换一个空的segment file,如果buffer里面有数据,默认1秒钟执行一次refresh操作,刷入一个新的segment file中,操作系统里面,磁盘文件其实都有一个东西,叫做os cache,操作系统缓存,就是说数据写入磁盘文件之前,会先进入os cache,先进入操作系统级别的一个内存缓存中去,只要buffer中的数据被refresh操作,刷入os cache中，就代表这个数据就可以被搜索到了,<strong>内存 buffer 生成一个新的 segment，刷到文件系统缓存中，Lucene 即可检索这个新 segment,此时segment位于文件内存缓存中</strong>,为什么叫es是准实时的？NRT，near real-time,准实时。默认是每隔1秒refresh一次的,所以es是准实时的,因为写入的数据1秒之后才能被看到。可以通过es的restful api或者java api，手动执行一次refresh操作，就是手动将buffer中的数据刷入os cache中，让数据立马就可以被搜索到。只要数据被输入os cache中，buffer就会被清空了，因为不需要保留buffer了，数据在translog里面已经持久化到磁盘去一份了</p>
+<p>3）只要数据进入os cache,此时就可以让这个segment file的数据对外提供搜索了</p>
+<p>4）重复1~3步骤，新的数据不断进入buffer和translog,不断将buffer数据写入一个又一个新的segment file中去，每次refresh完buffer清空，translog保留。随着这个过程推进，translog会变得越来越大。当translog达到一定长度的时候，就会触发commit操作。buffer中的数据，每隔1秒就被刷到os cache中去，然后这个buffer就被清空了。所以说这个buffer的数据始终是可以保持住不会填满es进程的内存的。每次一条数据写入buffer,同时会写入一条日志到translog日志文件中去,所以这个translog日志文件是不断变大的,当translog日志文件大到一定程度的时候，就会执行commit操作。</p>
+<p>5）commit操作发生第一步，就是将buffer中现有数据refresh到os cache中去，清空buffer</p>
+<p>6）将一个commit point写入磁盘文件，里面标识着这个commit point对应的<strong>所有os cache内存segment file</strong></p>
+<p>7）强行将os cache中目前所有的数据都fsync到磁盘文件中去,translog日志文件的作用是什么？就是在你执行commit操作之前，数据要么是停留在buffer中，要么是停留在os cache中，无论是buffer还是os cache都是内存，一旦这台机器死了，内存中的数据就全丢了。所以需要将数据对应的操作写入一个专门的日志文件，translog日志文件中，一旦此时机器宕机，再次重启的时候，es会自动读取translog日志文件中的数据，恢复到内存buffer和os cache中去。</p>
+<p>commit操作：</p>
+<p>1、写commit point；</p>
+<p>2、将os cache数据fsync强刷到磁盘上去；</p>
+<p>3、清空translog日志文件</p>
+<p>8）将现有的translog清空，然后再次重启启用一个translog，此时commit操作完成。默认每隔30分钟会自动执行一次commit，但是如果translog过大，也会触发commit。整个commit的过程，叫做flush操作。我们可以手动执行flush操作，就是将所有os cache数据刷到磁盘文件中去。不叫做commit操作，flush操作。es中的flush操作，就对应着commit的全过程。我们也可以通过es api，手动执行flush操作，手动将os cache中的数据fsync强刷到磁盘上去，记录一个commit point，清空translog日志文件。</p>
+<p>9）translog其实也是先写入os cache的，默认每隔5秒刷一次到磁盘中去，所以默认情况下，可能有5秒的数据会仅仅停留在buffer或者translog文件的os cache中，如果此时机器挂了，会丢失5秒钟的数据。但是这样性能比较好，最多丢5秒的数据。也可以将translog设置成每次写操作必须是直接fsync到磁盘，但是性能会差很多。其实es第一是准实时的，数据写入1秒后可以搜索到；可能会丢失数据的，你的数据有5秒的数据，停留在buffer、translog os cache、segment file os cache中，有5秒的数据不在磁盘上，此时如果宕机，会导致5秒的数据丢失。如果你希望一定不能丢失数据的话，你可以设置个参数每次写入一条数据，都是写入buffer，同时写入磁盘上的translog，但是这会导致写性能、写入吞吐量会下降一个数量级。</p>
+<p>Elasticsearch 2.0 新加入的特性。为了保证不丢数据，每次 index、bulk、delete、update 完成的时候，一定触发刷新 translog 到磁盘上，才给请求返回 200 OK。这个改变在提高数据安全性的同时当然也降低了一点性能。</p>
+<p>10）如果是删除操作，commit的时候会生成一个.del文件，里面将某个doc标识为deleted状态，那么搜索的时候根据.del文件就知道这个doc被删除了</p>
+<p>11）如果是更新操作，就是将原来的doc标识为deleted状态，然后新写入一条数据</p>
+<p>12）buffer每次refresh一次，就会产生一个segment file，所以默认情况下是1秒钟一个segment file，segment file会越来越多，此时会定期执行merge</p>
+<p>13）每次merge的时候，会将多个segment file合并成一个，同时这里会将标识为deleted的doc给物理删除掉，然后将新的segment file写入磁盘，这里会写一个commit point，标识所有新的segment file，然后打开segment file供搜索使用，同时删除旧的segment file。</p>
+<p>es里的写流程，有4个底层的核心概念，refresh、flush、translog、merge,当segment file多到一定程度的时候，es就会自动触发merge操作，将多个segment file给merge成一个segment file。</p>
+</li>
+</ol>
+<h2 id="es搜索的性能优化-几十亿"><a href="#es搜索的性能优化-几十亿" class="headerlink" title="es搜索的性能优化(几十亿)"></a>es搜索的性能优化(几十亿)</h2><p>es搜索优化不是银弹,关键的底层性能影响就是内存的es缓存(filesystem cache)</p>
+<ol>
+<li><p>增加filesystem cache的值设置足够大,确保es机器内存足够大,如果es未命中filesystem cache数据,会到磁盘中读取十分影响读取的性能。(filesystem cache尽量足够大)</p>
+</li>
+<li><p>尽量少的字段存放到es这样filesystem cache能更大存放es数据,真正大的数据存放到外部mysql或hbase中通过es中的关键字段到外置存储中查询。(filesystem cache尽量保留关键)</p>
+</li>
+<li><p>数据预热,如果实在是有数据被存放在了磁盘中,对于经常访问的数据,可以定时查询一下,保证filesystem cache中的都基本是热数据,提升体验。(filesystem cach尽量多存放热数据)</p>
+</li>
+<li><p>冷热分离,将热数据和冷数据尽量水平拆分,这样可以保证尽可能多的热数据位于filesystem cache中。(filesystem cach尽量多存放热数据)</p>
+</li>
+<li><p>优化document模型设计,对于原始数据有关联的结果,尽量在写入的时候就将结果写入,尽量避免使用复杂关联的查询。复杂的计算尽量在程序中做。(es尽量少的计算合并读取)</p>
+</li>
+<li><p>分页的优化,es的分页,分页深度越大越慢,因为是分布式存储数据,分页深度大的情况下,协调节点依然会将pagesize*pageindex的量的数据查询出来然后做合并排序等操作,再取出分页的数据。</p>
+<p>对于不需要跳转,只需要一页一页下翻的分页,可以使用scroll api,其原理是使用了es数据快照,将查询出来的数据进行快照,然后通过游标一页一页的展示,缺点是无法指定页数以及页跳转。</p>
+</li>
+</ol>
+<h1 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h1><h2 id="为什么用缓存缓存缺点"><a href="#为什么用缓存缓存缺点" class="headerlink" title="为什么用缓存缓存缺点"></a>为什么用缓存缓存缺点</h2><ul>
+<li>一般用缓存是为了高并发或高性能</li>
+<li>缓存的缺点<ul>
+<li>缓存击穿</li>
+<li>缓存雪崩</li>
+<li>缓存与数据库双写不一致</li>
+<li>缓存并发竞争</li>
+</ul>
+</li>
+</ul>
+<h2 id="redis缓存相关知识"><a href="#redis缓存相关知识" class="headerlink" title="redis缓存相关知识"></a>redis缓存相关知识</h2><h3 id="redis和memcache主要区别"><a href="#redis和memcache主要区别" class="headerlink" title="redis和memcache主要区别"></a>redis和memcache主要区别</h3><ol>
+<li>redis支持丰富的数据类型,memcache只支持简单的key-value存储模式</li>
+<li>redis是单线程对于小数据有很高的效率,memcache是多线程对于大数据存储可能效率高些</li>
+<li>redis支持原生的集群高可用,而memcache没有高可用可能需要依赖客户端的分片写入</li>
+</ol>
+<h3 id="redis线程模型"><a href="#redis线程模型" class="headerlink" title="redis线程模型"></a>redis线程模型</h3><p>Redis 基于 Reactor 模式开发了自己的网络事件处理器[文件事件处理器(file event handler)]</p>
+<p>文件事件处理器使用 I/O 多路复用（multiplexing）程序来同时监听多个套接字, 并根据套接字目前执行的任务来为套接字关联不同的事件处理器。<br>当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时， 与操作相对应的文件事件就会产生, 这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。<br>虽然文件事件处理器以单线程方式运行, 但通过使用 I/O 多路复用程序来监听多个套接字,文件事件处理器既实现了高性能的网络通信模型，,又可以很好地与 redis 服务器中其他同样以单线程方式运行的模块进行对接,保持了 Redis 内部单线程设计的简单性。</p>
+<p><a href="https://www.jianshu.com/p/ccae497c0ebb" target="_blank" rel="noopener">Redis 线程模型</a></p>
+<p><a href="https://blog.csdn.net/Happy_wu/article/details/73732883" target="_blank" rel="noopener">redis单线程模型</a></p>
+<p><a href="https://blog.csdn.net/skiof007/article/details/52873421" target="_blank" rel="noopener">BIO,NIO,AIO</a></p>
+<ul>
+<li>redis单线程模型高性能原因<ul>
+<li>纯内存操作</li>
+<li>单线程避免多线程的上下文切换消耗</li>
+<li>多路IO非阻塞模型,不同环境使用实现不一样(Solaries 10,linux epoll,mac os kqueue,select等)</li>
+</ul>
+</li>
+</ul>
+<h3 id="redis数据类型以及使用场景"><a href="#redis数据类型以及使用场景" class="headerlink" title="redis数据类型以及使用场景"></a>redis数据类型以及使用场景</h3><ul>
+<li>string</li>
+<li>hash</li>
+<li>list</li>
+<li>set</li>
+<li>sorted set</li>
+<li>HyperLogLog-基数统计,有偏差</li>
+</ul>
+<h3 id="redis的过期策略和淘汰机制"><a href="#redis的过期策略和淘汰机制" class="headerlink" title="redis的过期策略和淘汰机制"></a>redis的过期策略和淘汰机制</h3><ul>
+<li><p>过期策略,定期删除+惰性删除</p>
+<p>redis检查过期key是通过定期随机检查[100ms,随机是因为如果是量很大的话100ms检测一遍会很消耗CPU所以使用随机定量key进行检测]和惰性检测[当再次访问key时判断是否过期]</p>
+</li>
+<li><p>淘汰机制,当reids内存存放的key很多很大的时候,会触发redis删除一些key[内存淘汰]</p>
+<p>1）noeviction：当内存不足以容纳新写入数据时，新写入操作会报错，这个一般没人用</p>
+<p>2）allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（这个是最常用的）</p>
+<p>3）allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key，这个一般没人用吧，为啥要随机，肯定是把最近最少使用的key给干掉啊</p>
+<p>4）volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key（这个一般不太合适）</p>
+<p>5）volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key</p>
+<p>6）volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除</p>
+<p>​</p>
+</li>
+</ul>
+<h3 id="redis高并发和高可用-现在可以直接使用redis集群进行读写的水平扩展"><a href="#redis高并发和高可用-现在可以直接使用redis集群进行读写的水平扩展" class="headerlink" title="redis高并发和高可用[现在可以直接使用redis集群进行读写的水平扩展]"></a>redis高并发和高可用[现在可以直接使用redis集群进行读写的水平扩展]</h3><p>redis单机一般可支持5w~10w的QPS,再高的话就会有单机瓶颈,一般可以使用redis读写分离来水平扩展redis的读性能,master负责写入和同步多个slave数据,多个slave负责读取,这样的主从架构可以随时水平扩展进而可以支持高于10w的QPS。如果采用了主从架构<strong>必须开启master node的持久化</strong>,</p>
+<h4 id="redis读写分离架构中的master和slave数据复制-现在一般不用这种架构而是使用redis集群架构"><a href="#redis读写分离架构中的master和slave数据复制-现在一般不用这种架构而是使用redis集群架构" class="headerlink" title="redis读写分离架构中的master和slave数据复制[现在一般不用这种架构而是使用redis集群架构]"></a>redis读写分离架构中的master和slave数据复制[现在一般不用这种架构而是使用redis集群架构]</h4><p>1、复制的完整流程</p>
+<p>（1）slave node启动，仅仅保存master node的信息，包括master node的host和ip，但是复制流程没开始</p>
+<p>master host和ip是从哪儿来的，redis.conf里面的slaveof配置的</p>
+<p>（2）slave node内部有个定时任务，每秒检查是否有新的master node要连接和复制，如果发现，就跟master node建立socket网络连接<br>（3）slave node发送ping命令给master node<br>（4）口令认证，如果master设置了requirepass，那么salve node必须发送masterauth的口令过去进行认证<br>（5）master node第一次执行全量复制，将所有数据发给slave node<br>（6）master node后续持续将写命令，异步复制给slave node</p>
+<p>2、数据同步相关的核心机制</p>
+<p>就是第一次slave连接msater的时候，执行的全量复制，那个过程里面一些细节的机制</p>
+<p>（1）master和slave都会维护一个offset</p>
+<p>master会在自身不断累加offset，slave也会在自身不断累加offset<br>slave每秒都会上报自己的offset给master，同时master也会保存每个slave的offset,master和slave都要知道各自的数据的offset，才能知道互相之间的数据不一致的情况</p>
+<p>（2）backlog</p>
+<p>master node有一个backlog，默认是1MB大小<br>master node给slave node复制数据时，也会将数据在backlog中同步写一份<br>backlog主要是用来做全量复制中断候的增量复制的</p>
+<p>（3）master run id</p>
+<p>info server，可以看到master run id<br>如果根据host+ip定位master node，是不靠谱的，如果master node重启或者数据出现了变化，那么slave node应该根据不同的run id区分，run id不同就做全量复制<br>如果需要不更改run id重启redis，可以使用redis-cli debug reload命令</p>
+<p>（4）psync</p>
+<p>从节点使用psync从master node进行复制，psync runid offset<br>master node会根据自身的情况返回响应信息，可能是FULLRESYNC runid offset触发全量复制，可能是CONTINUE触发增量复制</p>
+<p>3、全量复制</p>
+<p>（1）master执行bgsave，在本地生成一份rdb快照文件<br>（2）master node将rdb快照文件发送给salve node，如果rdb复制时间超过60秒（repl-timeout），那么slave node就会认为复制失败，可以适当调节大这个参数<br>（3）对于千兆网卡的机器，一般每秒传输100MB，6G文件，很可能超过60s<br>（4）master node在生成rdb时，会将所有新的写命令缓存在内存中，在salve node保存了rdb之后，再将新的写命令复制给salve node<br>（5）client-output-buffer-limit slave 256MB 64MB 60，如果在复制期间，内存缓冲区持续消耗超过64MB，或者一次性超过256MB，那么停止复制，复制失败<br>（6）slave node接收到rdb之后，清空自己的旧数据，然后重新加载rdb到自己的内存中，同时基于旧的数据版本对外提供服务<br>（7）如果slave node开启了AOF，那么会立即执行BGREWRITEAOF，重写AOF</p>
+<p>rdb生成、rdb通过网络拷贝、slave旧数据的清理、slave aof rewrite，很耗费时间</p>
+<p>如果复制的数据量在4G~6G之间，那么很可能全量复制时间消耗到1分半到2分钟</p>
+<p>4、增量复制</p>
+<p>（1）如果全量复制过程中，master-slave网络连接断掉，那么salve重新连接master时，会触发增量复制<br>（2）master直接从自己的backlog中获取部分丢失的数据，发送给slave node，默认backlog就是1MB<br>（3）msater就是根据slave发送的psync中的offset来从backlog中获取数据的</p>
+<p>5、heartbeat</p>
+<p>主从节点互相都会发送heartbeat信息</p>
+<p>master默认每隔10秒发送一次heartbeat，salve node每隔1秒发送一个heartbeat</p>
+<p>6、异步复制</p>
+<p>master每次接收到写命令之后，现在内部写入数据，然后异步发送给slave node</p>
+<h4 id="redis高可用架构"><a href="#redis高可用架构" class="headerlink" title="redis高可用架构"></a>redis高可用架构</h4><p>1、哨兵sentinal</p>
+<p>哨兵是redis集群架构中非常重要的一个组件，主要功能如下</p>
+<p>（1）集群监控，负责监控redis master和slave进程是否正常工作<br>（2）消息通知，如果某个redis实例有故障，那么哨兵负责发送消息作为报警通知给管理员<br>（3）故障转移，如果master node挂掉了，会自动转移到slave node上<br>（4）配置中心，如果故障转移发生了，通知client客户端新的master地址</p>
+<p>哨兵本身也是分布式的，作为一个哨兵集群去运行，互相协同工作</p>
+<p>（1）故障转移时，判断一个master node是宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题<br>（2）即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的，因为如果一个作为高可用机制重要组成部分的故障转移系统本身是单点的,本身就不能高可用</p>
+<p>（3）哨兵至少需要三个才能故障转移,因为如果只有两个哨兵其中一个挂掉后不满足2的majority=2,不会允许执行故障转移。</p>
+<p>4、经典的3节点哨兵集群</p>
+<p>Master,Sentinal1             Slave1,Sentinal2         Slave2,Sentinal3</p>
+<p>Configuration: quorum = 2 如果M1所在机器宕机了，那么三个哨兵还剩下2个，S2和S3可以一致认为master宕机，然后选举出一个来执行故障转移同时3个哨兵的majority是2，所以还剩下的2个哨兵运行着，就可以允许执行故障转移。</p>
+<h4 id="redis持久化方式-AOF-RDB-以及优缺点"><a href="#redis持久化方式-AOF-RDB-以及优缺点" class="headerlink" title="redis持久化方式[AOF,RDB]以及优缺点"></a>redis持久化方式[AOF,RDB]以及优缺点</h4><p>1、RDB和AOF两种持久化机制的介绍</p>
+<p>RDB持久化机制，对redis中的数据执行周期性的持久化</p>
+<p>AOF机制对每条写入命令作为日志，以append-only的模式写入一个日志文件中，在redis重启的时候，可以通过回放AOF日志中的写入指令来重新构建整个数据集</p>
+<p>通过RDB或AOF，都可以将redis内存中的数据给持久化到磁盘上面来,如果同时使用RDB和AOF两种持久化机制，那么在redis重启的时候，会使用AOF来重新构建数据，因为AOF中的数据更加完整</p>
+<p>2、RDB持久化机制的优点</p>
+<p>（1）RDB会生成多个数据文件，每个数据文件都代表了某一个时刻中redis的数据，这种多个数据文件的方式，非常适合做冷备，以预定好的备份策略来定期备份redis中的数据</p>
+<p>（2）RDB对redis对外提供的读写服务，影响非常小，可以让redis保持高性能，因为redis主进程只需要fork一个子进程，让子进程执行磁盘IO操作来进行RDB持久化即可</p>
+<p>（3）相对于AOF持久化机制来说，直接基于RDB数据文件来重启和恢复redis进程，更加快速</p>
+<p>3、RDB持久化机制的缺点</p>
+<p>（1）如果想要在redis故障时，尽可能少的丢失数据，那么RDB没有AOF好。一般来说，RDB数据快照文件，都是每隔5分钟，或者更长时间生成一次，这个时候就得接受一旦redis进程宕机，那么会丢失最近5分钟的数据</p>
+<p>（2）RDB每次在fork子进程来执行RDB快照数据文件生成的时候，如果数据文件特别大，可能会导致对客户端提供的服务暂停数毫秒，或者甚至数秒</p>
+<p>4、AOF持久化机制的优点</p>
+<p>（1）AOF可以更好的保护数据不丢失，一般AOF会每隔1秒，通过一个后台线程执行一次fsync操作，最多丢失1秒钟的数据</p>
+<p>（2）AOF日志文件以append-only模式写入，所以没有任何磁盘寻址的开销，写入性能非常高，而且文件不容易破损，即使文件尾部破损，也很容易修复</p>
+<p>（3）AOF日志文件即使过大的时候，出现后台重写操作，也不会影响客户端的读写。因为在rewrite log的时候，会对其中的指导进行压缩，创建出一份需要恢复数据的最小日志出来。再创建新日志文件的时候，老的日志文件还是照常写入。当新的merge后的日志文件ready的时候，再交换新老日志文件即可。</p>
+<p>（4）AOF日志文件的命令通过非常可读的方式进行记录，这个特性非常适合做灾难性的误删除的紧急恢复。比如某人不小心用flushall命令清空了所有数据，只要这个时候后台rewrite还没有发生，那么就可以立即拷贝AOF文件，将最后一条flushall命令给删了，然后再将该AOF文件放回去，就可以通过恢复机制，自动恢复所有数据</p>
+<p>5、AOF持久化机制的缺点</p>
+<p>（1）对于同一份数据来说，AOF日志文件通常比RDB数据快照文件更大</p>
+<p>（2）AOF开启后，支持的写QPS会比RDB支持的写QPS低，因为AOF一般会配置成每秒fsync一次日志文件，当然，每秒一次fsync，性能也还是很高的</p>
+<p>（3）以前AOF发生过bug，就是通过AOF记录的日志，进行数据恢复的时候，没有恢复一模一样的数据出来。所以说，类似AOF这种较为复杂的基于命令日志/merge/回放的方式，比基于RDB每次持久化一份完整的数据快照文件的方式，更加脆弱一些，容易有bug。不过AOF就是为了避免rewrite过程导致的bug，因此每次rewrite并不是基于旧的指令日志进行merge的，而是基于当时内存中的数据进行指令的重新构建，这样健壮性会好很多。</p>
+<p>6、RDB和AOF到底该如何选择</p>
+<p>（1）不要仅仅使用RDB，因为那样会导致你丢失很多数据</p>
+<p>（2）也不要仅仅使用AOF，因为那样有两个问题，第一，你通过AOF做冷备，没有RDB做冷备，来的恢复速度更快; 第二，RDB每次简单粗暴生成数据快照，更加健壮，可以避免AOF这种复杂的备份和恢复机制的bug</p>
+<p>（3）综合使用AOF和RDB两种持久化机制，用AOF来保证数据不丢失，作为数据恢复的第一选择; 用RDB来做不同程度的冷备，在AOF文件都丢失或损坏不可用的时候，还可以使用RDB来进行快速的数据恢复</p>
+<h4 id="redis-cluster集群-数据会分片到相应的redis-master-slave主从架构"><a href="#redis-cluster集群-数据会分片到相应的redis-master-slave主从架构" class="headerlink" title="redis cluster集群(数据会分片到相应的redis master-slave主从架构)"></a>redis cluster集群(数据会分片到相应的redis master-slave主从架构)</h4><p>如果你的数据量很少，主要是承载高并发高性能的场景，比如你的缓存一般就几个G，单机足够了使用单master进行读写分离就行了replication，一个mater，多个slave，要几个slave跟你的要求的读吞吐量有关系，然后自己搭建一个sentinal集群，去保证redis主从架构的高可用性。</p>
+<p>redis cluster，主要是针对海量数据+高并发+高可用的场景，海量数据，如果你的数据量很大，那么建议就用redis cluster。</p>
+<ol>
+<li><p>redis cluster数据分布算法</p>
+<p>hash算法 -&gt; 一致性hash算法（memcached） -&gt; redis cluster，hash slot算法</p>
+<p>用不同的算法，就决定了在多个master节点的时候，数据如何分布到这些节点上去，解决这个问题</p>
+<p>1、redis cluster介绍</p>
+<p>redis cluster</p>
+<p>（1）自动将数据进行分片，每个master上放一部分数据<br>（2）提供内置的高可用支持，部分master不可用时，还是可以继续工作的</p>
+<p>在redis cluster架构下，每个redis要放开两个端口号，比如一个是6379，另外一个就是加10000的端口号，比如16379</p>
+<p>16379端口号是用来进行节点间通信的，也就是cluster bus的东西，集群总线。cluster bus的通信，用来进行故障检测，配置更新，故障转移授权</p>
+<p>cluster bus用了另外一种二进制的协议，主要用于节点间进行高效的数据交换，占用更少的网络带宽和处理时间</p>
+<p>2、最老土的hash算法和弊端（大量缓存重建）</p>
+<p>3、一致性hash算法（自动缓存迁移）+虚拟节点（自动负载均衡）</p>
+<p>4、redis cluster的hash slot算法</p>
+<p>redis cluster有固定的16384个hash slot，对每个key计算CRC16值，然后对16384取模，可以获取key对应的hash slot</p>
+<p>redis cluster中每个master都会持有部分slot，比如有3个master，那么可能每个master持有5000多个hash slot</p>
+<p>hash slot让node的增加和移除很简单，增加一个master，就将其他master的hash slot移动部分过去，减少一个master，就将它的hash slot移动到其他master上去</p>
+<p>移动hash slot的成本是非常低的</p>
+<p>客户端的api，可以对指定的数据，让他们走同一个hash slot，通过hash tag来实现</p>
+</li>
+<li><p>节点间的内部通讯机制</p>
+<p>一、节点间的内部通信机制</p>
+<p>1、基础通信原理</p>
+<p>（1）redis cluster节点间采取gossip协议进行通信</p>
+<p>跟集中式不同，不是将集群元数据（节点信息，故障，等等）集中存储在某个节点上，而是互相之间不断通信，保持整个集群所有节点的数据是完整的</p>
+<p>维护集群的元数据用得，集中式，一种叫做gossip</p>
+<p>集中式(如zookeeper)：好处在于，元数据的更新和读取，时效性非常好，一旦元数据出现了变更，立即就更新到集中式的存储中，其他节点读取的时候立即就可以感知到; 不好在于，所有的元数据的跟新压力全部集中在一个地方，可能会导致元数据的存储有压力</p>
+<p>gossip：好处在于，元数据的更新比较分散，不是集中在一个地方，更新请求会陆陆续续，打到所有节点上去更新，有一定的延时，降低了压力; 缺点，元数据更新有延时，可能导致集群的一些操作会有一些滞后</p>
+<p>我们刚才做reshard，去做另外一个操作，会发现说，configuration error，达成一致</p>
+<p>（2）10000端口</p>
+<p>每个节点都有一个专门用于节点间通信的端口，就是自己提供服务的端口号+10000，比如7001，那么用于节点间通信的就是17001端口</p>
+<p>每隔节点每隔一段时间都会往另外几个节点发送ping消息，同时其他几点接收到ping之后返回pong</p>
+<p>（3）交换的信息</p>
+<p>故障信息，节点的增加和移除，hash slot信息，等等</p>
+<p>2、gossip协议</p>
+<p>gossip协议包含多种消息，包括ping，pong，meet，fail，等等</p>
+<p>meet: 某个节点发送meet给新加入的节点，让新节点加入集群中，然后新节点就会开始与其他节点进行通信</p>
+<p>redis-trib.rb add-node</p>
+<p>其实内部就是发送了一个gossip meet消息，给新加入的节点，通知那个节点去加入我们的集群</p>
+<p>ping: 每个节点都会频繁给其他节点发送ping，其中包含自己的状态还有自己维护的集群元数据，互相通过ping交换元数据</p>
+<p>每个节点每秒都会频繁发送ping给其他的集群，ping，频繁的互相之间交换数据，互相进行元数据的更新</p>
+<p>pong: 返回ping和meet，包含自己的状态和其他信息，也可以用于信息广播和更新</p>
+<p>fail: 某个节点判断另一个节点fail之后，就发送fail给其他节点，通知其他节点，指定的节点宕机了</p>
+<p>3、ping消息深入</p>
+<p>ping很频繁，而且要携带一些元数据，所以可能会加重网络负担</p>
+<p>每个节点每秒会执行10次ping，每次会选择5个最久没有通信的其他节点</p>
+<p>当然如果发现某个节点通信延时达到了cluster_node_timeout / 2，那么立即发送ping，避免数据交换延时过长，落后的时间太长了</p>
+<p>比如说，两个节点之间都10分钟没有交换数据了，那么整个集群处于严重的元数据不一致的情况，就会有问题</p>
+<p>所以cluster_node_timeout可以调节，如果调节比较大，那么会降低发送的频率</p>
+<p>每次ping，一个是带上自己节点的信息，还有就是带上1/10其他节点的信息，发送出去，进行数据交换</p>
+<p>至少包含3个其他节点的信息，最多包含总节点-2个其他节点的信息</p>
+<p>二、面向集群的jedis内部实现原理</p>
+<p>开发，jedis，redis的java client客户端，redis cluster，jedis cluster api</p>
+<p>jedis cluster api与redis cluster集群交互的一些基本原理</p>
+<p>1、基于重定向的客户端</p>
+<p>redis-cli -c，自动重定向</p>
+<p>（1）请求重定向</p>
+<p>客户端可能会挑选任意一个redis实例去发送命令，每个redis实例接收到命令，都会计算key对应的hash slot</p>
+<p>如果在本地就在本地处理，否则返回moved给客户端，让客户端进行重定向</p>
+<p>cluster keyslot mykey，可以查看一个key对应的hash slot是什么</p>
+<p>用redis-cli的时候，可以加入-c参数，支持自动的请求重定向，redis-cli接收到moved之后，会自动重定向到对应的节点执行命令</p>
+<p>（2）计算hash slot</p>
+<p>计算hash slot的算法，就是根据key计算CRC16值，然后对16384取模，拿到对应的hash slot</p>
+<p>用hash tag可以手动指定key对应的slot，同一个hash tag下的key，都会在一个hash slot中，比如set mykey1:{100}和set mykey2:{100}</p>
+<p>（3）hash slot查找</p>
+<p>节点间通过gossip协议进行数据交换，就知道每个hash slot在哪个节点上</p>
+<p>2、smart jedis</p>
+<p>（1）什么是smart jedis</p>
+<p>基于重定向的客户端，很消耗网络IO，因为大部分情况下，可能都会出现一次请求重定向，才能找到正确的节点</p>
+<p>所以大部分的客户端，比如java redis客户端，就是jedis，都是smart的</p>
+<p>本地维护一份hashslot -&gt; node的映射表，缓存，大部分情况下，直接走本地缓存就可以找到hashslot -&gt; node，不需要通过节点进行moved重定向</p>
+<p>（2）JedisCluster的工作原理</p>
+<p>在JedisCluster初始化的时候，就会随机选择一个node，初始化hashslot -&gt; node映射表，同时为每个节点创建一个JedisPool连接池</p>
+<p>每次基于JedisCluster执行操作，首先JedisCluster都会在本地计算key的hashslot，然后在本地映射表找到对应的节点</p>
+<p>如果那个node正好还是持有那个hashslot，那么就ok; 如果说进行了reshard这样的操作，可能hashslot已经不在那个node上了，就会返回moved</p>
+<p>如果JedisCluter API发现对应的节点返回moved，那么利用该节点的元数据，更新本地的hashslot -&gt; node映射表缓存</p>
+<p>重复上面几个步骤，直到找到对应的节点，如果重试超过5次，那么就报错，JedisClusterMaxRedirectionException</p>
+<p>jedis老版本，可能会出现在集群某个节点故障还没完成自动切换恢复时，频繁更新hash slot，频繁ping节点检查活跃，导致大量网络IO开销</p>
+<p>jedis最新版本，对于这些过度的hash slot更新和ping，都进行了优化，避免了类似问题</p>
+<p>（3）hashslot迁移和ask重定向</p>
+<p>如果hash slot正在迁移，那么会返回ask重定向给jedis</p>
+<p>jedis接收到ask重定向之后，会重新定位到目标节点去执行，但是因为ask发生在hash slot迁移过程中，所以JedisCluster API收到ask是不会更新hashslot本地缓存</p>
+<p>已经可以确定说，hashslot已经迁移完了，moved是会更新本地hashslot-&gt;node映射表缓存的</p>
+<p>三、高可用性与主备切换原理</p>
+<p>redis cluster的高可用的原理，几乎跟哨兵是类似的</p>
+<p>1、判断节点宕机</p>
+<p>如果一个节点认为另外一个节点宕机，那么就是pfail，主观宕机</p>
+<p>如果多个节点都认为另外一个节点宕机了，那么就是fail，客观宕机，跟哨兵的原理几乎一样，sdown，odown</p>
+<p>在cluster-node-timeout内，某个节点一直没有返回pong，那么就被认为pfail</p>
+<p>如果一个节点认为某个节点pfail了，那么会在gossip ping消息中，ping给其他节点，如果超过半数的节点都认为pfail了，那么就会变成fail</p>
+<p>2、从节点过滤</p>
+<p>对宕机的master node，从其所有的slave node中，选择一个切换成master node</p>
+<p>检查每个slave node与master node断开连接的时间，如果超过了cluster-node-timeout * cluster-slave-validity-factor，那么就没有资格切换成master</p>
+<p>这个也是跟哨兵是一样的，从节点超时过滤的步骤</p>
+<p>3、从节点选举</p>
+<p>哨兵：对所有从节点进行排序，slave priority，offset，run id</p>
+<p>每个从节点，都根据自己对master复制数据的offset，来设置一个选举时间，offset越大（复制数据越多）的从节点，选举时间越靠前，优先进行选举</p>
+<p>所有的master node开始slave选举投票，给要进行选举的slave进行投票，如果大部分master node（N/2 + 1）都投票给了某个从节点，那么选举通过，那个从节点可以切换成master</p>
+<p>从节点执行主备切换，从节点切换为主节点</p>
+<p>4、与哨兵比较</p>
+<p>整个流程跟哨兵相比，非常类似，所以说，redis cluster功能强大，直接集成了replication和sentinal的功能</p>
+</li>
+</ol>
+<p>   没有办法去给大家深入讲解redis底层的设计的细节，核心原理和设计的细节，那个除非单独开一门课，redis底层原理深度剖析，redis源码</p>
+<p>   对于咱们这个架构课来说，主要关注的是架构，不是底层的细节，对于架构来说，核心的原理的基本思路，是要梳理清晰的</p>
+<h4 id="缓存穿透和缓存雪崩"><a href="#缓存穿透和缓存雪崩" class="headerlink" title="缓存穿透和缓存雪崩"></a>缓存穿透和缓存雪崩</h4><ol>
+<li><p>缓存雪崩</p>
+<p>缓存雪崩是指在我们设置缓存时采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到DB，DB瞬时压力过重雪崩。</p>
+<p>事前：redis高可用，主从+哨兵，redis cluster，避免全盘崩溃</p>
+<p>事中：本地ehcache缓存 + hystrix限流&amp;降级，避免MySQL被打死</p>
+<p>事后：redis持久化，快速恢复缓存数据</p>
+</li>
+<li><p>缓存穿透</p>
+<p>缓存穿透是指查询一个一定不存在的数据,由于缓存一般是命中后才写入缓存,如果有大量这样的查询请求(黑客攻击,恶意请求),会全部打到DB上,导致DB宕机</p>
+<p>解决方式:</p>
+<p>​    1,使用布隆过滤器，将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被 这个bitmap拦截掉</p>
+<p>​    2,如果查询未命中将未命中的key仍然写入缓存,value为UNKONW等,过期时间为5到10分钟来冲抵短时恶意攻击</p>
+</li>
+<li><p>缓存击穿</p>
+<p>对于一些设置了过期时间的key，如果这些key可能会在某些时间点被超高并发地访问，是一种非常“热点”的数据。和缓存雪崩的区别在于这里针对某一key缓存，前者则是很多key。</p>
+<p>1.使用互斥锁(mutex key),推荐使用</p>
+<p>​    就是在缓存失效的时候（判断拿出来的值为空），不是立即去load db，而是先使用缓存工具的某些带成功操作返回值的操作（比如Redis的SETNX或者Memcache的ADD）去set一个mutex key，当操作返回成功时，再进行load db的操作并回设缓存；否则，就重试整个get缓存的方法。</p>
+<p>2.热点key设置不过期,或者使用快过期时预热key</p>
+<p>3.采用netflix的hystrix,抵挡冲击</p>
+</li>
+</ol>
+<h4 id="缓存数据库双写不一致"><a href="#缓存数据库双写不一致" class="headerlink" title="缓存数据库双写不一致"></a>缓存数据库双写不一致</h4><ul>
+<li><p>先更新数据库,再更新缓存</p>
+<p>这种操作太费时费力一般不使用</p>
+</li>
+</ul>
+<ul>
+<li><p>先更新数据库，再删除缓存这种策略比较多平台使用，如：Facebook。但是这种策略也存在一些问题，如：一、脏数据造成脏数据的原因主要由并发引起，如：</p>
+<p>用户A请求数据A</p>
+<p>数据A缓存失效</p>
+<p>用户A从数据库中得到旧数据数据A</p>
+<p>用户B更新了数据A（新数据）</p>
+<p>用户B删除了缓存</p>
+<p>用户A将查到旧数据写入了缓存</p>
+<p>此时就产生了脏数据，虽然这种概率非常小，但对于更新不频繁的网站来说，此时的脏数据就是个很严重的错误。</p>
+<p>二、缓存删除失败</p>
+<p>用户A更新了数据A</p>
+<p>用户A删除数据A的缓存失败</p>
+<p>用户B读到数据A缓存的旧数据</p>
+<p>此时就产生了数据不一致的问题。</p>
+<p>解决方案</p>
+<p>置缓存的有效时间（最简单的方案）优点:易操作  缺点:会存在短时间内的旧数据,如果数据量太多，缓存有效时间短，容易发生一段时间内缓存大量失效，此时的数据库压力突然剧增，引发缓存雪崩现象（缓存有效时间为随机值减少发生缓存雪崩的可能性）</p>
+<p>消息队列（比较复杂，需要引入消息队列系统）</p>
+<p>步骤：</p>
+<p>更新数据库；</p>
+<p>删除缓存失败；</p>
+<p>将需要删除的Key发送到消息队列；</p>
+<p>隔断时间从消息队列中拉取要删除的key；</p>
+<p>继续删除，直至成功为止。</p>
+<p>优点：不会引发缓存雪崩,只删除需要删除的缓存 缺点：引入了消息系统（增加了系统的复杂性）</p>
+</li>
+</ul>
+<ul>
+<li><p>先删除缓存，推荐使用，但是也会出现脏数据的问题：</p>
+<p>用户A删除缓存失败</p>
+<p>用户A成功更新了数据</p>
+<p>或者</p>
+<p>用户A删除了缓存；</p>
+<p>用户B读取缓存，缓存不存在；</p>
+<p>用户B从数据库拿到旧数据；</p>
+<p>用户B更新了缓存；</p>
+<p>用户A更新了数据。</p>
+<p>以上两种情况都能造成脏数据的产生。</p>
+<p>解决方式同上</p>
+</li>
+</ul>
+<h4 id="redis并发竞争问题"><a href="#redis并发竞争问题" class="headerlink" title="redis并发竞争问题"></a>redis并发竞争问题</h4><p>一般使用分布式锁(zookeeper)保证统一时间只有一个实例获取到锁</p>
+<p>使用版本控制和锁重试机制来处理并发的竞争顺序</p>
+<h1 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h1><p>​    分布式系统一般使用RPC框架相互调用,RPC一般提供了负载,超时重试,自动感知上下线.等如果不使用RPC框架就需要自己处理这些复杂的问题。</p>
+<h3 id="dubbo工作原理注册中心挂了可以继续通讯么"><a href="#dubbo工作原理注册中心挂了可以继续通讯么" class="headerlink" title="dubbo工作原理注册中心挂了可以继续通讯么"></a>dubbo工作原理注册中心挂了可以继续通讯么</h3><p>1.dubbo工作原理</p>
+<p>第一层：service层，接口层，给服务提供者和消费者来实现的</p>
+<p>第二层：config层，配置层，主要是对dubbo进行各种配置的</p>
+<p>第三层：proxy层，服务代理层，透明生成客户端的stub和服务单的skeleton</p>
+<p>第四层：registry层，服务注册层，负责服务的注册与发现</p>
+<p>第五层：cluster层，集群层，封装多个服务提供者的路由以及负载均衡，将多个实例组合成一个服务</p>
+<p>第六层：monitor层，监控层，对rpc接口的调用次数和调用时间进行监控</p>
+<p>第七层：protocol层，远程调用层，封装rpc调用</p>
+<p>第八层：exchange层，信息交换层，封装请求响应模式，同步转异步</p>
+<p>第九层：transport层，网络传输层，抽象mina和netty为统一接口</p>
+<p>第十层：serialize层，数据序列化层</p>
+<p>工作流程：</p>
+<p>1）第一步，provider向注册中心去注册</p>
+<p>2）第二步，consumer从注册中心订阅服务，注册中心会通知consumer注册好的服务</p>
+<p>3）第三步，consumer调用provider</p>
+<p>4）第四步，consumer和provider都异步的通知监控中心</p>
+<p> 2.注册中心挂了可以继续通信吗？</p>
+<p>​    可以,因为刚开始初始化的时候,消费者会将提供者的地址等信息拉取到本地缓存,所以注册中心挂了可以继续通信,但是因为信息是旧的如果服务方挂了无法感知。</p>
+<h3 id="dubbo的通讯协议以及序列化协议"><a href="#dubbo的通讯协议以及序列化协议" class="headerlink" title="dubbo的通讯协议以及序列化协议"></a>dubbo的通讯协议以及序列化协议</h3><p>1、dubbo协议</p>
+<p>Dubbo缺省协议采用单一长连接和NIO异步通讯，适合于小数据量大并发的服务调用，以及服务消费者机器数远大于服务提供者机器数的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">缺省协议，使用基于mina1.1.7+hessian3.2.1的tbremoting交互。</span><br><span class="line">连接个数：单连接</span><br><span class="line">连接方式：长连接</span><br><span class="line">传输协议：TCP</span><br><span class="line">传输方式：NIO异步传输</span><br><span class="line">序列化：Hessian二进制序列化</span><br><span class="line">适用范围：传入传出参数数据包较小（建议小于100K），消费者比提供者个数多，单一消费者无法压满提供者，尽量不要用dubbo协议传输大文件或超大字符串。</span><br><span class="line">适用场景：常规远程服务方法调用</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">为什么要消费者比提供者个数多：</span><br><span class="line">因dubbo协议采用单一长连接，</span><br><span class="line">假设网络为千兆网卡(1024Mbit=128MByte)，</span><br><span class="line">根据测试经验数据每条连接最多只能压满7MByte(不同的环境可能不一样，供参考)，</span><br><span class="line">理论上1个服务提供者需要20个服务消费者才能压满网卡。</span><br><span class="line"></span><br><span class="line">为什么不能传大包：</span><br><span class="line">因dubbo协议采用单一长连接，</span><br><span class="line">如果每次请求的数据包大小为500KByte，假设网络为千兆网卡(1024Mbit=128MByte)，每条连接最大7MByte(不同的环境可能不一样，供参考)，</span><br><span class="line">单个服务提供者的TPS(每秒处理事务数)最大为：128MByte / 500KByte = 262。</span><br><span class="line">单个消费者调用单个服务提供者的TPS(每秒处理事务数)最大为：7MByte / 500KByte = 14。</span><br><span class="line">如果能接受，可以考虑使用，否则网络将成为瓶颈。</span><br><span class="line"></span><br><span class="line">为什么采用异步单一长连接：</span><br><span class="line">因为服务的现状大都是服务提供者少，通常只有几台机器，</span><br><span class="line">而服务的消费者多，可能整个网站都在访问该服务，</span><br><span class="line">比如Morgan的提供者只有6台提供者，却有上百台消费者，每天有1.5亿次调用，</span><br><span class="line">如果采用常规的hessian服务，服务提供者很容易就被压跨，</span><br><span class="line">通过单一连接，保证单一消费者不会压死提供者，</span><br><span class="line">长连接，减少连接握手验证等，</span><br><span class="line">并使用异步IO，复用线程池，防止C10K问题。</span><br></pre></td></tr></table></figure>
+<p> 2、RMI</p>
+<p>RMI协议采用JDK标准的java.rmi.*实现，采用阻塞式短连接和JDK标准序列化方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Java标准的远程调用协议。</span><br><span class="line">连接个数：多连接</span><br><span class="line">连接方式：短连接</span><br><span class="line">传输协议：TCP</span><br><span class="line">传输方式：同步传输</span><br><span class="line">序列化：Java标准二进制序列化</span><br><span class="line">适用范围：传入传出参数数据包大小混合，消费者与提供者个数差不多，可传文件。</span><br><span class="line">适用场景：常规远程服务方法调用，与原生RMI服务互操作</span><br></pre></td></tr></table></figure>
+<p> 3、hessian</p>
+<p>Hessian协议用于集成Hessian的服务，Hessian底层采用Http通讯，采用Servlet暴露服务，Dubbo缺省内嵌Jetty作为服务器实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">基于Hessian的远程调用协议。</span><br><span class="line"></span><br><span class="line">连接个数：多连接</span><br><span class="line">连接方式：短连接</span><br><span class="line">传输协议：HTTP</span><br><span class="line">传输方式：同步传输</span><br><span class="line">序列化：Hessian二进制序列化</span><br><span class="line">适用范围：传入传出参数数据包较大，提供者比消费者个数多，提供者压力较大，可传文件。</span><br><span class="line">适用场景：页面传输，文件传输，或与原生hessian服务互操作</span><br></pre></td></tr></table></figure>
+<p>4、http</p>
+<p>采用Spring的HttpInvoker实现 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">基于http表单的远程调用协议。</span><br><span class="line"></span><br><span class="line">连接个数：多连接</span><br><span class="line">连接方式：短连接</span><br><span class="line">传输协议：HTTP</span><br><span class="line">传输方式：同步传输</span><br><span class="line">序列化：表单序列化（JSON）</span><br><span class="line">适用范围：传入传出参数数据包大小混合，提供者比消费者个数多，可用浏览器查看，可用表单或URL传入参数，暂不支持传文件。</span><br><span class="line">适用场景：需同时给应用程序和浏览器JS使用的服务。</span><br></pre></td></tr></table></figure>
+<p>5、webservice</p>
+<p>基于CXF的<a href>frontend-simple</a>和<a href>transports-http</a>实现 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">基于WebService的远程调用协议。</span><br><span class="line">连接个数：多连接</span><br><span class="line">连接方式：短连接</span><br><span class="line">传输协议：HTTP</span><br><span class="line">传输方式：同步传输</span><br><span class="line">序列化：SOAP文本序列化</span><br><span class="line">适用场景：系统集成，跨语言调用。</span><br></pre></td></tr></table></figure>
+<p>6、thrif</p>
+<p>Thrift是Facebook捐给Apache的一个RPC框架，当前 dubbo 支持的 thrift 协议是对 thrift 原生协议的扩展，在原生协议的基础上添加了一些额外的头信息，比如service name，magic number等。</p>
+<h3 id="dubbo负载均衡"><a href="#dubbo负载均衡" class="headerlink" title="dubbo负载均衡"></a>dubbo负载均衡</h3><h3 id="Random-LoadBalance"><a href="#Random-LoadBalance" class="headerlink" title="Random LoadBalance"></a>Random LoadBalance</h3><ul>
+<li><strong>随机</strong>，按权重设置随机概率。</li>
+<li>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</li>
+</ul>
+<h3 id="RoundRobin-LoadBalance"><a href="#RoundRobin-LoadBalance" class="headerlink" title="RoundRobin LoadBalance"></a>RoundRobin LoadBalance</h3><ul>
+<li><strong>轮询</strong>，按公约后的权重设置轮询比率。</li>
+<li>存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</li>
+</ul>
+<h3 id="LeastActive-LoadBalance"><a href="#LeastActive-LoadBalance" class="headerlink" title="LeastActive LoadBalance"></a>LeastActive LoadBalance</h3><ul>
+<li><strong>最少活跃调用数</strong>，相同活跃数的随机，活跃数指调用前后计数差。</li>
+<li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</li>
+</ul>
+<h3 id="ConsistentHash-LoadBalance"><a href="#ConsistentHash-LoadBalance" class="headerlink" title="ConsistentHash LoadBalance"></a>ConsistentHash LoadBalance</h3><ul>
+<li><strong>一致性 Hash</strong>，相同参数的请求总是发到同一提供者。</li>
+<li>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。</li>
+</ul>
+<h3 id="分布式幂等"><a href="#分布式幂等" class="headerlink" title="分布式幂等"></a>分布式幂等</h3><p>1.数据库乐观锁</p>
+<p>2.分布式锁(redis,zookeeper)</p>
+<p>3.token机制，防止页面重复提交</p>
+<p><a href="http://825635381.iteye.com/blog/2276077" target="_blank" rel="noopener">http://825635381.iteye.com/blog/2276077</a></p>
+<h3 id="分布式请求顺序性"><a href="#分布式请求顺序性" class="headerlink" title="分布式请求顺序性"></a>分布式请求顺序性</h3><p>一般不建议保证分布式的顺序性,因为复杂度太高,如果实在是需要可以使用维护内存队列。</p>
+<h3 id="zookeeper的使用场景"><a href="#zookeeper的使用场景" class="headerlink" title="zookeeper的使用场景"></a>zookeeper的使用场景</h3><p>1、负载均衡</p>
+<p>在分布式系统中，负载均衡是一种普遍的技术。ZooKeeper作为一个集群，负责数据的存储以及一系列分布式协调。所有的请求，会通过ZooKeeper通过一些调度策略去协调调度哪一台服务器。</p>
+<p>2、分布式协调/通知</p>
+<p>分布式协调/通知服务是分布式系统中将不同的分布式组件结合起来。通常需要一个协调者来控制整个系统的运行流程，这个协调者便于将分布式协调的职责从应用中分离出来，从而可以大大减少系统之间的耦合性，而且能够显著提高系统的可扩展性。</p>
+<p>ZooKeeper中特有的Watcher注册与异步通知机制，能够很好地实现分布式环境下不同机器，甚至是不同系统之间的协调与通知，从而实现对数据变更的实时处理。基于ZooKeeper实现分布式协调与通知功能，通常的作坊式不同的客户端对ZooKeeper上同一个数据节点进行Watcher注册，监听数据节点的变化，如果数据节点发生变化，那么所有订阅的客户端都能够接受到相应的Watcher通知，并作出相应的处理。</p>
+<p>3、集群管理</p>
+<p>集群管理包括集群监控和集群控制。前者侧重对集群运行状态的收集，后者则是对集群进行操作与控制。在传统的基于Agent的分布式管理体系中，都是通过在集群中每台机器上部署一个Agent，由这个Agent负责主动向指定的一个监控中心系统汇报自己所在机器的状态。在集群规模适中的场景下，这确实是一种在生产实践中广泛使用的解决方案，但一旦系统的业务场景增多，这种方案就不好了。大规模升级困难，统一的Agent无法满足多样的需求等问题。</p>
+<p>4、分布式锁</p>
+<p>分布式锁是控制分布式系统之间同步访问共享资源的一种方式。如果不同的系统或是同一个系统的不同主机之间共享一个或一组资源，那么访问这些资源的时候，往往需要通过一些互斥手段来防止彼此之间的干扰，以保证一致性，在这种情况下，需要使用分布式锁。</p>
+<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p>1.基于redis</p>
+<p>2.基于zookeeper(推荐)</p>
+<h3 id="分布式session的处理"><a href="#分布式session的处理" class="headerlink" title="分布式session的处理"></a>分布式session的处理</h3><ol>
+<li><p>tomcat+redis</p>
+<p>Tomcat RedisSessionManager的东西，让所有我们部署的tomcat都将session数据存储到redis即可。</p>
+<p>在tomcat的配置文件中，配置一下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">"com.orangefunction.tomcat.redissessions.RedisSessionManager"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">         <span class="attr">host</span>=<span class="string">"&#123;redis.host&#125;"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">         <span class="attr">port</span>=<span class="string">"&#123;redis.port&#125;"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">         <span class="attr">database</span>=<span class="string">"&#123;redis.dbnum&#125;"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">         <span class="attr">maxInactiveInterval</span>=<span class="string">"60"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">-- 哨兵模式</span><br><span class="line"><span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"com.orangefunction.tomcat.redissessions.RedisSessionHandlerValve"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">"com.orangefunction.tomcat.redissessions.RedisSessionManager"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">	 <span class="attr">sentinelMaster</span>=<span class="string">"mymaster"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">	 <span class="attr">sentinels</span>=<span class="string">"&lt;sentinel1-ip&gt;:26379,&lt;sentinel2-ip&gt;:26379,&lt;sentinel3-ip&gt;:26379"</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">	 <span class="attr">maxInactiveInterval</span>=<span class="string">"60"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>还可以用上面这种方式基于redis哨兵支持的redis高可用集群来保存session数据</p>
+</li>
+<li><p>spring session + redis</p>
+<p>不仅可以使用redis spring session还可以基于数据库等其他存储</p>
+<p><a href="https://juejin.im/entry/593c9cb8128fe1006adf6690" target="_blank" rel="noopener">spring session</a></p>
+</li>
+</ol>
+<h3 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h3><ol>
+<li><p>两阶段提交(效率低下不推荐)</p>
+</li>
+<li><p>TCC(需要自己写大量的回滚逻辑复杂不推荐)</p>
+<p>1）Try阶段：对各个服务的资源做检测以及对资源进行锁定或者预留</p>
+<p>2）Confirm阶段：各个服务中执行实际的操作</p>
+<p>3）Cancel阶段：如果任何一个服务的业务方法执行出错，就需要进行补偿，就是执行已经执行成功的业务逻辑的回滚操作</p>
+</li>
+<li><p>本地消息表(严重依赖于数据库的消息表,高并发场景无法扩展,比较少用)</p>
+<p>1）A系统在自己本地一个事务里操作同时，插入一条数据到消息表</p>
+<p>2）A系统将这个消息发送到MQ中去</p>
+<p>3）B系统接收到消息之后，在一个事务里，往自己本地消息表里插入一条数据，同时执行其他的业务操作，如果这个消息已经被处理过了，那么此时这个事务会回滚，这样保证不会重复处理消息</p>
+<p>4）B系统执行成功之后，就会更新自己本地消息表的状态以及A系统消息表的状态</p>
+<p>5）如果B系统处理失败了，那么就不会更新消息表状态，那么此时A系统会定时扫描自己的消息表，如果有没处理的消息，会再次发送到MQ中去，让B再次处理</p>
+<p>6）这个方案保证了最终一致性，哪怕B事务失败了，但是A会不断重发消息，直到B那边成功为止</p>
+</li>
+<li><p>可靠消息最终一致性</p>
+<p>基于MQ来实现事务</p>
+<p>1）A系统先发送一个prepared消息到mq，如果这个prepared消息发送失败那么就直接取消操作别执行了</p>
+<p>2）如果这个消息发送成功过了，那么接着执行本地事务，如果成功就告诉mq发送确认消息，如果失败就告诉mq回滚消息</p>
+<p>3）如果发送了确认消息，那么此时B系统会接收到确认消息，然后执行本地的事务</p>
+<p>4）mq会自动定时轮询所有prepared消息回调你的接口，询问这个消息是不是本地事务处理失败了，这里你就可以查下数据库看之前本地事务是否执行，如果回滚了，那么这里也回滚吧。这个就是避免可能本地事务执行成功了，别确认消息发送失败了。</p>
+<p>5）要是系统B的事务失败了，自动不断重试直到成功，如果实在是不行，要么就是针对重要的资金类业务进行回滚，比如B系统本地回滚后，想办法通知系统A也回滚；或者是发送报警由人工来手工回滚和补偿</p>
+</li>
+<li><p>最大努力通知</p>
+<p>1）系统A本地事务执行完之后，发送个消息到MQ</p>
+<p>2）有个专门消费MQ的最大努力通知服务，这个服务会消费MQ然后写入数据库中记录下来，或者是放入个内存队列也可以，接着调用系统B的接口</p>
+<p>3）要是系统B执行成功就ok了；要是系统B执行失败了，那么最大努力通知服务就定时尝试重新调用系统B，反复N次，最后还是不行就放弃</p>
+<p>​</p>
+<p>别严格的场景，用的是TCC来保证强一致性；然后其他的一些场景基于了MQ或最大通知来实现了分布式事务,一般很少使用事务,一般是快速发现问题修复数据。</p>
+</li>
+</ol>
+<h2 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h2><p><a href="https://juejin.im/entry/591968f6a0bb9f005ff7af23" target="_blank" rel="noopener">分库分表参考</a></p>
+<h3 id="分库分表中间件"><a href="#分库分表中间件" class="headerlink" title="分库分表中间件"></a>分库分表中间件</h3><ol>
+<li><p>cobar(不推荐)</p>
+<p>阿里b2b团队开发和开源的,属于proxy层方案,功能简单且没人维护了</p>
+</li>
+<li><p>TDDL(不推荐)</p>
+<p>淘宝团队开发的,属于client层方案,功能简单,基本没人使用和维护了且安装需要依赖淘宝的diamond配置管理系统比较麻烦。</p>
+</li>
+<li><p>atlas(不推荐)</p>
+<p>360开源的,属于proxy层方案,功能简单且没人维护了</p>
+</li>
+<li><p>sharding-jdbc(推荐,小公司)</p>
+<p>当当开源的,属于client层方案,功能较多,社区活跃,推荐使用。</p>
+</li>
+<li><p>mycat(推荐,大公司)</p>
+<p>基于cobar改造的,属于proxy层方案,社区活跃。</p>
+</li>
+</ol>
+<h3 id="分库分表拆分方式"><a href="#分库分表拆分方式" class="headerlink" title="分库分表拆分方式"></a>分库分表拆分方式</h3><ul>
+<li><p>水平拆分</p>
+<p>range来分(数据连续依据时间划分)</p>
+<p>扩容很容易,可以依据月份写到新库中；</p>
+<p>缺点容易产生热点问题,大量的流量都请求在最新的数据上</p>
+<p>​</p>
+<p>hash分法(依据订单hash划分库)</p>
+<p>可以平均分配没给库的数据量和请求压力；</p>
+<p>坏处在于扩容起来比较麻烦,会有数据迁移的过程</p>
+</li>
+<li><p>垂直拆分</p>
+</li>
+</ul>
+<h3 id="分库分表方案"><a href="#分库分表方案" class="headerlink" title="分库分表方案"></a>分库分表方案</h3><ol>
+<li><p>停机迁移方案</p>
+</li>
+<li><p>双写迁移方案</p>
+<p>在写入的时候同时写入老库和新的基于中间件的分库,启动迁移程序,不断的读取老库中的数据通过中间件写到新的分库中,在写的时候先查询一下如果不存在或者修改时间比新库中的新才写入,写完后可能数据还不一致,需要继续跑几遍才可能一致,直到老库和新库中的数据一致才算完成,随后将写老库的代码下线。</p>
+</li>
+</ol>
+<h3 id="动态扩容和缩容"><a href="#动态扩容和缩容" class="headerlink" title="动态扩容和缩容"></a>动态扩容和缩容</h3><p><a href="https://my.oschina.net/u/1859679/blog/1577049" target="_blank" rel="noopener">https://my.oschina.net/u/1859679/blog/1577049</a></p>
+<p><a href="https://kefeng.wang/2018/07/22/mysql-sharding/" target="_blank" rel="noopener">https://kefeng.wang/2018/07/22/mysql-sharding/</a></p>
+<h3 id="分库分表后全局id的获取"><a href="#分库分表后全局id的获取" class="headerlink" title="分库分表后全局id的获取"></a>分库分表后全局id的获取</h3><ol>
+<li><p>myqsl自动增长列(新建一台mysql服务)</p>
+</li>
+<li><p>全局ID映射表</p>
+<p>在全局 Redis 中为每张数据表创建一个 ID 的键，记录该表当前最大 ID；每次申请 ID 时，都自增 1 并返回给应用；Redis 要定期持久至全局数据库。</p>
+</li>
+<li><p>UUID(128位)</p>
+<p>优点：简单，全球唯一；</p>
+<p>缺点：存储和传输空间大，无序，性能欠佳。</p>
+</li>
+<li><p>COMB(组合)</p>
+<p>组合 GUID(10字节) 和时间(6字节)，达到有序的效果，提高索引性能。</p>
+</li>
+<li><p>Snowflake(雪花) 算法</p>
+<p>Snowflake 是 Twitter 开源的分布式 ID 生成算法，其结果为 long(64bit) 的数值。其特性是各节点无需协调、按时间大致有序、且整个集群各节点单不重复。</p>
+</li>
+</ol>
+<hr>
+<p><a href="https://www.cnblogs.com/aspirant/p/9006670.html" target="_blank" rel="noopener">8种通讯协议对比</a></p>
+<p><a href="http://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html" target="_blank" rel="noopener">dubbo中文官网</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/记录/" rel="tag"><i class="fa fa-tag"></i>
+
+ 记录</a>
+          
+            <a href="/tags/杂记/" rel="tag"><i class="fa fa-tag"></i>
+
+ 杂记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/01/senssic.github.io/201901/jvm内存排查/" rel="next" title="jvm内存排查">
+                <i class="fa fa-chevron-left"></i> jvm内存排查
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/06/senssic.github.io/201901/docker的maven插件使用/" rel="prev" title="docker的maven插件使用">
+                docker的maven插件使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="senssic">
+            
+              <p class="site-author-name" itemprop="name">senssic</p>
+              <p class="site-description motion-element" itemprop="description">不要在生活中迷失</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存队列相关"><span class="nav-number">1.</span> <span class="nav-text">缓存队列相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为什么使用mq？mq的优点？"><span class="nav-number">1.1.</span> <span class="nav-text">1.为什么使用mq？mq的优点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-mq的缺点有哪些？"><span class="nav-number">1.2.</span> <span class="nav-text">2.mq的缺点有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-主流MQ框架的对比"><span class="nav-number">1.3.</span> <span class="nav-text">3.主流MQ框架的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-mq的高可用模式"><span class="nav-number">1.4.</span> <span class="nav-text">4.mq的高可用模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-消息重复的处理"><span class="nav-number">1.5.</span> <span class="nav-text">5.消息重复的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-消息丢失情况分析"><span class="nav-number">1.6.</span> <span class="nav-text">6.消息丢失情况分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-保证消息的顺序性"><span class="nav-number">1.7.</span> <span class="nav-text">7.保证消息的顺序性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-处理消息积压"><span class="nav-number">1.8.</span> <span class="nav-text">8.处理消息积压</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式搜索引擎"><span class="nav-number">2.</span> <span class="nav-text">分布式搜索引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#es的基础知识"><span class="nav-number">2.1.</span> <span class="nav-text">es的基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es的工作原理"><span class="nav-number">2.2.</span> <span class="nav-text">es的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es搜索的性能优化-几十亿"><span class="nav-number">2.3.</span> <span class="nav-text">es搜索的性能优化(几十亿)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式缓存"><span class="nav-number">3.</span> <span class="nav-text">分布式缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么用缓存缓存缺点"><span class="nav-number">3.1.</span> <span class="nav-text">为什么用缓存缓存缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis缓存相关知识"><span class="nav-number">3.2.</span> <span class="nav-text">redis缓存相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis和memcache主要区别"><span class="nav-number">3.2.1.</span> <span class="nav-text">redis和memcache主要区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis线程模型"><span class="nav-number">3.2.2.</span> <span class="nav-text">redis线程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis数据类型以及使用场景"><span class="nav-number">3.2.3.</span> <span class="nav-text">redis数据类型以及使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的过期策略和淘汰机制"><span class="nav-number">3.2.4.</span> <span class="nav-text">redis的过期策略和淘汰机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis高并发和高可用-现在可以直接使用redis集群进行读写的水平扩展"><span class="nav-number">3.2.5.</span> <span class="nav-text">redis高并发和高可用[现在可以直接使用redis集群进行读写的水平扩展]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis读写分离架构中的master和slave数据复制-现在一般不用这种架构而是使用redis集群架构"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">redis读写分离架构中的master和slave数据复制[现在一般不用这种架构而是使用redis集群架构]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis高可用架构"><span class="nav-number">3.2.5.2.</span> <span class="nav-text">redis高可用架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis持久化方式-AOF-RDB-以及优缺点"><span class="nav-number">3.2.5.3.</span> <span class="nav-text">redis持久化方式[AOF,RDB]以及优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-cluster集群-数据会分片到相应的redis-master-slave主从架构"><span class="nav-number">3.2.5.4.</span> <span class="nav-text">redis cluster集群(数据会分片到相应的redis master-slave主从架构)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存穿透和缓存雪崩"><span class="nav-number">3.2.5.5.</span> <span class="nav-text">缓存穿透和缓存雪崩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存数据库双写不一致"><span class="nav-number">3.2.5.6.</span> <span class="nav-text">缓存数据库双写不一致</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis并发竞争问题"><span class="nav-number">3.2.5.7.</span> <span class="nav-text">redis并发竞争问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式系统"><span class="nav-number">4.</span> <span class="nav-text">分布式系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo工作原理注册中心挂了可以继续通讯么"><span class="nav-number">4.0.1.</span> <span class="nav-text">dubbo工作原理注册中心挂了可以继续通讯么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo的通讯协议以及序列化协议"><span class="nav-number">4.0.2.</span> <span class="nav-text">dubbo的通讯协议以及序列化协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dubbo负载均衡"><span class="nav-number">4.0.3.</span> <span class="nav-text">dubbo负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-LoadBalance"><span class="nav-number">4.0.4.</span> <span class="nav-text">Random LoadBalance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RoundRobin-LoadBalance"><span class="nav-number">4.0.5.</span> <span class="nav-text">RoundRobin LoadBalance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeastActive-LoadBalance"><span class="nav-number">4.0.6.</span> <span class="nav-text">LeastActive LoadBalance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConsistentHash-LoadBalance"><span class="nav-number">4.0.7.</span> <span class="nav-text">ConsistentHash LoadBalance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式幂等"><span class="nav-number">4.0.8.</span> <span class="nav-text">分布式幂等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式请求顺序性"><span class="nav-number">4.0.9.</span> <span class="nav-text">分布式请求顺序性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper的使用场景"><span class="nav-number">4.0.10.</span> <span class="nav-text">zookeeper的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式锁"><span class="nav-number">4.0.11.</span> <span class="nav-text">分布式锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式session的处理"><span class="nav-number">4.0.12.</span> <span class="nav-text">分布式session的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务"><span class="nav-number">4.0.13.</span> <span class="nav-text">分布式事务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分库分表"><span class="nav-number">4.1.</span> <span class="nav-text">分库分表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分库分表中间件"><span class="nav-number">4.1.1.</span> <span class="nav-text">分库分表中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分库分表拆分方式"><span class="nav-number">4.1.2.</span> <span class="nav-text">分库分表拆分方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分库分表方案"><span class="nav-number">4.1.3.</span> <span class="nav-text">分库分表方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态扩容和缩容"><span class="nav-number">4.1.4.</span> <span class="nav-text">动态扩容和缩容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分库分表后全局id的获取"><span class="nav-number">4.1.5.</span> <span class="nav-text">分库分表后全局id的获取</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">senssic</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">本站总字数&#58;</span>
+    
+    <span title="本站总字数">100.6k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>  
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ToiHpMxSkLspg2H7q3UJLq9f-gzGzoHsz',
+        appKey: 'WYyGqASXqv7lSRTxb7TCO0N0',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！快点呀 ~',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('3');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ToiHpMxSkLspg2H7q3UJLq9f-gzGzoHsz", "WYyGqASXqv7lSRTxb7TCO0N0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
