@@ -83,7 +83,6 @@ services:
 #!/bin/sh
 nowdate=$(date)
 echo ${nowdate}
-
 cd /Users/senssic/work/mkdown/githublog/senssic
 hexo clean
 hexo g
