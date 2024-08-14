@@ -7,9 +7,9 @@ copyright: true
 
 [TOC]
 
-# 0.windows相 关
+# 0.windows相关
 
-## 0.0 windows关于端口查询和自启动目录
+## 0.0 windows关于端口查询&自启动目录
 
 ```shell
 # 查看被占用的端口的进程
