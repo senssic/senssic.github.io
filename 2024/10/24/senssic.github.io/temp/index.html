@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="杂项,记录,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] 0.windows相关0.0 windows关于端口查询&amp;amp;自启动目录123456789# 查看被占用的端口的进程netstat -aon|findstr &quot;8081&quot;#杀死进程PID以及子进程taskkill /T /F /PID 9088#自启动脚本的.vbs文件不弹框set ws=WScript.CreateObject(&quot;WScript.Shell&quot;)ws.Run &quot;C:">
+<meta name="keywords" content="杂项,记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="temp">
+<meta property="og:url" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/index.html">
+<meta property="og:site_name" content="senssic">
+<meta property="og:description" content="[TOC] 0.windows相关0.0 windows关于端口查询&amp;amp;自启动目录123456789# 查看被占用的端口的进程netstat -aon|findstr &quot;8081&quot;#杀死进程PID以及子进程taskkill /T /F /PID 9088#自启动脚本的.vbs文件不弹框set ws=WScript.CreateObject(&quot;WScript.Shell&quot;)ws.Run &quot;C:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/1663629-20200827235901806-297834126.png">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/1663629-20200828000604276-1504908204.png">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/1663629-20200828000852659-163415984.png">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/1663629-20200828001445506-1267469068.png">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/1663629-20200828001027831-2089731344.png">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/WX20220625-185011@2x.png">
+<meta property="og:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/951e5d60-c1b9-4f7f-b3d2-d57cea175bf8.png">
+<meta property="og:updated_time" content="2024-10-30T10:55:14.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="temp">
+<meta name="twitter:description" content="[TOC] 0.windows相关0.0 windows关于端口查询&amp;amp;自启动目录123456789# 查看被占用的端口的进程netstat -aon|findstr &quot;8081&quot;#杀死进程PID以及子进程taskkill /T /F /PID 9088#自启动脚本的.vbs文件不弹框set ws=WScript.CreateObject(&quot;WScript.Shell&quot;)ws.Run &quot;C:">
+<meta name="twitter:image" content="http://yoursite.com/2024/10/24/senssic.github.io/temp/1663629-20200827235901806-297834126.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2024/10/24/senssic.github.io/temp/">
+
+
+
+
+
+  <title>temp | senssic</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5516360d09ce586c528149c2afdd3fcc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">senssic</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/10/24/senssic.github.io/temp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="senssic">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="senssic">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">temp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-10-24T18:45:21+08:00">
+                2024-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2024/10/24/senssic.github.io/temp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2024/10/24/senssic.github.io/temp/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2024/10/24/senssic.github.io/temp/" class="leancloud_visitors" data-flag-title="temp">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+                
+			   <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  10,482
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  51
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="0-windows相关"><a href="#0-windows相关" class="headerlink" title="0.windows相关"></a>0.windows相关</h1><h2 id="0-0-windows关于端口查询-amp-自启动目录"><a href="#0-0-windows关于端口查询-amp-自启动目录" class="headerlink" title="0.0 windows关于端口查询&amp;自启动目录"></a>0.0 windows关于端口查询&amp;自启动目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 查看被占用的端口的进程</span><br><span class="line">netstat -aon|findstr "8081"</span><br><span class="line"><span class="meta">#</span>杀死进程PID以及子进程</span><br><span class="line">taskkill /T /F /PID 9088</span><br><span class="line"><span class="meta">#</span>自启动脚本的.vbs文件不弹框</span><br><span class="line">set ws=WScript.CreateObject("WScript.Shell")</span><br><span class="line">ws.Run "C:\start\bat-start.bat",0</span><br><span class="line"><span class="meta">#</span>将上面的代码文本编辑重命名.vbs文件放到下面的自启动目录</span><br><span class="line">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</span><br></pre></td></tr></table></figure>
+<h2 id="0-1-windows使用自带命令监听本地端口转发到其他服务器"><a href="#0-1-windows使用自带命令监听本地端口转发到其他服务器" class="headerlink" title="0.1 windows使用自带命令监听本地端口转发到其他服务器"></a>0.1 windows使用自带命令监听本地端口转发到其他服务器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>这条命令会监听所有本地的3306端口的请求，并将它们转发到xx.xx.xx.xx的3306端口上。以管理员权限启动cmd</span><br><span class="line">netsh interface portproxy add v4tov4 listenport=3306 listenaddress=0.0.0.0 connectport=3306 connectaddress=xx.xx.xx.xx</span><br><span class="line"><span class="meta">#</span>删除本条转发规则</span><br><span class="line">netsh interface portproxy delete v4tov4 listenport=3306 listenaddress=0.0.0.0</span><br><span class="line"><span class="meta">#</span>查看所有正在转发的规则</span><br><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+<h2 id="0-2-hyper-v开启centos的虚拟化并安装docker的Windows镜像"><a href="#0-2-hyper-v开启centos的虚拟化并安装docker的Windows镜像" class="headerlink" title="0.2 hyper-v开启centos的虚拟化并安装docker的Windows镜像"></a>0.2 hyper-v开启centos的虚拟化并安装docker的Windows镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">1.开启hyper-v的centos虚拟机的KVM虚拟化</span><br><span class="line"><span class="meta">#</span>1.0查看centos虚拟机有没有开启</span><br><span class="line">egrep -o 'vmx|svm' /proc/cpuinfo</span><br><span class="line"><span class="meta">#</span>1.1 若没开启，关闭centos，打开宿主机的powershell使用管理员身份打开</span><br><span class="line"><span class="meta">#</span>#列出虚拟机</span><br><span class="line">Get-VM</span><br><span class="line"><span class="meta">#</span>#查看虚拟化选项参数，ExposeVirtualizationExtensions参数发现是false</span><br><span class="line">Get-VMProcessor -VMName centos虚拟机名称 | fl</span><br><span class="line"><span class="meta">#</span>#将ExposeVirtualizationExtensions参数设置为True</span><br><span class="line">Set-VMProcessor -ExposeVirtualizationExtensions $true -VMName centos虚拟机名称</span><br><span class="line"><span class="meta">#</span># 重新虚拟机并查看是否已经支持kvm，发现执行后会有多个VMX，有几个意味着有几个cpu</span><br><span class="line">egrep -o 'vmx|svm' /proc/cpuinfo</span><br><span class="line"><span class="meta">#</span># 参考github开源docker部署windows</span><br><span class="line">https://github.com/dockur/windows</span><br><span class="line"><span class="meta">#</span># docker-compose书写如下，启动成功后可以使用远程链接，或者http浏览器访问</span><br><span class="line">services:</span><br><span class="line">  windows:</span><br><span class="line">    image: dockurr/windows</span><br><span class="line">    container_name: windows</span><br><span class="line">    environment:</span><br><span class="line">      VERSION: "winxp"</span><br><span class="line">      LANGUAGE: "cn"</span><br><span class="line">      DISK_SIZE: "128G"</span><br><span class="line">    volumes:</span><br><span class="line">      - /opt/win:/storage</span><br><span class="line">    devices:</span><br><span class="line">      - /dev/kvm</span><br><span class="line">    cap_add:</span><br><span class="line">      - NET_ADMIN</span><br><span class="line">    ports:</span><br><span class="line">      - 8006:8006</span><br><span class="line">      - 3389:3389/tcp</span><br><span class="line">      - 3389:3389/udp</span><br><span class="line">    stop_grace_period: 2m</span><br></pre></td></tr></table></figure>
+<h1 id="1-linux相关"><a href="#1-linux相关" class="headerlink" title="1.linux相关"></a>1.linux相关</h1><h2 id="1-1-hexo一键执行脚本"><a href="#1-1-hexo一键执行脚本" class="headerlink" title="1.1 hexo一键执行脚本"></a>1.1 hexo一键执行脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">nowdate=$(date)</span><br><span class="line">echo $&#123;nowdate&#125;</span><br><span class="line">cd /Users/senssic/work/mkdown/githublog/senssic</span><br><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line">cd ./source/_posts/senssic.github.io</span><br><span class="line">git pull</span><br><span class="line">git add .</span><br><span class="line">git commit -m 'updated:'$(date +%y年%m月%d日%H时%M分)</span><br><span class="line">git push</span><br><span class="line">cd /Users/senssic/work/mkdown/githublog</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-使用阿里源"><a href="#1-2-使用阿里源" class="headerlink" title="1.2 使用阿里源"></a>1.2 使用阿里源</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget</span><br><span class="line">rm -rf /etc/yum.repos.d/*.repo</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">sed -i '/aliyuncs/d' /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">sed -i 's/$releasever/7/g' /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">sed -i '/aliyuncs/d' /etc/yum.repos.d/epel.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-linux操作系统相关"><a href="#1-3-linux操作系统相关" class="headerlink" title="1.3 linux操作系统相关"></a>1.3 linux操作系统相关</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1. 设置hostname名称</span><br><span class="line">sudo hostnamectl set-hostname &lt;newhostname&gt;</span><br><span class="line">2. tcpdump的命令使用</span><br><span class="line"><span class="meta">#</span>详细输出且目标端host为10.19.146.223且目标端端口为28201 且网卡为ens160</span><br><span class="line">tcpdump -s 0 -l -w - dst 10.19.146.223 and port 28201 -i ens160|strings &gt; tcpdump.txt</span><br><span class="line">3. 使用ffmpeg命令拉流并截图保存</span><br><span class="line">ffmpeg -an -vf select='eq(pict_type\,I)' -vsync 2 -f image2 -strftime 1 "%H_%M_%S.jpg" -i  rtsp://admin:admin@192.168.1.12:554/h264/ch33/main/av_stream</span><br><span class="line">4.linux系统增加只读账号对某个目录只读限定</span><br><span class="line"><span class="meta">#</span>增加只读用户</span><br><span class="line">useradd readonly</span><br><span class="line"><span class="meta">#</span>修改密码</span><br><span class="line">passwd readonly</span><br><span class="line"><span class="meta">#</span>添加用户对文件的只读r权限</span><br><span class="line">setfacl -R -m u:readonly:rX /data/software</span><br><span class="line"><span class="meta">#</span>收回对应的权限</span><br><span class="line">setfacl -R -x u:readonly:rX /data/software</span><br><span class="line"><span class="meta">#</span>查看文件权限赋权信息</span><br><span class="line">getfacl /data/software/</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-centos8-root用户忘记密码"><a href="#1-4-centos8-root用户忘记密码" class="headerlink" title="1.4 centos8 root用户忘记密码"></a>1.4 centos8 root用户忘记密码</h2><ul>
+<li><p>1.启动centos8系统,在开机界面选择第一行，按e</p>
+<ul>
+<li><img src="1663629-20200827235901806-297834126.png" alt="img"></li>
+</ul>
+</li>
+<li><p>2.进入以下界面，找到ro并将其修改为rw init=/sysroot/bin/bash</p>
+<ul>
+<li><img src="1663629-20200828000604276-1504908204.png" alt="img"></li>
+</ul>
+</li>
+<li><p>3.同时按住ctrl和x键，系统进入以下紧急模式界面</p>
+<ul>
+<li><img src="1663629-20200828000852659-163415984.png" alt="img"></li>
+</ul>
+</li>
+<li><p>4.输入以下命令修改密码</p>
+<ul>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chroot /sysroot/          #切换回原始系统</span><br><span class="line">LANG=en                   #把语言改为英文</span><br><span class="line">passwd                    #设置新密码</span><br><span class="line">touch /.autorelabel       #使密码生效</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="1663629-20200828001445506-1267469068.png" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>5.同时按住Ctrl和d键，进入以下界面，输入reboot，重启系统,直接使用新密码操作即可</p>
+<ul>
+<li><img src="1663629-20200828001027831-2089731344.png" alt="img"></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-linux的初始化优化"><a href="#1-5-linux的初始化优化" class="headerlink" title="1.5 linux的初始化优化"></a>1.5 linux的初始化优化</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 1.设置主机名称</span><br><span class="line">hostnamectl set-hostname xxx # 将 xxx 替换为当前主机名</span><br><span class="line"><span class="meta">#</span> 2.设置host</span><br><span class="line">cat &gt;&gt; /etc/hosts &lt;&lt;EOF</span><br><span class="line">172.27.138.251 xxx-01</span><br><span class="line">172.27.137.229 xxx-02</span><br><span class="line">172.27.138.239 xxx-03</span><br><span class="line">EOF</span><br><span class="line"><span class="meta">#</span>3.添加节点信任关系</span><br><span class="line">ssh-keygen -t rsa </span><br><span class="line">ssh-copy-id root@xxx-01</span><br><span class="line">ssh-copy-id root@xxx-02</span><br><span class="line">ssh-copy-id root@xxx-03</span><br><span class="line"><span class="meta">#</span>4.安装基础依赖</span><br><span class="line">yum install -y epel-release</span><br><span class="line">yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git</span><br><span class="line"><span class="meta">#</span>5.关闭防火墙</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br><span class="line">iptables -F &amp;&amp; iptables -X &amp;&amp; iptables -F -t nat &amp;&amp; iptables -X -t nat</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line"><span class="meta">#</span>6.关闭 swap 分区</span><br><span class="line">swapoff -a</span><br><span class="line">sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab </span><br><span class="line"><span class="meta">#</span>7.关闭 SELinux</span><br><span class="line">setenforce 0</span><br><span class="line">sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config</span><br><span class="line"><span class="meta">#</span>8.优化内核参数</span><br><span class="line">cat &gt; temp.conf &lt;&lt;EOF</span><br><span class="line">net.bridge.bridge-nf-call-iptables=1</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables=1</span><br><span class="line">net.ipv4.ip_forward=1</span><br><span class="line">net.ipv4.tcp_tw_recycle=0</span><br><span class="line">net.ipv4.neigh.default.gc_thresh1=1024</span><br><span class="line">net.ipv4.neigh.default.gc_thresh1=2048</span><br><span class="line">net.ipv4.neigh.default.gc_thresh1=4096</span><br><span class="line">vm.swappiness=0</span><br><span class="line">vm.overcommit_memory=1</span><br><span class="line">vm.panic_on_oom=0</span><br><span class="line">fs.inotify.max_user_instances=8192</span><br><span class="line">fs.inotify.max_user_watches=1048576</span><br><span class="line">fs.file-max=52706963</span><br><span class="line">fs.nr_open=52706963</span><br><span class="line">net.ipv6.conf.all.disable_ipv6=1</span><br><span class="line">net.netfilter.nf_conntrack_max=2310720</span><br><span class="line">EOF</span><br><span class="line">cp temp.conf  /etc/sysctl.d/temp.conf</span><br><span class="line">sysctl -p /etc/sysctl.d/temp.conf</span><br><span class="line"><span class="meta">#</span>9.设置系统时区</span><br><span class="line">timedatectl set-timezone Asia/Shanghai</span><br><span class="line"><span class="meta">#</span>10.设置系统时钟同步</span><br><span class="line">systemctl enable chronyd</span><br><span class="line">systemctl start chronyd</span><br><span class="line"><span class="meta">#</span>11.关闭无关的服务</span><br><span class="line">systemctl stop postfix &amp;&amp; systemctl disable postfix</span><br><span class="line"><span class="meta">#</span>12.升级内核</span><br><span class="line">rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm</span><br><span class="line"><span class="meta">#</span> 安装完成后检查 /boot/grub2/grub.cfg 中对应内核 menuentry 中是否包含 initrd16 配置，如果没有，再安装一次！</span><br><span class="line">yum --enablerepo=elrepo-kernel install -y kernel-lt</span><br><span class="line"><span class="meta">#</span> 设置开机从新内核启动</span><br><span class="line">grub2-set-default 0</span><br><span class="line">sync</span><br><span class="line">reboot</span><br><span class="line"><span class="meta">#</span>安装docker</span><br><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br></pre></td></tr></table></figure>
+<h2 id="1-6-linux双网卡NAT路由映射"><a href="#1-6-linux双网卡NAT路由映射" class="headerlink" title="1.6 linux双网卡NAT路由映射"></a>1.6 linux双网卡NAT路由映射</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 前提:</span><br><span class="line"><span class="meta">#</span>   服务器 A ：配有外网 IP 地址 1.1.1.1 和内网 IP 地址 192.168.1.1 ，操作系统为 CentOS Linux 7 ；</span><br><span class="line"><span class="meta">#</span>   数据库服务器 B ：仅配有内网 IP 地址 192.168.1.2 ，操作系统没有限制，Windows 也可。</span><br><span class="line"><span class="meta">#</span> 需求:</span><br><span class="line"><span class="meta">#</span>   需要通过外网去访问数据库服务器 B 的 3306 端口，即将 1.1.1.1:30000 映射为 192.168.1.2:3306 。</span><br><span class="line"><span class="meta">#</span> 开启 IP 路由转发</span><br><span class="line">echo "net.ipv4.ip_forward = 1" &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line"><span class="meta">#</span> 清除原有的 NAT 表中的规则</span><br><span class="line">iptables -t nat -F</span><br><span class="line"><span class="meta">#</span> 清除原有的 filter 表中的规则</span><br><span class="line">iptables -F</span><br><span class="line"><span class="meta">#</span> 缺省允许 IP 转发</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line"><span class="meta">#</span> SNAT(source NAT,对源 IP 地址做 NAT)将 x.x.x.x:yyyy → 192.168.1.2:3306 转换为 192.168.1.1:zzzz → 192.168.1.2:3306 </span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 30000 -j DNAT --to-destination 192.168.1.2:3306</span><br><span class="line"><span class="meta">#</span>  DNAT（ destination NAT ，对目的 IP 地址做 NAT ），即将 x.x.x.x:yyyy → 1.1.1.1:30000 转换为 x.x.x.x:yyyy → 192.168.1.2:3306 </span><br><span class="line">iptables -t nat -A POSTROUTING -d 192.168.1.2 -p tcp --dport 3306 -j SNAT --to 192.168.1.1</span><br></pre></td></tr></table></figure>
+<h2 id="1-7-主盘扩容-dev-mapper-centos-root-空间不足"><a href="#1-7-主盘扩容-dev-mapper-centos-root-空间不足" class="headerlink" title="1.7 主盘扩容(/dev/mapper/centos-root 空间不足)"></a>1.7 主盘扩容(/dev/mapper/centos-root 空间不足)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ls  /dev/sd*  #使用fdisk分区然后找一块空的分区</span><br><span class="line">pvcreate /dev/sda3 #使用空的分区创建pv</span><br><span class="line">vgs  #先使用vgs查看vg组大小</span><br><span class="line">vgextend centos /dev/sda3 #扩展vg</span><br><span class="line">vgs  #再查看一下vg组大小，看是否发生变化</span><br><span class="line">lvs #查看lv大小,虽然我们把vg扩展了，但是lv还没有扩展</span><br><span class="line">lvextend -L +20G /dev/mapper/centos-root #扩展lv,使用lvextend</span><br><span class="line">xfs_growfs /dev/mapper/centos-root #命令使系统重新读取大小</span><br><span class="line">df -h  #查看磁盘是否成功变化大小</span><br></pre></td></tr></table></figure>
+<h2 id="1-8-新增磁盘挂载"><a href="#1-8-新增磁盘挂载" class="headerlink" title="1.8 新增磁盘挂载"></a>1.8 新增磁盘挂载</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>列出新的的磁盘</span><br><span class="line">fdisk -l</span><br><span class="line"><span class="meta">#</span>若需要划分分区，执行如下操作，若不需要分区直接格式化挂载即可，如果使用分区则需要挂载分区后的比如xvde1</span><br><span class="line"><span class="meta">#</span>1.第一种要划分分区，或者划分空间分区</span><br><span class="line"><span class="meta">#</span>fdisk /dev/xvde</span><br><span class="line"><span class="meta">#</span>输入 n 开始进行设置</span><br><span class="line"><span class="meta">#</span>输入 p  设置主分区</span><br><span class="line"><span class="meta">#</span>分区号默认</span><br><span class="line"><span class="meta">#</span>起始扇区默认,按enter默认开始</span><br><span class="line"><span class="meta">#</span>结束扇区默认,若按enter默认所有的结束按需</span><br><span class="line"><span class="meta">#</span>输入 w 设置保存</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>2.第二种直接格式化整个磁盘进行挂载</span><br><span class="line"><span class="meta">#</span>格式化此磁盘,若报错不存在,使用partprobe /dev/sda重建分区，lsblk来查看是否成功</span><br><span class="line">mkfs -t ext4 /dev/xvde</span><br><span class="line"><span class="meta">#</span>创建新目录并挂载此磁盘</span><br><span class="line">mkdir -p /mnt/home</span><br><span class="line">mount /dev/xvde /mnt/home</span><br><span class="line"><span class="meta">#</span>设置开机挂载 编辑 vim /etc/fstab 增加如下</span><br><span class="line">/dev/xvde /mnt/home ext4 defaults 0 0</span><br></pre></td></tr></table></figure>
+<h2 id="1-9-linux虚拟网卡和路由"><a href="#1-9-linux虚拟网卡和路由" class="headerlink" title="1.9 linux虚拟网卡和路由"></a>1.9 linux虚拟网卡和路由</h2><p><img src="WX20220625-185011@2x.png" alt="img"></p>
+<p><a href="https://www.linuxidc.com/Linux/2017-09/146914.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2017-09/146914.htm</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1.新增虚拟网卡,【或者直接使用虚拟机创建两个实体网卡】</span><br><span class="line"><span class="meta">#</span>***********ubuntu 配置开始**************</span><br><span class="line">vi /etc/network/interfaces</span><br><span class="line"><span class="meta">#</span> 需替换为实际物理网卡</span><br><span class="line">auto  eth0:1</span><br><span class="line">iface eth0:1 inet static</span><br><span class="line">address 192.168.2.10</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line"><span class="meta">#</span>重启网络</span><br><span class="line">/etc/init.d/networking restart</span><br><span class="line"><span class="meta">#</span>***********ubuntu 配置结束**************</span><br><span class="line"><span class="meta">#</span>***********centos 配置开始**************</span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-eth0:1</span><br><span class="line"><span class="meta">#</span> 需替换为实际物理网卡</span><br><span class="line">DEVICE=eth0:1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=192.168.2.10</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line"><span class="meta">#</span>重启网络</span><br><span class="line">service network restart</span><br><span class="line"><span class="meta">#</span>***********centos 配置结束**************</span><br><span class="line"><span class="meta">#</span>2.若需要上级网段访问下级网段可以配置路由</span><br><span class="line"><span class="meta">#</span>配置转发，Linux 本身开启转发功能后就是一个路由器</span><br><span class="line">echo "net.ipv4.ip_forward=1" &gt;&gt; /etc/sysctl.conf </span><br><span class="line">sysctl -p</span><br><span class="line"><span class="meta">#</span>https://www.cnblogs.com/embedded-linux/p/10200831.html</span><br><span class="line"><span class="meta">#</span>设置路由          目标                子网掩码         网关/下一跳</span><br><span class="line">route add -net 10.10.20.0 netmask 255.255.255.0 gw  10.10.10.1</span><br><span class="line"><span class="meta">#</span>3.配置nat转发（在虚拟路由服务器执行）</span><br><span class="line"><span class="meta">#</span>清除原有的nat表中的规则</span><br><span class="line">iptables -F &amp;&amp; iptables -X &amp;&amp; iptables -F -t nat &amp;&amp; iptables -X -t nat</span><br><span class="line"><span class="meta">#</span>缺省允许IP转发</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br><span class="line"><span class="meta">#</span>利用iptables 实现nat MASQUERADE 共享上网，eth0为可以上网的网卡</span><br><span class="line">iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<p>windows增加路由,访问192.168.x.x的所有请求都经由192.168.176.1网关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">route add -p 192.168.0.0 mask 255.255.240.0 192.168.176.1 metric 1</span><br></pre></td></tr></table></figure>
+<h2 id="1-10-增加或扩容swap"><a href="#1-10-增加或扩容swap" class="headerlink" title="1.10 增加或扩容swap"></a>1.10 增加或扩容swap</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>********创建和扩容**************</span><br><span class="line"><span class="meta">#</span>创建10G的swap文件在 /mnt/swap文件，若是扩容swap注意此路径不与之前的swap文件相同</span><br><span class="line">dd if=/dev/zero of=/mnt/swap bs=1M count=10240</span><br><span class="line"><span class="meta">#</span>将刚才创建的文件格式为swap文件，并记录返回的磁盘UUID</span><br><span class="line">mkswap /mnt/swap</span><br><span class="line"><span class="meta">#</span>挂载swap分区</span><br><span class="line">swapon /mnt/swap</span><br><span class="line"><span class="meta">#</span>查看swap分区</span><br><span class="line">free -h</span><br><span class="line">swapon -s</span><br><span class="line"><span class="meta">#</span>写入开启磁盘加载文件</span><br><span class="line">echo 'UUID=替换为刚才记录的UUID swap                    swap    defaults        0 0' &gt;&gt;   /etc/fstab</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>********卸载和缩容**************</span><br><span class="line"><span class="meta">#</span>卸载缩容swap文件</span><br><span class="line">swapoff /mnt/swap</span><br><span class="line"><span class="meta">#</span>删除对应的swap磁盘挂载</span><br><span class="line">vim /etc/fstab</span><br><span class="line"><span class="meta">#</span>删除对应swap文件</span><br><span class="line">rm /mnt/swap</span><br></pre></td></tr></table></figure>
+<h2 id="1-11-centos下载应离线安装包"><a href="#1-11-centos下载应离线安装包" class="headerlink" title="1.11 centos下载应离线安装包"></a>1.11 centos下载应离线安装包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>#从功能定位上来说推荐使用方式1</span><br><span class="line"><span class="meta">#</span>方式1:使用yumdownloader若没有先安装yum install yum-utils</span><br><span class="line">yumdownloader -y &lt;package-name&gt;</span><br><span class="line"><span class="meta">#</span>方式2:使用localinstall只下载的方式实现</span><br><span class="line">yum localinstall -y --downloadonly --downloaddir=&lt;目录路径&gt; &lt;package-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-12-linux查询系统进行被杀"><a href="#1-12-linux查询系统进行被杀" class="headerlink" title="1.12 linux查询系统进行被杀"></a>1.12 linux查询系统进行被杀</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">journalctl -xb | egrep -i 'killed process'</span><br><span class="line">dmesg | egrep -i 'killed process'</span><br><span class="line">egrep -i -r 'killed process' /var/log</span><br><span class="line"><span class="meta">#</span>增加kill的日志审计，能看到被哪个进程和用户杀死的</span><br><span class="line">sudo apt install auditd</span><br><span class="line">systemctl enable auditd.service</span><br><span class="line">systemctl restart auditd.service</span><br><span class="line"><span class="meta">#</span>使用auditctl命令添加</span><br><span class="line">auditctl -a exit,always -F arch=b64 -S kill -F a1=9</span><br><span class="line"><span class="meta">#</span>查看日志审计</span><br><span class="line">sudo ausearch -sc kill</span><br></pre></td></tr></table></figure>
+<h1 id="2-虚拟机相关"><a href="#2-虚拟机相关" class="headerlink" title="2.虚拟机相关"></a>2.虚拟机相关</h1><h2 id="2-1-virtual-Boxs使用virtual-host和nat网络固定ip"><a href="#2-1-virtual-Boxs使用virtual-host和nat网络固定ip" class="headerlink" title="2.1 virtual Boxs使用virtual host和nat网络固定ip"></a>2.1 virtual Boxs使用virtual host和nat网络固定ip</h2><p>1.新建net网络(管理-&gt;全局设置-&gt;网络设置)<br>2.虚拟机新建网卡1virtual host(可以指定网址段)，设置网络类型为virtual host<br>3.虚拟机新建网卡2设置网络类型为NAT(选择新建的NAT网络,可以指定网址段)<br>4.固定NAT网络IP地址<br>   编辑/etc/sysconfig/network-scripts/对应的网卡信息如果没有则新建<br>   修改属性BOOTPROTO=static<br>   修改属性NOBOOT=yes<br>   新增属性(对应网卡的属性)<br>        IPADDR=10.0.2.101<br>        NETMASK=255.255.255.0<br>        GATEWAY=10.0.2.1<br>5.同上固定virtual host连接的网络IP地址</p>
+<blockquote>
+<p>virtual boxs上网</p>
+<p>0.使用everthing的iso</p>
+<p>1.使用NET网络选择准虚拟化网络(virtio-net),混杂模式拒绝</p>
+<p>2.创建host-noly网络并选择选择准虚拟化网络(virtio-net),混杂模式拒绝</p>
+<p><strong>如果无法自动获取net和host-noly的ip,到/etc/sysconfig/network-scripts/目录下将这两个网卡的配置(ifcfg-xxx)删除然后重启</strong></p>
+</blockquote>
+<h2 id="2-2-桥接网络虚拟机无法自动获取ip"><a href="#2-2-桥接网络虚拟机无法自动获取ip" class="headerlink" title="2.2 桥接网络虚拟机无法自动获取ip"></a>2.2 桥接网络虚拟机无法自动获取ip</h2><p>dhclient 网卡 -v</p>
+<h2 id="2-3-virtual-Boxs设置已存在的硬盘的大小"><a href="#2-3-virtual-Boxs设置已存在的硬盘的大小" class="headerlink" title="2.3 virtual Boxs设置已存在的硬盘的大小"></a>2.3 virtual Boxs设置已存在的硬盘的大小</h2><p><strong>C:\Program Files\Oracle\VirtualBox\VBoxManage.exe modifyhd E:\vribox\k8s-temp\k8s-temp-disk1.vdi –resize 512000</strong></p>
+<h2 id="2-4-实验室主机虚拟化软件"><a href="#2-4-实验室主机虚拟化软件" class="headerlink" title="2.4  实验室主机虚拟化软件"></a>2.4  实验室主机虚拟化软件</h2><p>VMware ESXi 和 Proxmox 一般研发推荐Proxmox</p>
+<h2 id="2-5-pve-设置虚拟机分辨率"><a href="#2-5-pve-设置虚拟机分辨率" class="headerlink" title="2.5 pve 设置虚拟机分辨率"></a>2.5 pve 设置虚拟机分辨率</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1.虚拟BIOS需要使用OVMF(UEFI),并再启动时候点击 esc键进入bios</span><br><span class="line"><span class="meta">#</span>2.依次选择 Device Manager&gt;OVMF Platform Configuration&gt;Change Preferred 选择对应的分辨率就行</span><br><span class="line"><span class="meta">#</span>3.选择Commit Changes adn Exit 退出bios继续进入系统即可</span><br></pre></td></tr></table></figure>
+<h2 id="2-6-Hyper-V-NAT-网络设置固定-IP-DHCP"><a href="#2-6-Hyper-V-NAT-网络设置固定-IP-DHCP" class="headerlink" title="2.6 Hyper-V NAT 网络设置固定 IP / DHCP"></a>2.6 Hyper-V NAT 网络设置固定 IP / DHCP</h2><p>以管理员身份启动PowerShell ，执行下列命令,创建NAT名称的网络，并在虚拟机的配置中选择此网络</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建虚拟交换机</span></span><br><span class="line">New-VMSwitch -SwitchName <span class="string">"NAT"</span> -SwitchType Internal</span><br><span class="line"><span class="comment"># 获取虚拟交换机的ifindex，并赋值到变量中</span></span><br><span class="line"><span class="variable">$ifindex</span> = Get-NetAdapter -Name <span class="string">"vEthernet (NAT)"</span> | <span class="built_in">Select-Object</span> -ExpandProperty <span class="string">'ifIndex'</span></span><br><span class="line"><span class="comment"># 在虚拟交换机上设置固定IP，用于网关IP</span></span><br><span class="line">New-NetIPAddress -IPAddress <span class="number">192.168</span>.<span class="number">56.254</span> -PrefixLength <span class="number">24</span> -InterfaceIndex <span class="variable">$ifindex</span></span><br><span class="line"><span class="comment"># 创建nat网络</span></span><br><span class="line">New-NetNat -Name NAT -InternalIPInterfaceAddressPrefix <span class="number">192.168</span>.<span class="number">56.0</span>/<span class="number">24</span></span><br></pre></td></tr></table></figure>
+<p>编辑虚拟机网络配置vim /etc/sysconfig/network-scripts/ifcfg-eth0<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=eth0</span><br><span class="line">UUID=3b8a4cf0-252f-4cc5-9e23-eebd73a37185</span><br><span class="line">DEVICE=eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.56.101</span><br><span class="line">GATEWAY=192.168.56.254</span><br><span class="line">DNS1=223.5.5.5</span><br></pre></td></tr></table></figure></p>
+<p>重启网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+<h1 id="3-数据库相关"><a href="#3-数据库相关" class="headerlink" title="3.数据库相关"></a>3.数据库相关</h1><h2 id="3-1-mysql数据库常用操作"><a href="#3-1-mysql数据库常用操作" class="headerlink" title="3.1 mysql数据库常用操作"></a>3.1 mysql数据库常用操作</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 重置root密码,并刷新权限</span></span><br><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> authentication_string = <span class="keyword">password</span>(‘<span class="number">123456</span>’), password_expired = ‘N’, password_last_changed = <span class="keyword">now</span>() <span class="keyword">where</span> <span class="keyword">user</span> = ‘root’;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-数据库问题排查语句"><a href="#3-2-数据库问题排查语句" class="headerlink" title="3.2 数据库问题排查语句"></a>3.2 数据库问题排查语句</h2><h3 id="3-2-1-数据库诊断命令"><a href="#3-2-1-数据库诊断命令" class="headerlink" title="3.2.1 数据库诊断命令"></a>3.2.1 数据库诊断命令</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">processlist</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">status</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">table</span> <span class="keyword">status</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">index</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">engine</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">status</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">slave</span> <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-2-数据库死锁排查语句"><a href="#3-3-2-数据库死锁排查语句" class="headerlink" title="3.3.2 数据库死锁排查语句"></a>3.3.2 数据库死锁排查语句</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前连接</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">processlist</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">full</span> <span class="keyword">processlist</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> INFORMATION_SCHEMA.PROCESSLIST;</span><br><span class="line"># 查看当前未提交的事务（如果死锁等待超时,事务可能还没有关闭）</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> INFORMATION_SCHEMA.INNODB_TRX;</span><br><span class="line"></span><br><span class="line"># 查看正在被访问的表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">OPEN</span> <span class="keyword">TABLES</span> <span class="keyword">where</span> In_use &gt; <span class="number">0</span>;</span><br><span class="line"># 查看最近的死锁记录</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">ENGINE</span> <span class="keyword">INNODB</span> <span class="keyword">STATUS</span>;</span><br><span class="line"># 死锁日志</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'innodb_print_all_deadlocks'</span>;</span><br><span class="line"></span><br><span class="line"># 若一直请求不到资源，默认50秒则出现锁等待超时。</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'innodb_lock_wait_timeout'</span>;</span><br><span class="line"># 设置全局变量 锁等待超时为60秒（新的连接生效）</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">session</span> innodb_lock_wait_timeout=<span class="number">50</span>;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> innodb_lock_wait_timeout=<span class="number">60</span>;</span><br><span class="line">#上面测试中，当事务中的某个语句超时只回滚该语句，事务的完整性属于被破坏了。为了回滚这个事务，启用以下参数：</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'innodb_rollback_on_timeout'</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">processlist</span>;</span><br><span class="line"><span class="keyword">SELECT</span> trx_mysql_thread_id,trx_state,trx_started,trx_weight <span class="keyword">FROM</span> INFORMATION_SCHEMA.INNODB_TRX;</span><br><span class="line"># 表锁级别</span><br><span class="line"># NEVER：加了读锁之后，不允许其他 session 并发插入。</span><br><span class="line"># AUTO：加了读锁之后，如果表里没有删除过数据，其他 session 就可以并发插入。</span><br><span class="line"># ALWAYS：加了读锁之后，允许其他 session 并发插入。</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%concurrent_insert%'</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">master</span> <span class="keyword">logs</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-3-数据库慢查询链接数过多CPU升高排查语句"><a href="#3-3-3-数据库慢查询链接数过多CPU升高排查语句" class="headerlink" title="3.3.3 数据库慢查询链接数过多CPU升高排查语句"></a>3.3.3 数据库慢查询链接数过多CPU升高排查语句</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- ***Mysql 开启慢查询***----</span></span><br><span class="line">#查看是否开启了慢查询日志</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%slow_query_log%'</span></span><br><span class="line">#用命令方式开启慢查询日志，但是重启MySQL后此设置会失效</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log = <span class="number">1</span></span><br><span class="line">#永久生效开启方式可以在my.cnf里进行配置，在[mysqld]下新增以下两个参数，重启MySQL即可生效</span><br><span class="line">slow_query_log = <span class="number">1</span></span><br><span class="line">slow_query_log_file = 日志文件存储路径</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ***Mysql 线程执行时间问题***----</span></span><br><span class="line"><span class="comment">-- 按客户端 IP 分组，看哪个客户端的链接数最多</span></span><br><span class="line"><span class="keyword">SELECT</span> client_ip,<span class="keyword">COUNT</span>(client_ip) <span class="keyword">AS</span> client_num <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> SUBSTRING_INDEX(HOST,<span class="string">':'</span> ,<span class="number">1</span>) <span class="keyword">AS</span> client_ip <span class="keyword">FROM</span> information_schema.processlist ) <span class="keyword">AS</span> connect_info <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_ip <span class="keyword">ORDER</span> <span class="keyword">BY</span> client_num <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- 查看正在执行的线程，并按 Time 倒排序，看看有没有执行时间特别长的线程</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.processlist <span class="keyword">WHERE</span> Command != <span class="string">'Sleep'</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">TIME</span> <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- 找出所有执行时间超过 3 分钟的线程(排除守护线程)，拼凑出 kill 语句，方便后面查杀 （此处 5分钟 可根据自己的需要调整SQL标红处）可复制查询结果到控制台，直接执行，杀死堵塞进程</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">'kill '</span>, <span class="keyword">id</span>, <span class="string">';'</span>) <span class="keyword">FROM</span> information_schema.processlist <span class="keyword">WHERE</span> Command != <span class="string">'Sleep'</span> <span class="keyword">AND</span> Command != <span class="string">'Daemon'</span> <span class="keyword">AND</span> <span class="keyword">TIME</span> &gt; <span class="number">180</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">TIME</span> <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- 查询线程及相关信息 (ID 为此线程ID，Time为线程运行时间，Info为此线程SQL)</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">FULL</span> <span class="keyword">PROCESSLIST</span></span><br><span class="line"><span class="comment">-- 上面的语句等同于下面</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.processlist</span><br><span class="line"><span class="comment">-- 查看最大连接数</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%max_connection%'</span>;</span><br><span class="line"><span class="comment">-- 重新设置最大连接数</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> max_connections=<span class="number">1000</span>;</span><br><span class="line"><span class="comment">-- mysql查看连接数（连接总数、活跃数、最大并发数）</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">STATUS</span> <span class="keyword">LIKE</span>  <span class="string">'Threads%'</span>;</span><br><span class="line"><span class="comment">-- 查询服务器thread_cache_size的值</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'thread_cache_size'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-mysqldump常用命令"><a href="#3-3-mysqldump常用命令" class="headerlink" title="3.3 mysqldump常用命令"></a>3.3 mysqldump常用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 备份全部数据库（包含存储过程、自定义函数及事件） </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction -R -E --all-databases &gt; /tmp/all_database.sql </span><br><span class="line"><span class="meta">#</span> 要求记录 binlog 位点信息 可用于搭建从库 </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction -R -E --all-databases --master-data=2 &gt; /tmp/all_database.sql </span><br><span class="line"><span class="meta">#</span> 备份指定数据库 </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction -R -E --databases db1 &gt; /tmp/db1.sql </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction -R -E --databases db1 db2 &gt; /tmp/db1_db2.sql </span><br><span class="line"><span class="meta">#</span> 备份部分表 </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 &gt; /tmp/tb1.sql </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 tb2 tb3 &gt; /tmp/tb.sql </span><br><span class="line"><span class="meta">#</span> 导出某个表，数据以单行insert显示 </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction --skip-extended-insert db1 tb1 &gt; /tmp/tb1.sql </span><br><span class="line"><span class="meta">#</span> 导出单表的部分数据 </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 --where=" create_time &gt;= '2021-06-01 00:00:00' " &gt; /tmp/tb1.sql </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction db1 tb1 --where='id &lt; 10' &gt; /tmp/tb1.sql </span><br><span class="line"><span class="meta">#</span> 排除某些表导出 </span><br><span class="line">mysqldump -uroot -pxxxxxx --single-transaction --databases db1 --ignore-table=db1.tb1 --ignore-table=db1.tb2 &gt; /tmp/db1.sql </span><br><span class="line"><span class="meta">#</span> 只导出结构或只导出数据 </span><br><span class="line">mysqldump -uroot -pxxxxxx db1 --no-data &gt; /tmp/db1_jiegou.sql </span><br><span class="line">mysqldump -uroot -pxxxxxx db1 --no-create-info &gt; /tmp/db1_data.sql </span><br><span class="line"><span class="meta">#</span> 只导出某个库的存储过程及自定义函数 </span><br><span class="line">mysqldump -uroot -pxxxxxx -d -t -R db1 &gt; /tmp/db1_routine.sql </span><br><span class="line"><span class="meta">#</span> 远程导出 即MySQL服务端不在本地 </span><br><span class="line">mysqldump -uroot -pxxxxxx -hxxx.xxx.xx -P3306 --single-transaction --databases db1 &gt; /tmp/db1.sql</span><br></pre></td></tr></table></figure>
+<h1 id="4-容器相关"><a href="#4-容器相关" class="headerlink" title="4.容器相关"></a>4.容器相关</h1><h2 id="4-1-命令相关"><a href="#4-1-命令相关" class="headerlink" title="4.1 命令相关"></a>4.1 命令相关</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">1.列出所有的容器 ID</span><br><span class="line">docker ps -aq</span><br><span class="line">2.停止所有的容器</span><br><span class="line">docker stop $(docker ps -aq)</span><br><span class="line">3.删除所有的容器</span><br><span class="line">docker rm $(docker ps -aq)</span><br><span class="line">或</span><br><span class="line">docker container prune -f</span><br><span class="line">4.删除所有镜像</span><br><span class="line">docker rmi $(docker images -q)</span><br><span class="line">或</span><br><span class="line">docker image prune -f -a</span><br><span class="line">5.删除所有网络</span><br><span class="line">docker network prune -f -a</span><br><span class="line">6.复制文件</span><br><span class="line">docker cp mycontainer:/opt/file.txt /opt/local/</span><br><span class="line">docker cp /opt/local/file.txt mycontainer:/opt/</span><br><span class="line">7.查看镜像的启动命令</span><br><span class="line">alias runlike="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock assaflavie/runlike"</span><br><span class="line">runlike -p 容器</span><br><span class="line">8.查看镜像的构建Dockerfile命令</span><br><span class="line"><span class="meta">#</span>使用命令</span><br><span class="line">docker history 容器 --no-trunc</span><br><span class="line"><span class="meta">#</span>使用其他容器命令</span><br><span class="line">alias whaler="docker run -t --rm -v /var/run/docker.sock:/var/run/docker.sock:ro pegleg/whaler"</span><br><span class="line">whaler -sV=1.36  容器</span><br><span class="line">9.调试docker容器</span><br><span class="line"><span class="meta">#</span>安装docker-debug</span><br><span class="line">https://github.com/zeromake/docker-debug/blob/master/README-zh-Hans.md</span><br><span class="line">10.调试k8s的pod容器</span><br><span class="line"><span class="meta">#</span>如果是私有仓库需要自己将debug-agent:v0.1.1 和 nicolaka/netshoot:latest push到私有仓库,docker tag,docker push</span><br><span class="line">kubectl-debug -n dev pod-xxx --agentless=true --port-forward=true --agent-image=aylei/debug-agent:v0.1.1</span><br><span class="line">11.docker一键清理所有没有用到的网络，镜像，磁盘挂载等</span><br><span class="line">docker system prune -a</span><br><span class="line">12.安装docker-compose</span><br><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/v2.16.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-安装docker和minikube"><a href="#4-2-安装docker和minikube" class="headerlink" title="4.2 安装docker和minikube"></a>4.2 安装docker和minikube</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1.创建非root用户</span><br><span class="line">adduser test</span><br><span class="line">passwd  test</span><br><span class="line"><span class="meta">#</span>创建docker组</span><br><span class="line">sudo groupadd docker</span><br><span class="line"><span class="meta">#</span>将您的用户添加到该docker组</span><br><span class="line">sudo usermod -aG docker test</span><br><span class="line"><span class="meta">#</span>在Linux上，运行以下命令来激活对组的更改</span><br><span class="line">newgrp docker</span><br><span class="line"><span class="meta">#</span>2.安装docker</span><br><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun</span><br><span class="line"><span class="meta">#</span>3.安装kubectl</span><br><span class="line">curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl</span><br><span class="line">sudo chmod a+x ./kubectl</span><br><span class="line">sudo mv ./kubectl /usr/local/bin/kubectl</span><br><span class="line"><span class="meta">#</span>4.安装minikube</span><br><span class="line">curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.20.0/minikube-linux-amd64 &amp;&amp; chmod +x minikube &amp;&amp; sudo mv minikube /usr/local/bin/</span><br><span class="line"><span class="meta">#</span>5.多节点启动</span><br><span class="line"><span class="meta">#</span>#创建主集群(默认Profile为minikube,可以加 -p 创建不通的k8s集群)</span><br><span class="line">minikube start --force</span><br><span class="line"><span class="meta">#</span>#增加节点</span><br><span class="line">minikube node add</span><br><span class="line"><span class="meta">#</span>#查看节点</span><br><span class="line">minikube node list</span><br><span class="line"><span class="meta">#</span>#启动主节点仪表盘</span><br><span class="line">minikube dashboard</span><br><span class="line"><span class="meta">#</span>#删除集群</span><br><span class="line">minikube delete</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-安装jenkins"><a href="#4-3-安装jenkins" class="headerlink" title="4.3 安装jenkins"></a>4.3 安装jenkins</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkins/jenkins</span><br><span class="line"><span class="meta">#</span>挂载配置文件</span><br><span class="line">mkdir -p /var/jenkins_mount &amp;&amp; chmod 777 /var/jenkins_mount</span><br><span class="line"><span class="meta">#</span>启动Jenkins端口为10240</span><br><span class="line">docker run -d -p 10240:8080 -p 10241:50000 -v /var/jenkins_mount:/var/jenkins_home -v /etc/localtime:/etc/localtime --name myjenkins jenkins/jenkins</span><br><span class="line"><span class="meta">#</span> 清华大学官方镜像：https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</span><br><span class="line">vi  hudson.model.UpdateCenter.xml</span><br></pre></td></tr></table></figure>
+<h2 id="4-4-自定义jenkins的镜像"><a href="#4-4-自定义jenkins的镜像" class="headerlink" title="4.4 自定义jenkins的镜像"></a>4.4 自定义jenkins的镜像</h2><p>当前目录下存在:  config  Dockerfile  glibc-2.23-r3.apk  kubectl  settings.xml 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FROM jenkins/jenkins:alpine</span><br><span class="line">LABEL auth="qisensen"</span><br><span class="line"></span><br><span class="line">USER root</span><br><span class="line"></span><br><span class="line">ARG MAVEN_VERSION=3.6.3</span><br><span class="line">ARG MAVEN_SHA=fae9c12b570c3ba18116a4e26ea524b29f7279c17cbaadc3326ca72927368924d9131d11b9e851b8dc9162228b6fdea955446be41207a5cfc61283dd8a561d2f</span><br><span class="line">ARG MAVEN_BASE_URL=https://apache.osuosl.org/maven/maven-3/$&#123;MAVEN_VERSION&#125;/binaries</span><br><span class="line"></span><br><span class="line">RUN echo "https://mirrors.aliyun.com/alpine/v3.8/main/" &gt; /etc/apk/repositories \</span><br><span class="line">  &amp;&amp; echo "https://mirrors.aliyun.com/alpine/v3.8/community/" &gt;&gt; /etc/apk/repositories \</span><br><span class="line">  &amp;&amp; apk add --no-cache curl  ca-certificates openrc tar procps tzdata shadow docker \</span><br><span class="line">  &amp;&amp; cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo Asia/Shanghai &gt; /etc/timezone \</span><br><span class="line">  &amp;&amp; mkdir -p /usr/share/maven /usr/share/maven/ref/repository \</span><br><span class="line">  &amp;&amp; curl -fsSL -o /tmp/apache-maven.tar.gz $&#123;MAVEN_BASE_URL&#125;/apache-maven-$&#123;MAVEN_VERSION&#125;-bin.tar.gz \</span><br><span class="line">  &amp;&amp; tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \</span><br><span class="line">  &amp;&amp; rm -f /tmp/apache-maven.tar.gz \</span><br><span class="line">  &amp;&amp; ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \</span><br><span class="line">  &amp;&amp; usermod -aG 999 jenkins \</span><br><span class="line">  &amp;&amp; chown 1000:1000 /usr/share/maven/ref/repository \</span><br><span class="line">  &amp;&amp; apk del tzdata shadow tar &amp;&amp; rc-update add docker boot &amp;&amp; mkdir -p ~/.kube/</span><br><span class="line">COPY kubectl /usr/local/bin/</span><br><span class="line">COPY config ~/.kube/</span><br><span class="line">ENV MAVEN_HOME /usr/share/maven</span><br><span class="line">ENV KUBECONFIG ~/.kube/config</span><br><span class="line">VOLUME /usr/share/maven/ref/repository</span><br><span class="line"></span><br><span class="line">COPY settings.xml /usr/share/maven/conf/settings.xml</span><br></pre></td></tr></table></figure>
+<p>执行容器命令启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 10240:8080 -p 10241:50000 -v /root/test/jenkins:/var/jenkins_home -v /etc/localtime:/etc/localtime -v "/var/run/docker.sock:/var/run/docker.sock:rw"  --name myjenkins f7b60faddb9e</span><br></pre></td></tr></table></figure>
+<h2 id="4-5-运行的容器制作成镜像，以及镜像打包和推送到远程仓库"><a href="#4-5-运行的容器制作成镜像，以及镜像打包和推送到远程仓库" class="headerlink" title="4.5 运行的容器制作成镜像，以及镜像打包和推送到远程仓库"></a>4.5 运行的容器制作成镜像，以及镜像打包和推送到远程仓库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>结尾添加"非安全的 IP地址\域名" </span><br><span class="line">vim /lib/systemd/system/docker.service</span><br><span class="line">...</span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --insecure-registry 192.168.1.102:5000</span><br><span class="line"></span><br><span class="line">或者,等效，只能配置其一</span><br><span class="line">/etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  "registry-mirrors": [</span><br><span class="line">    "https://docker.mirrors.ustc.edu.cn/",</span><br><span class="line">    "https://1rlt72n0.mirror.aliyuncs.com",</span><br><span class="line">    "https://registry.docker-cn.com",</span><br><span class="line">    "http://hub-mirror.c.163.com",</span><br><span class="line">    "https://docker.mirrors.ustc.edu.cn",</span><br><span class="line">    "https://reg-mirror.qiniu.com",</span><br><span class="line">    "https://dockerhub.azk8s.cn",</span><br><span class="line">    "https://mirror.ccs.tencentyun.com"</span><br><span class="line">  ],</span><br><span class="line">  "insecure-registries": [</span><br><span class="line">    "192.168.1.102:5000"</span><br><span class="line">  ],</span><br><span class="line">  "dns" : [//dns可以配置私有dns</span><br><span class="line">    "114.114.114.114"</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"><span class="meta">#</span>其他机器登录</span><br><span class="line">docker login 192.168.1.102:5000</span><br><span class="line"><span class="meta">#</span> 1.对于运行的容器打包成镜像使用commit命令</span><br><span class="line">docker commit -m '增加' 运行容器的名字 192.168.1.102:5000/dev/test:v2.0</span><br><span class="line"><span class="meta">#</span> 2.对于已存在的镜像打tag,以便推送到私有仓库上</span><br><span class="line">docker tag jenkins 192.168.1.102:5000/dev/jenkins:v2.0</span><br><span class="line"><span class="meta">#</span> 3.推送tag或者镜像文件到私有仓库上</span><br><span class="line"><span class="meta">#</span># 3.1登录私有仓库</span><br><span class="line">docker login -u admin  -p admin 192.168.1.102:5000</span><br><span class="line"><span class="meta">#</span># 3.2推送镜像文件</span><br><span class="line">docker push 192.168.1.102:5000/dev/jenkins:v2.0</span><br></pre></td></tr></table></figure>
+<h2 id="4-6-docker-compose安装grafana和prometheus"><a href="#4-6-docker-compose安装grafana和prometheus" class="headerlink" title="4.6 docker-compose安装grafana和prometheus"></a>4.6 docker-compose安装grafana和prometheus</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2.1'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  monitor-net:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">bridge</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="attr">    prometheus_data:</span> <span class="string">&#123;&#125;</span></span><br><span class="line"><span class="attr">    grafana_data:</span> <span class="string">&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  prometheus:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">prom/prometheus:v2.17.1</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">prometheus</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"9090:9090"</span>    </span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./prometheus:/etc/prometheus</span></span><br><span class="line"><span class="attr">      - prometheus_data:</span><span class="string">/prometheus</span></span><br><span class="line"><span class="attr">    command:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'--config.file=/etc/prometheus/prometheus.yml'</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'--storage.tsdb.path=/prometheus'</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'--web.console.libraries=/etc/prometheus/console_libraries'</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'--web.console.templates=/etc/prometheus/consoles'</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'--storage.tsdb.retention.time=200h'</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">'--web.enable-lifecycle'</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    expose:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">9090</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">monitor-net</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line">      <span class="string">org.label-schema.group:</span> <span class="string">"monitoring"</span></span><br><span class="line"><span class="attr">  grafana:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">grafana/grafana:6.7.2</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">grafana</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3000:3000"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="attr">      - grafana_data:</span><span class="string">/var/lib/grafana</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./grafana/provisioning:/etc/grafana/provisioning</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">GF_SECURITY_ADMIN_USER=$&#123;ADMIN_USER&#125;</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">GF_SECURITY_ADMIN_PASSWORD=$&#123;ADMIN_PASSWORD&#125;</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">GF_USERS_ALLOW_SIGN_UP=false</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    expose:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">3000</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">monitor-net</span></span><br><span class="line"><span class="attr">    labels:</span></span><br><span class="line">      <span class="string">org.label-schema.group:</span> <span class="string">"monitoring"</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-7-基于ubuntu机器学习的环境Dockerfile"><a href="#4-7-基于ubuntu机器学习的环境Dockerfile" class="headerlink" title="4.7 基于ubuntu机器学习的环境Dockerfile"></a>4.7 基于ubuntu机器学习的环境Dockerfile</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">21.10</span></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"><span class="keyword">RUN</span> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">ENV DEBIAN_FRONTEND=noninteractive</span><br><span class="line">RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list</span><br><span class="line">RUN apt-get clean</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install ffmpeg libsm6 libxext6 wget make build-essential libssl-dev zlib1g-dev libbz2-dev \</span><br><span class="line">            libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \</span><br><span class="line">            xz-utils tk-dev libffi-dev liblzma-dev zlib1g-dev python3-distutils -y</span><br><span class="line">RUN wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz --no-check-certificate \</span><br><span class="line">          &amp;&amp; tar -xf Python-3.8.0.tgz &amp;&amp; cd Python-3.8.0 &amp;&amp;  ./configure --prefix=/usr/local/python3 --enable-optimizations \</span><br><span class="line">          &amp;&amp; make &amp;&amp; make install</span><br><span class="line">RUN wget https://bootstrap.pypa.io/get-pip.py &amp;&amp; python3 get-pip.py</span><br><span class="line">RUN mkdir -p /opt/data/deploy/discernment_ai</span><br><span class="line">WORKDIR /opt/data/deploy/discernment_ai</span><br><span class="line">COPY . .</span><br><span class="line">RUN pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">VOLUME /opt/data/deploy/discernment_ai</span><br><span class="line">EXPOSE 5003</span><br><span class="line">ENTRYPOINT ["python3","-u"]</span><br><span class="line">CMD ["app.py"]</span><br></pre></td></tr></table></figure>
+<h2 id="4-8-已存在的容器调试方法"><a href="#4-8-已存在的容器调试方法" class="headerlink" title="4.8 已存在的容器调试方法"></a>4.8 已存在的容器调试方法</h2><p>有些三方的镜像已经被构建且没有构建相关的Dockerfile，但是我们又想调试可以尝试覆盖进入命令进行覆盖启动</p>
+<blockquote>
+<p>别忘了同步修改暴露5005端口</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1.使用docker inspect获取启动的cmd或者Entrypoint命令</span><br><span class="line">docker inspect &lt;容器名称&gt;  &gt;path_to_modified_json.json</span><br><span class="line"><span class="meta">#</span>2.更新容器的配置</span><br><span class="line">docker update --config &lt;path_to_modified_json&gt; &lt;container&gt;</span><br></pre></td></tr></table></figure>
+<p>还可以使用修改启动镜像命令的方式覆盖启动命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 5005:5005 --entrypoint new-entrypoint.sh image_name</span><br><span class="line">或者直接修改docker-compose的entrypoint</span><br><span class="line">services:</span><br><span class="line">  your_service:</span><br><span class="line">    image: your_image</span><br><span class="line">    entrypoint:</span><br><span class="line">      - java</span><br><span class="line">      - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</span><br><span class="line">      - org.maxkey.MyApplication</span><br><span class="line">    ports:</span><br><span class="line">      - "9527:9527"</span><br><span class="line">      - "5005:5005"</span><br></pre></td></tr></table></figure>
+<h2 id="4-9-容器代理"><a href="#4-9-容器代理" class="headerlink" title="4.9 容器代理"></a>4.9 容器代理</h2><p><strong>dockerd 设置网络代理</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line">vi /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"><span class="meta">#</span># 添加如下内容</span><br><span class="line">[Service]</span><br><span class="line">Environment="HTTP_PROXY=socks5://proxy.example.com:8080/"</span><br><span class="line">Environment="HTTPS_PROXY=socks5://proxy.example.com:8080/"</span><br><span class="line">Environment="NO_PROXY=localhost,127.0.0.1,.example.com"</span><br></pre></td></tr></table></figure>
+<p><strong>docker 容器设置网络代理</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.docker/config.json</span><br><span class="line"># 第一种方式 添加如下内容</span><br><span class="line">&#123;</span><br><span class="line"> <span class="attr">"proxies"</span>:</span><br><span class="line"> &#123;</span><br><span class="line">   <span class="attr">"default"</span>:</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="attr">"httpProxy"</span>: <span class="string">"socks5://proxy.example.com:8080/"</span>,</span><br><span class="line">     <span class="attr">"httpsProxy"</span>: <span class="string">"socks5://proxy.example.com:8080/"</span>,</span><br><span class="line">     <span class="attr">"noProxy"</span>: <span class="string">"localhost,127.0.0.1,.example.com"</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"># 第二种方式通过启动容器时 --env HTTP_PROXY="http://proxy.example.com:8080/"  去设置代理</span><br></pre></td></tr></table></figure>
+<p><strong>Docker客户端使用代理</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>vim ~/.docker/config.json</span><br><span class="line">&#123;</span><br><span class="line">  "proxies": &#123;</span><br><span class="line">    "default": &#123;</span><br><span class="line">      "httpProxy": "socks5://proxy.example.com:8080",</span><br><span class="line">      "httpsProxy": "socks5://proxy.example.com:8080",</span><br><span class="line">      "noProxy": "localhost,127.0.0.1"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>docker build 过程设置网络代理</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 第一种方式启动时候指定变量</span><br><span class="line">docker build \</span><br><span class="line">    --build-arg "HTTP_PROXY=socks5://proxy.example.com:8080/" \</span><br><span class="line">    --build-arg "HTTPS_PROXY=socks5://proxy.example.com:8080/" \</span><br><span class="line">    --build-arg "NO_PROXY=localhost,127.0.0.1,.example.com" .</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span> 第二种方式在Dockfile中添加变量</span><br><span class="line"><span class="meta">#</span> vim Dockfile添加如下变量内容</span><br><span class="line">ENV HTTP_PROXY="socks5://proxy.example.com:8080/"</span><br><span class="line">ENV HTTPS_PROXY="socks5://proxy.example.com:8080/"</span><br><span class="line">ENV NO_PROXY="localhost,127.0.0.1,.example.com"</span><br></pre></td></tr></table></figure>
+<h1 id="5-大数据相关"><a href="#5-大数据相关" class="headerlink" title="5.大数据相关"></a>5.大数据相关</h1><h2 id="5-1-kafka相关"><a href="#5-1-kafka相关" class="headerlink" title="5.1 kafka相关"></a>5.1 kafka相关</h2><ul>
+<li><p>集群相关配置</p>
+<ul>
+<li><p>zookeeper</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>重要配置，需要在此目录下生成myid文件,即为集群标记</span><br><span class="line">dataDir=/mnt/data/</span><br><span class="line"><span class="meta">#</span>zk链接端口</span><br><span class="line">clientPort=2181</span><br><span class="line"><span class="meta">#</span>集群id和集群ip配置</span><br><span class="line">server.0=ip1:2888:3888</span><br><span class="line">server.1=ip2:2888:3888</span><br><span class="line">server.2=ip3:2888:3888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>kafka</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>集群标记,每个需递增</span><br><span class="line">borker.id=1</span><br><span class="line"><span class="meta">#</span>日志文件</span><br><span class="line">log.dir=/mnt/data/kafka</span><br><span class="line"><span class="meta">#</span>配置zk集群</span><br><span class="line">zookeeper.connect=ip1:2181,ip2:2181,ip3:2181</span><br><span class="line"><span class="meta">#</span>配置端口</span><br><span class="line">port=9092</span><br><span class="line"><span class="meta">#</span>绑定机器</span><br><span class="line">host.name=ip</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>常用命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1.新建topic</span><br><span class="line">bin/kafka-topics.sh --create --zookeeper node:2181 --topic test --partitions 2 --replication-factor 1</span><br><span class="line">2.修改partition数 只能增</span><br><span class="line">./bin/kafka-topics.sh --alter --topic test2 --zookeeper node:2181 --partitions 3  </span><br><span class="line">3.查看指定topic</span><br><span class="line">bin/kafka-topics.sh --zookeeper zookeeper01:2181 --describe --topic topic_test</span><br><span class="line">4.删除topic</span><br><span class="line">bin/kafka-topics.sh  --delete --topic test --zookeeper node:2181</span><br><span class="line">5.显示某个消费组的消费详情(CURRENT-OFFSET:已消费的,LOG-END-OFFSET:总数,LAG=LOG-END-OFFSET-CURRENT-OFFSET:堆积的消息)</span><br><span class="line">bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --describe --group test-consumer-group</span><br><span class="line">6.消费者列表查询</span><br><span class="line">bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --list</span><br><span class="line">7.所有新消费者列表</span><br><span class="line">bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --list</span><br><span class="line">8.查询集群描述</span><br><span class="line">bin/kafka-topics.sh --describe --zookeeper </span><br><span class="line">9.从头开始消费</span><br><span class="line">bin/kafka-console-consumer.sh --zookeeper node:2181 --topic test --from-beginning</span><br><span class="line">10.获取主题(其分区)的最大偏移量</span><br><span class="line">bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic</span><br><span class="line">11.从尾开始消费指定分区指定消费个数</span><br><span class="line">kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic mytopic --offset 10 --partition 0   --max-messages 1</span><br><span class="line">12.使用命令对指定topic发送kafka消息</span><br><span class="line">bin/kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic test</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-2-impala相关"><a href="#5-2-impala相关" class="headerlink" title="5.2 impala相关"></a>5.2 impala相关</h2> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">常用修改操作: https://www.cnblogs.com/yhason/p/4724987.html</span><br><span class="line">1.查看表的文件分布</span><br><span class="line">show files in xxx;</span><br><span class="line">2.查看表的状态</span><br><span class="line">show table stats xxx;</span><br><span class="line">3.表基本描述</span><br><span class="line">describe xxx;</span><br><span class="line">4.查看表的见表语句</span><br><span class="line">show CREATE TABLE xxx;</span><br><span class="line">5.compute stats </span><br><span class="line">为表收集重要的与性能相关的信息,以便被 Impala 用于优化查询</span><br><span class="line">6.更新 impalad 元数据中表的存在性与结构</span><br><span class="line">invalidate metadata</span><br><span class="line">7.刷新 impalad 元数据中 Impala 数据文件对应的 HDFS 块的位置</span><br><span class="line">refresh xxx;</span><br><span class="line">8.使用jar包查看parquet文件</span><br><span class="line">https://github.com/apache/parquet-mr/tree/master/parquet-tools?spm=5176.doc52798.2.6.H3s2kL</span><br><span class="line">http://logservice-resource.oss-cn-shanghai.aliyuncs.com/tools/parquet-tools-1.6.0rc3-SNAPSHOT.jar?spm=5176.doc52798.2.7.H3s2kL&amp;file=parquet-tools-1.6.0rc3-SNAPSHOT.jar</span><br><span class="line">查看结构：</span><br><span class="line">java -jar parquet-tools-1.6.0rc3-SNAPSHOT.jar schema -d activity.201711171437.0.parquet |head -n 30</span><br><span class="line">查看内容：</span><br><span class="line">java -jar parquet-tools-1.6.0rc3-SNAPSHOT.jar head -n 2 activity.201711171437.0.parquet</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-hdfs相关"><a href="#5-3-hdfs相关" class="headerlink" title="5.3 hdfs相关"></a>5.3 hdfs相关</h2><p><code>hadoop fs &lt;选项&gt;</code> 建议使用<br><code>hdfs dfs &lt;选项&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>选项名称</th>
+<th><strong>使用格式</strong></th>
+<th><strong>含义</strong></th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-ls</td>
+<td>-ls &lt;路径&gt;</td>
+<td>查看指定路径的当前目录结构</td>
+<td><code>hadoop fs -ls /input</code></td>
+</tr>
+<tr>
+<td>-lsr</td>
+<td>-lsr &lt;路径&gt;</td>
+<td>递归查看指定路径的目录结构</td>
+<td><code>hadoop fs -lsr /</code></td>
+</tr>
+<tr>
+<td>-du</td>
+<td>-du &lt;路径&gt;</td>
+<td>统计目录下文件的大小</td>
+<td><code>hadoop fs -du /input</code></td>
+</tr>
+<tr>
+<td>-dus</td>
+<td>-dus &lt;路径&gt;</td>
+<td>汇总统计目录下文件和文件夹的大小</td>
+<td><code>hadoop fs -du /</code></td>
+</tr>
+<tr>
+<td>-mv</td>
+<td>-mv &lt;源路径&gt; &lt;目的路径&gt;</td>
+<td>移动或重命名</td>
+<td><code>hadoop fs -mv /input /tmp</code></td>
+</tr>
+<tr>
+<td>-count</td>
+<td>-count [-q] &lt;路径&gt;</td>
+<td>查询文件夹的磁盘空间限额和文件数目限额</td>
+<td><code>hadoop fs -count -p /tmp</code></td>
+</tr>
+<tr>
+<td>-cp</td>
+<td>-cp &lt;源路径&gt; &lt;目的路径&gt;</td>
+<td>复制文件(夹)到指定目录</td>
+<td><code>hadoop fs -cp /one /two</code></td>
+</tr>
+<tr>
+<td>-put</td>
+<td>-put &lt;多个 Linux 上的文件&gt;</td>
+<td>上传文件到 HDFS 中</td>
+<td><code>hadoop fs -put ~/Downloads/abc.txt /two/one/</code></td>
+</tr>
+<tr>
+<td>-copyFromLocal</td>
+<td>-copyFromLocal &lt;多个或单个 linux 上的文件&gt;</td>
+<td>从本地复制文件到 HDFS</td>
+<td><code>hadoop fs -copyFromLocal ~/Downloads/1.txt /two</code></td>
+</tr>
+<tr>
+<td>-moveFromLocal</td>
+<td>-moveFromLocal &lt;多个或单个 linux 上的文件&gt;</td>
+<td>从本地移动</td>
+<td><code>hadoop fs -copyFromLocal ~/Downloads/2.txt /two</code></td>
+</tr>
+<tr>
+<td>-rm</td>
+<td>-rm [-skipTrash] &lt;路径&gt;</td>
+<td>删除文件或空白文件夹, 加上 <code>-skipTrash</code> 删除不会放到回收站</td>
+<td><code>hadoop -fs -rm -skipTrash /two/one/abc.txt</code></td>
+</tr>
+<tr>
+<td>-rmr</td>
+<td>-rmr [-skipTrash] &lt;路径&gt;</td>
+<td>递归删除, 加上 <code>-skipTrash</code> 删除不会放到回收站</td>
+<td><code>hadoop -fs -rmr -skipTrash /two/one</code></td>
+</tr>
+<tr>
+<td>-getmerge</td>
+<td>-getmerge &lt;源路径&gt; [addnl]</td>
+<td>合并文件到本地, [addnl] 参数实在每一个文件末尾添加一个换行符</td>
+<td><code>hadoop fs -getmerge /two/*.txt ~/Down addnl</code></td>
+</tr>
+<tr>
+<td>-cat</td>
+<td>-cat</td>
+<td>查看文件内容</td>
+<td><code>hadoop fs -cat /input/abc.txt</code></td>
+</tr>
+<tr>
+<td>-text</td>
+<td>-text</td>
+<td>查看文件或者 zip 的内容</td>
+<td><code>hadoop fs -text /input/abc.txt</code></td>
+</tr>
+<tr>
+<td>-copyToLocal</td>
+<td>-copyToLocal [-ignoreCrc] [-crc] [hdfs 源路径] [linux 目的路径]</td>
+<td>从 hdfs 向本地复制</td>
+<td><code>hadoop fs -copyToLocal /input/* ~/Downloads</code></td>
+</tr>
+<tr>
+<td>-moveToLocal</td>
+<td>-moveToLocal [-crc]</td>
+<td>从 hdfs 向本地移动</td>
+<td><code>hdfs dfs -moveToLocal /input/* ~/Downloads</code></td>
+</tr>
+<tr>
+<td>-mkdir</td>
+<td>-mkdir</td>
+<td>创建空白文件夹</td>
+<td><code>hadoop fs -mkdir /666</code></td>
+</tr>
+<tr>
+<td>-setrep</td>
+<td>-setrp [-R] [-w] &lt;副本数&gt; &lt;路径&gt;</td>
+<td><code>修改文件的副本系数。-R选项用于递归改变目录下所有文件的副本系数</code></td>
+<td><code>hadoop fs -setrep -R -w 3 /user/hadoop/dir</code></td>
+</tr>
+<tr>
+<td>-touchz</td>
+<td>-touchz &lt;文件路径&gt;</td>
+<td>创建空白文件</td>
+<td><code>hadoop fs -touchz /666/999.log</code></td>
+</tr>
+<tr>
+<td>-stat</td>
+<td>-stat [format] &lt;路径&gt;</td>
+<td>显示文件统计信息</td>
+<td><code>hadoop fs -stat path</code></td>
+</tr>
+<tr>
+<td>-tail</td>
+<td>-tail [-f] &lt;文件&gt;</td>
+<td>查看文件尾部信息</td>
+<td><code>hadoop fs -tail pathname</code></td>
+</tr>
+<tr>
+<td>-chmod</td>
+<td>-chmod [-R] &lt;权限模式&gt; [路径]</td>
+<td>修改权限</td>
+<td><code>hadoop fs -chmod -R 777 /input</code></td>
+</tr>
+<tr>
+<td>-chown</td>
+<td>-chown [-R] [属主]] 路径</td>
+<td>修改属主</td>
+<td><code>hadoop fs -chown -R hadoop0 /input</code></td>
+</tr>
+<tr>
+<td>-chgrp</td>
+<td>-chgrp [-R] 属组名称 路径</td>
+<td>修改属组</td>
+<td><code>hadoop fs -chgrp -R root /flume</code></td>
+</tr>
+<tr>
+<td>-help</td>
+<td>-help [命令选项]</td>
+<td>查看帮助</td>
+<td><code>hadoop fs -help</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-Java相关"><a href="#6-Java相关" class="headerlink" title="6.Java相关"></a>6.Java相关</h1><h2 id="6-1-maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突"><a href="#6-1-maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突" class="headerlink" title="6.1 maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突"></a>6.1 maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突</h2><h3 id="6-1-1-排除不使用的类"><a href="#6-1-1-排除不使用的类" class="headerlink" title="6.1.1 排除不使用的类"></a>6.1.1 排除不使用的类</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-shade-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>shade<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">minimizeJar</span>&gt;</span>true<span class="tag">&lt;/<span class="name">minimizeJar</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-1-2-将依赖的类重命名并打包进来-（隔离方案）"><a href="#6-1-2-将依赖的类重命名并打包进来-（隔离方案）" class="headerlink" title="6.1.2 将依赖的类重命名并打包进来 （隔离方案）"></a>6.1.2 将依赖的类重命名并打包进来 （隔离方案）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">将“org.codehaus.plexus.util”重命名为“org.shaded.plexus.util”，原始jar包中的“org.codehaus.plexus.util.xml.Xpp3Dom”和“org.codehaus.plexus.util.xml.pull”不会被重命名到目的包中；</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-shade-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">goal</span>&gt;</span>shade<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">relocations</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">relocation</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>org.codehaus.plexus.util<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">shadedPattern</span>&gt;</span>org.shaded.plexus.util<span class="tag">&lt;/<span class="name">shadedPattern</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>org.codehaus.plexus.util.xml.Xpp3Dom<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>org.codehaus.plexus.util.xml.pull.*<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">relocation</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">relocations</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-1-3-Java执行单个编译类包括依赖"><a href="#6-1-3-Java执行单个编译类包括依赖" class="headerlink" title="6.1.3 Java执行单个编译类包括依赖"></a>6.1.3 Java执行单个编译类包括依赖</h3><p>比如，需要执行Simple.class以及其依赖包xxxa.jar以及xxxb.jar</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp .:xxxa.jar;d:\classes\*.jar  Simple</span><br></pre></td></tr></table></figure>
+<h2 id="6-2-Java-VisualVM-远程调试"><a href="#6-2-Java-VisualVM-远程调试" class="headerlink" title="6.2 Java VisualVM 远程调试"></a>6.2 Java VisualVM 远程调试</h2><ol>
+<li><p>创建all.policy文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; all.policy &lt;&lt;EOF</span><br><span class="line">grant codebase "file:$&#123;java.home&#125;/../lib/tools.jar" &#123;</span><br><span class="line">permission java.security.AllPermission;</span><br><span class="line">&#125;;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器端启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jstatd -J-Djava.security.policy=all.policy</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开 Java VisualVM  文件&gt;添加远程主机   填入服务端IP</p>
+</li>
+</ol>
+<h2 id="6-3-springboot的可执行jar不能替换lib目录下jar文件"><a href="#6-3-springboot的可执行jar不能替换lib目录下jar文件" class="headerlink" title="6.3 springboot的可执行jar不能替换lib目录下jar文件"></a>6.3 springboot的可执行jar不能替换lib目录下jar文件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">springboot项目在使用压缩软件替换lib下的依赖包后，启动报错</span><br><span class="line">​Exception in thread <span class="string">"main"</span> java.lang.IllegalStateException: Failed to get nested archive <span class="keyword">for</span> entry BOOT-INF/lib/xxx</span><br></pre></td></tr></table></figure>
+<p>原因是:替换或者导入jar包时，jar包被自动压缩，springboot规定嵌套的jar包不能在被压缩的情况下存储。需要使用jar命令解压jar包，在压缩包外重新替换jar包，在进行压缩。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>1.解压springboot的可执行jar</span><br><span class="line">jar -xvf *.jar</span><br><span class="line"><span class="meta">#</span>2.替换相关依赖lib目录下的jar</span><br><span class="line">mv  xxx BOOT-INF/lib/</span><br><span class="line"><span class="meta">#</span>3.重新压缩jar</span><br><span class="line">jar -cfM0 new.jar BOOT-INF/ META-INF/ org/  xxx</span><br></pre></td></tr></table></figure>
+<h2 id="6-4-cpu100-线上排查"><a href="#6-4-cpu100-线上排查" class="headerlink" title="6.4 cpu100%线上排查"></a>6.4 cpu100%线上排查</h2><p><img src="951e5d60-c1b9-4f7f-b3d2-d57cea175bf8.png" alt="c1b9"></p>
+<p><strong>线程CPU100%可能导致的原因</strong></p>
+<p><a href="https://www.cnblogs.com/jajian/p/10578628.html" target="_blank" rel="noopener">https://www.cnblogs.com/jajian/p/10578628.html</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>找出消耗cpu最高的线程</span><br><span class="line">top  #找到占用最高的进程</span><br><span class="line">top -H -p pid #找到占用最高进程的最高线程</span><br><span class="line">printf "%x\n" tid #将占用最高的线程id转换为16进制</span><br><span class="line"><span class="meta">#</span>打印jvm线程信息并查看占用CPU最高的线程执行了什么代码</span><br><span class="line">jstack pid&gt;stack.txt #保留现场</span><br><span class="line">cat stack.txt|grep 十六进制的tid #查看线程忙什么</span><br><span class="line">jstack pid |grep tid -A 50 #查询忙线程执行什么</span><br><span class="line"><span class="meta">#</span>每秒打印GC日志查看gc情况</span><br><span class="line">jstat -gcutil pid 1000</span><br><span class="line"><span class="meta">#</span>dump jvm内存信息,并使用MAT进行分析</span><br><span class="line">jmap -dump:format=b,file=./java.dump pid</span><br><span class="line"><span class="meta">#</span>查看队内存情况和使用的垃圾回收器</span><br><span class="line">jmap -heap pid</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>打印垃圾回收日志</span><br><span class="line">-XX:+PrintGCDetails</span><br><span class="line">-XX:+PrintGCDateStamps</span><br><span class="line">-XX:+PrintTenuringDistribution</span><br><span class="line">-XX:+PrintHeapAtGC</span><br><span class="line">-XX:+PrintReferenceGC</span><br><span class="line">-XX:+PrintGCApplicationStoppedTime</span><br><span class="line">-Xloggc:/data/gc-%t.log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用G1垃圾回收器</span><br><span class="line">-XX:+UseG1GC</span><br><span class="line">-XX:MaxGCPauseMillis=500</span><br><span class="line">-XX:-TieredCompilation</span><br><span class="line">-XX:ReservedCodeCacheSize=128m</span><br><span class="line">-XX:+UseCodeCacheFlushing</span><br><span class="line"><span class="meta">#</span>G1常用参数，和介绍</span><br><span class="line">https://blog.csdn.net/Megustas_JJC/article/details/105470675</span><br><span class="line">https://www.cnblogs.com/klvchen/articles/11672058.html</span><br></pre></td></tr></table></figure>
+<h2 id="6-5-git使用代理"><a href="#6-5-git使用代理" class="headerlink" title="6.5 git使用代理"></a>6.5 git使用代理</h2><p>如果仅设置当前项目的git代理需要在当前项目目录进入命令行，如果需要设置全局git代理，需要在每个<em>git config</em> 命令后加上 <em>–global</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>代理</span><br><span class="line">git config http.proxy http://192.168.15.40:3128</span><br><span class="line">git config https.proxy https://192.168.15.40:3128</span><br><span class="line"><span class="meta">#</span>取消代理</span><br><span class="line">git config --unset http.proxy</span><br><span class="line">git config --unset https.proxy</span><br><span class="line"><span class="meta">#</span>查询是否使用</span><br><span class="line">git config http.proxy </span><br><span class="line">git config https.proxy</span><br></pre></td></tr></table></figure>
+<h1 id="7-中间件"><a href="#7-中间件" class="headerlink" title="7.中间件"></a>7.中间件</h1><h2 id="7-1-fastdfs扩容"><a href="#7-1-fastdfs扩容" class="headerlink" title="7.1 fastdfs扩容"></a>7.1 fastdfs扩容</h2><p>Ⅰ.扩容基于goup的store_path进行扩容,<strong>扩充group的存储空间，配置多个存储文件目录地址</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 1.停止现有的tracker服务，fdfs_nginx，storage服务。</span><br><span class="line"><span class="meta">#</span> 2.挂载新的磁盘（过程略）</span><br><span class="line"><span class="meta">#</span> 3.修改tracker.conf配置文件</span><br><span class="line">vi /etc/fdfs/tracker.conf</span><br><span class="line"><span class="meta">#</span>修改以下参数为2，上传时选择路径规则。（取值只有0和2。0：轮询（默认）；2：负载均衡，选择可用空间最大的文件夹）</span><br><span class="line">store_path=2</span><br><span class="line"><span class="meta">#</span> 4.修改storage.conf配置文件</span><br><span class="line">vi /etc/fdfs/storage.conf</span><br><span class="line"><span class="meta">#</span>将以下参数值改为2</span><br><span class="line">store_path_count=2 </span><br><span class="line"><span class="meta">#</span>新增存储路径store_path1(必须存在的路径，需提前手动创建 mkdir -p /data/fastdfs)</span><br><span class="line">store_path1=/data/fastdfs</span><br><span class="line"><span class="meta">#</span> 5.修改mod_fastdfs.conf配置文件</span><br><span class="line">vi /etc/fdfs/mod_fastdfs.conf</span><br><span class="line"><span class="meta">#</span>修改以下参数为2</span><br><span class="line">store_path_count=2</span><br><span class="line"><span class="meta">#</span>新增存储路径store_path1</span><br><span class="line">store_path1=/data/fastdfs（同storage.conf 一致）</span><br><span class="line"><span class="meta">#</span> 6.启动tracker，storage服务</span><br><span class="line"><span class="meta">#</span>7.查看状态</span><br><span class="line">fdfs_monitor /etc/fdfs/client.conf</span><br><span class="line"><span class="meta">#</span> 8.修改nginx.conf配置文件并重载nginx</span><br><span class="line">vi /usr/local/nginx/conf/nginx.conf</span><br><span class="line"><span class="meta">#</span> 添加store_path1的路径</span><br><span class="line">location ~/group[0-9]/M00 &#123;</span><br><span class="line">            alias   /opt/fastdfs/data/;</span><br><span class="line">            ngx_fastdfs_module;</span><br><span class="line">        &#125;</span><br><span class="line">location ~/group[0-9]/M01 &#123;</span><br><span class="line">            alias   /data/fastdfs/data/;</span><br><span class="line">            ngx_fastdfs_module;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#</span>dfs_nginx加载配置文件</span><br><span class="line">nginx -s reload</span><br><span class="line"><span class="meta">#</span> 9.测试上传</span><br><span class="line">/usr/bin/fdfs_test /etc/fdfs/client.conf upload test.txt</span><br></pre></td></tr></table></figure>
+<p>Ⅱ.扩容新的goup,<strong>扩充存储节点，新加服务器配置多个storage</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>背景,xx.1 xx.2作为tracker,xx.3,xx.4作为storage两个从属group1,新增一台storage xx.5为group2</span><br><span class="line"><span class="meta">#</span> 1.停止现有的tracker服务，fdfs_nginx，storage服务。</span><br><span class="line"><span class="meta">#</span> 2.新的机器装新的storage（过程略）</span><br><span class="line"><span class="meta">#</span> 3.修改xx.1 xx.2的tracker.conf配置文件</span><br><span class="line">vi /etc/fdfs/tracker.conf</span><br><span class="line"><span class="meta">#</span> the method of selecting group to upload files</span><br><span class="line"><span class="meta">#</span> 0: group组负载均衡，1: 指定组 2: 负载均衡，选择可用空间最大group</span><br><span class="line">store_lookup=1</span><br><span class="line"><span class="meta">#</span> which group to upload file</span><br><span class="line"><span class="meta">#</span> when store_lookup set to 1, must set store_group to the group name</span><br><span class="line">store_group=group2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 4.修改xx.5 storage.conf配置文件</span><br><span class="line">vi /etc/fdfs/storage.conf</span><br><span class="line"><span class="meta">#</span>指定之前的xx.1 xx.2的tracker地址和端口</span><br><span class="line">tracker_server=x.x.1:22122</span><br><span class="line">tracker_server=x.x.2:22122</span><br><span class="line">group_name=group2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 5.修改xx.5 mod_fastdfs.conf配置文件</span><br><span class="line">vi /etc/fdfs/mod_fastdfs.conf</span><br><span class="line"><span class="meta">#</span>指定之前的xx.1 xx.2的tracker地址和端口</span><br><span class="line">tracker_server=x.x.1:22122</span><br><span class="line">tracker_server=x.x.2:22122</span><br><span class="line">url_have_group_name=true</span><br><span class="line">group_name=group2</span><br><span class="line">group_count=1</span><br><span class="line">[group2]</span><br><span class="line">group_name=group2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 6.启动tracker，storage服务</span><br><span class="line"><span class="meta">#</span>7.查看状态</span><br><span class="line">fdfs_monitor /etc/fdfs/client.conf</span><br><span class="line"><span class="meta">#</span> 8.修改修改xx.5  fds的nginx.conf配置文件并重载nginx</span><br><span class="line">vi /usr/local/nginx/conf/nginx.conf</span><br><span class="line"><span class="meta">#</span> 添加store_path1的路径</span><br><span class="line">location ~/group[0-9]/M00 &#123;</span><br><span class="line">            alias   /opt/fastdfs/data/;</span><br><span class="line">            ngx_fastdfs_module;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#</span>dfs_nginx加载配置文件</span><br><span class="line">nginx -s reload</span><br><span class="line"><span class="meta">#</span> 9.测试上传</span><br><span class="line">/usr/bin/fdfs_test /etc/fdfs/client.conf upload test.txt</span><br></pre></td></tr></table></figure>
+<h1 id="8-其他杂项相关"><a href="#8-其他杂项相关" class="headerlink" title="8.其他杂项相关"></a>8.其他杂项相关</h1><h2 id="8-1-log日志最优格式化以及配置每日文件滚动"><a href="#8-1-log日志最优格式化以及配置每日文件滚动" class="headerlink" title="8.1 log日志最优格式化以及配置每日文件滚动:"></a>8.1 log日志最优格式化以及配置每日文件滚动:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log4j.rootLogger=INFO,stdout,fileAppender</span><br><span class="line">log4j.appender.fileAppender=org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.fileAppender.DatePattern=&apos;.&apos;yyyy-MM-dd</span><br><span class="line">log4j.appender.fileAppender.File=/opt/config/fileAppender.log</span><br><span class="line">log4j.appender.fileAppender.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.fileAppender.layout.ConversionPattern=[%p][%t]%-d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;: (%c&#123;1&#125;.%M:line %L) - %m%n</span><br></pre></td></tr></table></figure>
+<h2 id="8-2-关于断电"><a href="#8-2-关于断电" class="headerlink" title="8.2 关于断电"></a>8.2 关于断电</h2><p>1.客户端向服务端发送写操作（数据在客户端的内存中）<br>2.数据库服务端接收到写请求的数据（数据在服务端的内存中）<br>3.服务端调用write这个系统调用，将数据往磁盘上写（数据在系统内存的缓冲区中）<br>4.操作系统将缓冲区中的数据转移到磁盘控制器上（数据在磁盘缓存中）<br>5.磁盘控制器将数据写到磁盘的物理介质中（数据真正落到磁盘上）</p>
+<p>当数据库系统故障时，这时候系统内核还是正常运行的，此时只要执行完了第3步，数据就是安全的，操作系统会完成后面几步，保证数据最终会落到磁盘上。<br> 当系统断电，这时候上面5项中提到的所有缓存都会失效，并且数据库和操作系统都会停止工作，数据都会丢失，只有当数据在完成第5步后，机器断电才能保证数据不丢失。</p>
+<h2 id="8-3-流媒体服务器SRS拉取摄像头流并推流"><a href="#8-3-流媒体服务器SRS拉取摄像头流并推流" class="headerlink" title="8.3 流媒体服务器SRS拉取摄像头流并推流"></a>8.3 流媒体服务器SRS拉取摄像头流并推流</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>容器部署SRS</span><br><span class="line">docker run --rm -it -p 1935:1935 -p 1985:1985 -p 8080:8080     registry.cn-hangzhou.aliyuncs.com/ossrs/srs:latest ./objs/srs -c conf/docker.conf</span><br><span class="line"><span class="meta">#</span>同机器容器使用ffmpeg拉取摄像头流并推送给本机SRS流服务</span><br><span class="line">docker run --network host --rm -it -v $(pwd):/config  linuxserver/ffmpeg -rtsp_transport tcp  -i  rtsp://xx:xx@ip:554/h264/ch33/main/av_stream  -acodec aac -strict experimental -ar 44100 -ac 2 -b:a 96k -r 25 -b:v 500k -s 640*480 -f flv rtmp://127.0.0.1/live/livestream</span><br><span class="line"><span class="meta">#</span>客户端可以访问路径</span><br><span class="line">RTMP (by VLC): rtmp://srsip/live/livestream</span><br><span class="line">H5(HTTP-FLV): http://srsip:8080/live/livestream.flv</span><br><span class="line">H5(HLS): http://srsip:8080/live/livestream.m3u8</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/杂项/" rel="tag"><i class="fa fa-tag"></i>
+
+ 杂项</a>
+          
+            <a href="/tags/记录/" rel="tag"><i class="fa fa-tag"></i>
+
+ 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/24/senssic.github.io/202211/kafka/" rel="next" title="kafka相关">
+                <i class="fa fa-chevron-left"></i> kafka相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/24/senssic.github.io/你好,世界/" rel="prev" title="你好,世界">
+                你好,世界 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="senssic">
+            
+              <p class="site-author-name" itemprop="name">senssic</p>
+              <p class="site-description motion-element" itemprop="description">不要在生活中迷失</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-windows相关"><span class="nav-number">1.</span> <span class="nav-text">0.windows相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-0-windows关于端口查询-amp-自启动目录"><span class="nav-number">1.1.</span> <span class="nav-text">0.0 windows关于端口查询&amp;自启动目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1-windows使用自带命令监听本地端口转发到其他服务器"><span class="nav-number">1.2.</span> <span class="nav-text">0.1 windows使用自带命令监听本地端口转发到其他服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-2-hyper-v开启centos的虚拟化并安装docker的Windows镜像"><span class="nav-number">1.3.</span> <span class="nav-text">0.2 hyper-v开启centos的虚拟化并安装docker的Windows镜像</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-linux相关"><span class="nav-number">2.</span> <span class="nav-text">1.linux相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-hexo一键执行脚本"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 hexo一键执行脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-使用阿里源"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 使用阿里源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-linux操作系统相关"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 linux操作系统相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-centos8-root用户忘记密码"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 centos8 root用户忘记密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-linux的初始化优化"><span class="nav-number">2.5.</span> <span class="nav-text">1.5 linux的初始化优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-linux双网卡NAT路由映射"><span class="nav-number">2.6.</span> <span class="nav-text">1.6 linux双网卡NAT路由映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-主盘扩容-dev-mapper-centos-root-空间不足"><span class="nav-number">2.7.</span> <span class="nav-text">1.7 主盘扩容(/dev/mapper/centos-root 空间不足)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-新增磁盘挂载"><span class="nav-number">2.8.</span> <span class="nav-text">1.8 新增磁盘挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-linux虚拟网卡和路由"><span class="nav-number">2.9.</span> <span class="nav-text">1.9 linux虚拟网卡和路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-增加或扩容swap"><span class="nav-number">2.10.</span> <span class="nav-text">1.10 增加或扩容swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-centos下载应离线安装包"><span class="nav-number">2.11.</span> <span class="nav-text">1.11 centos下载应离线安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-linux查询系统进行被杀"><span class="nav-number">2.12.</span> <span class="nav-text">1.12 linux查询系统进行被杀</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-虚拟机相关"><span class="nav-number">3.</span> <span class="nav-text">2.虚拟机相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-virtual-Boxs使用virtual-host和nat网络固定ip"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 virtual Boxs使用virtual host和nat网络固定ip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-桥接网络虚拟机无法自动获取ip"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 桥接网络虚拟机无法自动获取ip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-virtual-Boxs设置已存在的硬盘的大小"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 virtual Boxs设置已存在的硬盘的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-实验室主机虚拟化软件"><span class="nav-number">3.4.</span> <span class="nav-text">2.4  实验室主机虚拟化软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-pve-设置虚拟机分辨率"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 pve 设置虚拟机分辨率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-Hyper-V-NAT-网络设置固定-IP-DHCP"><span class="nav-number">3.6.</span> <span class="nav-text">2.6 Hyper-V NAT 网络设置固定 IP / DHCP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-数据库相关"><span class="nav-number">4.</span> <span class="nav-text">3.数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-mysql数据库常用操作"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 mysql数据库常用操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-数据库问题排查语句"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 数据库问题排查语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-数据库诊断命令"><span class="nav-number">4.2.1.</span> <span class="nav-text">3.2.1 数据库诊断命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-数据库死锁排查语句"><span class="nav-number">4.2.2.</span> <span class="nav-text">3.3.2 数据库死锁排查语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-数据库慢查询链接数过多CPU升高排查语句"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.3.3 数据库慢查询链接数过多CPU升高排查语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-mysqldump常用命令"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 mysqldump常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-容器相关"><span class="nav-number">5.</span> <span class="nav-text">4.容器相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-命令相关"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 命令相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-安装docker和minikube"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 安装docker和minikube</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-安装jenkins"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 安装jenkins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-自定义jenkins的镜像"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 自定义jenkins的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-运行的容器制作成镜像，以及镜像打包和推送到远程仓库"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 运行的容器制作成镜像，以及镜像打包和推送到远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-docker-compose安装grafana和prometheus"><span class="nav-number">5.6.</span> <span class="nav-text">4.6 docker-compose安装grafana和prometheus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-基于ubuntu机器学习的环境Dockerfile"><span class="nav-number">5.7.</span> <span class="nav-text">4.7 基于ubuntu机器学习的环境Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-已存在的容器调试方法"><span class="nav-number">5.8.</span> <span class="nav-text">4.8 已存在的容器调试方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-容器代理"><span class="nav-number">5.9.</span> <span class="nav-text">4.9 容器代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-大数据相关"><span class="nav-number">6.</span> <span class="nav-text">5.大数据相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-kafka相关"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 kafka相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-impala相关"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 impala相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-hdfs相关"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 hdfs相关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-Java相关"><span class="nav-number">7.</span> <span class="nav-text">6.Java相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 maven插件maven-shade-plugin支持将开源包直接改package名称解决类冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-排除不使用的类"><span class="nav-number">7.1.1.</span> <span class="nav-text">6.1.1 排除不使用的类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-将依赖的类重命名并打包进来-（隔离方案）"><span class="nav-number">7.1.2.</span> <span class="nav-text">6.1.2 将依赖的类重命名并打包进来 （隔离方案）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-Java执行单个编译类包括依赖"><span class="nav-number">7.1.3.</span> <span class="nav-text">6.1.3 Java执行单个编译类包括依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Java-VisualVM-远程调试"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 Java VisualVM 远程调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-springboot的可执行jar不能替换lib目录下jar文件"><span class="nav-number">7.3.</span> <span class="nav-text">6.3 springboot的可执行jar不能替换lib目录下jar文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-cpu100-线上排查"><span class="nav-number">7.4.</span> <span class="nav-text">6.4 cpu100%线上排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-git使用代理"><span class="nav-number">7.5.</span> <span class="nav-text">6.5 git使用代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-中间件"><span class="nav-number">8.</span> <span class="nav-text">7.中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-fastdfs扩容"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 fastdfs扩容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-其他杂项相关"><span class="nav-number">9.</span> <span class="nav-text">8.其他杂项相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-log日志最优格式化以及配置每日文件滚动"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 log日志最优格式化以及配置每日文件滚动:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-关于断电"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 关于断电</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-流媒体服务器SRS拉取摄像头流并推流"><span class="nav-number">9.3.</span> <span class="nav-text">8.3 流媒体服务器SRS拉取摄像头流并推流</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">senssic</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">本站总字数&#58;</span>
+    
+    <span title="本站总字数">100.9k</span>
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>  
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: 'ToiHpMxSkLspg2H7q3UJLq9f-gzGzoHsz',
+        appKey: 'WYyGqASXqv7lSRTxb7TCO0N0',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀！快点呀 ~',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('3');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ToiHpMxSkLspg2H7q3UJLq9f-gzGzoHsz", "WYyGqASXqv7lSRTxb7TCO0N0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
