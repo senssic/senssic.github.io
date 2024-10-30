@@ -456,6 +456,51 @@ VMware ESXi 和 Proxmox 一般研发推荐Proxmox
 #3.选择Commit Changes adn Exit 退出bios继续进入系统即可
 ```
 
+## 2.6 Hyper-V NAT 网络设置固定 IP / DHCP
+
+以管理员身份启动PowerShell ，执行下列命令,创建NAT名称的网络，并在虚拟机的配置中选择此网络
+
+```powershell
+# 创建虚拟交换机
+New-VMSwitch -SwitchName "NAT" -SwitchType Internal
+# 获取虚拟交换机的ifindex，并赋值到变量中
+$ifindex = Get-NetAdapter -Name "vEthernet (NAT)" | Select-Object -ExpandProperty 'ifIndex'
+# 在虚拟交换机上设置固定IP，用于网关IP
+New-NetIPAddress -IPAddress 192.168.56.254 -PrefixLength 24 -InterfaceIndex $ifindex
+# 创建nat网络
+New-NetNat -Name NAT -InternalIPInterfaceAddressPrefix 192.168.56.0/24
+```
+
+编辑虚拟机网络配置vim /etc/sysconfig/network-scripts/ifcfg-eth0
+```shell
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=eth0
+UUID=3b8a4cf0-252f-4cc5-9e23-eebd73a37185
+DEVICE=eth0
+ONBOOT=yes
+IPADDR=192.168.56.101
+GATEWAY=192.168.56.254
+DNS1=223.5.5.5
+```
+
+重启网络
+
+```shell
+service network restart
+```
+
+
+
 
 
 # 3.数据库相关
