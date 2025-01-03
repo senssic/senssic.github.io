@@ -95,18 +95,29 @@ git push
 cd /Users/senssic/work/mkdown/githublog
 ```
 
-## 1.2 使用阿里源
+## 1.2 centos初始化
 
 ```shell
-yum install -y wget
-rm -rf /etc/yum.repos.d/*.repo
-wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-sed -i '/aliyuncs/d' /etc/yum.repos.d/CentOS-Base.repo
-sed -i 's/$releasever/7/g' /etc/yum.repos.d/CentOS-Base.repo
-sed -i '/aliyuncs/d' /etc/yum.repos.d/epel.repo
-yum clean all
-yum makecache fast
+#增加NDS解析
+echo -e "nameserver 4.4.4.4\nnameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf > /dev/null
+#替换清华源
+curl -o /etc/yum.repos.d/Centos7-tuna.repo https://mirrors.wlnmp.com/centos/Centos7-tuna-x86_64.repo
+#安装依赖
+yum install -y epel-release
+yum install -y chrony conntrack ipvsadm ipset jq iptables curl sysstat libseccomp wget socat git
+#停止防火墙
+systemctl stop firewalld
+systemctl disable firewalld
+iptables -F && iptables -X && iptables -F -t nat && iptables -X -t nat
+iptables -P FORWARD ACCEPT
+#关闭swap分区
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+setenforce 0
+#关闭SELINUX
+sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+#安装docker
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
 ```
 
 ## 1.3 linux操作系统相关
