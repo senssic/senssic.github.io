@@ -994,7 +994,40 @@ ENV NO_PROXY="localhost,127.0.0.1,.example.com"
 
 
 
+## 4.10 容器部署flink单机版
 
+```shell
+version: "2.2"
+services:
+  jobmanager:
+    image: flink:1.19.0-scala_2.12
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        state.savepoints.dir: file:///opt/flink/points/savepoints
+    volumes:
+      - ./resources:/opt/flink/resources
+      # copy容器内部的，同时增加mysql驱动cdc等依赖jar包
+      - ./lib:/opt/flink/lib
+  taskmanager:
+    image: flink:1.19.0-scala_2.12
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    scale: 1
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 5
+    volumes:
+      - ./resources:/opt/flink/resources
+      - ./lib:/opt/flink/lib
+```
 
 
 
